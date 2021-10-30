@@ -193,12 +193,6 @@ app.post("/add-device", (req,res) =>{
 
 app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'/views'))
-
-var corsOptions = {
-    origin: "http://localhost:3000"
-};
-
-
 console.log(__dirname)
 
 //get login
@@ -210,8 +204,8 @@ app.get('/login', (req, res)=> {
 
     req.session.errors = null;
 })
-// get info all device
 
+// get info all device
 app.get("/list",(req, res) => {
     var model = db.model('data-devices', DEVICESchema);
     var methodFind = model.find({});
@@ -223,15 +217,8 @@ app.get("/list",(req, res) => {
             ups: data.map(aa => aa.toJSON())
         })}
     })
-
-    // console.log("request create data");
-    // var model = db.model('data-sensor',DHT11Schema);
-    //
-    // model.find({},(error,devices)=>{
-    //     console.log("ham ham: ",devices)
-    //     res.render('table_2',{ups:devices})
-    // })
     });
+
 //get json devices
 app.get('/json-devices',(req, res)=>{
     var findDevice = DEVICE.find({});
@@ -486,7 +473,7 @@ app.post('/data-login-doctor',(req, res)=>{
         res.status(200).json(data);
     })
 })
-app.get('/json-login-patient', (req, res) =>{
+app.get('/data-login-patient', (req, res) =>{
     const username = req.body.username;
     const password = req.body.password;
     var findDoctor = DOCTORS.findOne({username: username, password:password});
