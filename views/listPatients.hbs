@@ -1,0 +1,66 @@
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+    <div class="container-fluid d-flex flex-column p-0"><a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+        <div class="sidebar-brand-text mx-3"><span>Profile</span></div>
+    </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><a class="nav-link active" href="/list-patients"><i
+                    class="fas fa-tachometer-alt"></i><span>Danh sách bệnh nhân</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/list-doctors"><i class="fas fa-user"></i><span>Danh sách bác sĩ</span></a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/add-patient"><i
+                    class="fas fa-table"></i><span>Add patient</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="/login"><i class="far fa-user-circle"></i><span>Thông báo</span></a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-user-circle"></i><span>Đăng xuất</span></a>
+            </li>
+        </ul>
+        <div class="text-center d-none d-md-inline">
+            <button class=" rounded-circle border-0" id="sidebarToggle" type="button"></button>
+        </div>
+    </div>
+</nav>
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th class="column1">Avatar</th>
+                        <th class="column2">ID</th>
+                        <th class="column3">Name</th>
+                        <th class="column4">Username</th>
+                        <th class="column5">Password</th>
+                        <th class="column4">Phone</th>
+                        <th class="column6">Số phòng</th>
+<!--                        <th class="column6">Thiết bị</th>-->
+                        <th class="column6">Sự kiện</th>
+                    </tr>
+                    </thead>
+                    {{#each docs}}
+                        <tbody>
+                        <tr  >
+                            <td class="column1"><img class="rounded-circle me-2" width="30" height="30" src="img/avatars/avatar{{this.id}}.jpeg" /></td>
+                            <td class="column2">{{this.id}}</td>
+                            <td class="column3">{{this.name}}</td>
+                            <td class="column4">{{this.username}}</td>
+                            <td class="column5">{{this.password}}</td>
+                            <td class="column4">{{this.phone}}</td>
+                            <td class="column6">{{this.number_room}}</td>
+<!--                            <td class="column6">{{this.key_device}}</td>-->
+                            <td>
+<!--                              <button href="/profile/{{this._id}}" type="button" class="btn btn-primary btn-sm">Small button</button>-->
+                               <a href="/profile/{{this._id}}" style="width: 20px; height:20px;float: left; text-align: left; background-color: red;">sửa</a>
+<!--                                <a href="/delete/{{this._id}}" style="width: 10px; position: absolute;" onclick="return confirm('Bạn muốn xóa bác sĩ')" class="btn btn-danger btn-sm ">DELETE</a>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
