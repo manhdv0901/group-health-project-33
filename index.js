@@ -225,8 +225,9 @@ app.get('/json-devices',(req, res)=>{
     findDevice.exec((err, data)=>{
         if (err){
             console.log('get data json patients error');
-        }
+        }else{
         res.status(200).json(data);
+        }
     })
 })
 // get infomation detail patient
@@ -328,8 +329,9 @@ app.get('/json-doctors',(req, res)=>{
     findDoctor.exec((err, data)=>{
         if (err){
             console.log('get data json patients error');
-        }
+        }else{
         res.status(200).json(data);
+        }
     })
 })
 
@@ -407,8 +409,10 @@ app.get('/json-patients',(req, res)=>{
     findPatient.exec((err, data)=>{
         if (err){
             console.log('get data json patients error');
+        }else{
+            res.status(200).json(data);
         }
-        res.status(200).json(data);
+        
     })
 })
 
@@ -458,8 +462,10 @@ app.post('/data-login-patient',(req, res)=>{
     findPatient.exec((err, data)=>{
         if (err){
             console.log('get data json patients error');
+        }else{
+            res.status(200).json(data);
         }
-        res.status(200).json(data);
+        
     })
 })
 app.post('/data-login-doctor',(req, res)=>{
@@ -469,8 +475,10 @@ app.post('/data-login-doctor',(req, res)=>{
     findDoctor.exec((err, data)=>{
         if (err){
             console.log('get data json patients error');
+        }else{
+            res.status(200).json(data);
         }
-        res.status(200).json(data);
+        
     })
 })
 app.get('/data-login-patient', (req, res) =>{
@@ -480,8 +488,10 @@ app.get('/data-login-patient', (req, res) =>{
     findDoctor.exec((err, data)=>{
         if (err){
             console.log('get data json patients error');
+        }else{
+            res.status(200).json(data);
         }
-        res.status(200).json(data);
+        
     })
 })
 app.get('/add-patient',(req, res)=>{
@@ -501,9 +511,11 @@ app.post('/add-patient', (req, res)=>{
     }).save((err) =>{
         if (err){
             console.log('Thêm bệnh nhân thất bại:', err);
-        }
-        res.render('addPatient');
+        }else{
+            res.render('addPatient');
         console.log('Thành công, user: ', req.body);
+        }
+        
     })
 })
 
