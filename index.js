@@ -205,6 +205,72 @@ app.get('/login', (req, res)=> {
     req.session.errors = null;
 })
 
+//get api data
+app.get('/data-device',(req, res)=>{
+    var findDevice = DEVICE.find({});
+    findDevice.exec((err, data)=>{
+        if (err){
+           res.status(404).json(err);
+        }else{
+        res.status(200).json(data);
+        }
+    })
+})
+
+// app.get('/data-doctor',(req, res)=>{
+//     var findDoctor = DOCTORS.find({});
+//     findDoctor.exec((err, data)=>{
+//         if (err){
+//             res.status(404).json(err);
+//         }else{
+//         res.status(200).json(data);
+//         }
+//     })
+// })
+
+// app.get('/data-patient',(req, res)=>{
+//     var findPatient = PATIENT.find({});
+//     findPatient.exec((err, data)=>{
+//         if (err){
+//             res.status(404).json(err);
+//         }else{
+//             res.status(200).json(data);
+//         }
+        
+//     })
+// })
+app.post('/data-login-doctor',(req, res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+    var findDoctor = DOCTORS.findOne({username: username, password:password});
+    findDoctor.exec((err, data)=>{
+        if (err){
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(data);
+        }
+        
+    })
+})
+app.post('/data-login-patient',(req, res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+    var findPatient = PATIENT.findOne({username: username, password:password});
+    findPatient.exec((err, data)=>{
+        if (err){
+            // console.log('get data json patients error');
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(data);
+        }
+        
+    })
+})
+
+//find one patient
+
+//
+
 // get info all device
 app.get("/list",(req, res) => {
     var model = db.model('data-devices', DEVICESchema);
@@ -219,17 +285,7 @@ app.get("/list",(req, res) => {
     })
     });
 
-//get json devices
-app.get('/json-devices',(req, res)=>{
-    var findDevice = DEVICE.find({});
-    findDevice.exec((err, data)=>{
-        if (err){
-           res.status(404).json(err);
-        }else{
-        res.status(200).json(data);
-        }
-    })
-})
+
 // get infomation detail patient
 // app.get("/profile", (req, res) => {
 //     var modelPatient = db.model('data-patients', PATIENTSchema);
@@ -280,6 +336,7 @@ app.get('/profile/:na', (req, res)=>{
     PATIENT.findById(req.params.na,(err, data)=>{
         if(err){
             console.log('err get data one item patient');
+            res.render('listPatient');
         }else {
             var myDevice = data.key_device;
             console.log('key device', data.key_device);
@@ -287,13 +344,12 @@ app.get('/profile/:na', (req, res)=>{
                 .exec((er, data2) => {
                     if (er) throw er;
                     else {
-                        
                         DOCTORS.find({state: true})
                         .exec((er3,  data3) => {
                             if (er3) throw er3;
                             else{
                                 console.log(`doctors:`, data3)
-                       res.render('profile', {
+                                res.render('profile', {
                             patient: data, device:data2, doctors: data3,
                         }) 
                             }
@@ -303,6 +359,28 @@ app.get('/profile/:na', (req, res)=>{
         }
 
     })
+})
+app.post('/data-patient', (req, res)=>{
+    const id = req.body.username;
+    // var findDevice = DEVICE.findOne({key_device: device});
+    var findPatient = PATIENT.findOne({username: id});
+     findPatient.exec((err, data) =>{
+         if (err){
+             res.status(404).json(err);
+         }else {
+             // res.status(200).json(data);
+             const device = data.key_device;
+             console.log('thiết bị:', device)
+             DEVICE.findOne({key_device: device})
+                 .exec((err, data2) => {
+                     if (err){
+                         res.status(404).json(err);
+                     }else {
+                         res.status(200).json(data);
+                     }
+                 })
+         }
+     })
 })
 
 app.get('/update-patient',(req, res)=>{
@@ -323,17 +401,6 @@ app.get("/list-doctors", (req, res) => {
     }
     })
 });
-//get json doctors
-app.get('/json-doctors',(req, res)=>{
-    var findDoctor = DOCTORS.find({});
-    findDoctor.exec((err, data)=>{
-        if (err){
-            res.status(404).json(err);
-        }else{
-        res.status(200).json(data);
-        }
-    })
-})
 
 //check login
 app.post('/login',
@@ -403,21 +470,11 @@ app.get("/list-patients", (req, res) => {
 })
     
 });
-//get json patients
-app.get('/json-patients',(req, res)=>{
-    var findPatient = PATIENT.find({});
-    findPatient.exec((err, data)=>{
-        if (err){
-            res.status(404).json(err);
-        }else{
-            res.status(200).json(data);
-        }
-        
-    })
-})
+
 
 //check login web manage
 // app.post('/login', [
+//     body('username', 'Email is required')
 //     body('username', 'Email is required')
 //         .isEmail(),
 //     body('password', 'Password is requried')
@@ -455,33 +512,8 @@ app.get('/json-patients',(req, res)=>{
 //     }
 //
 // })
-app.post('/data-login-patient',(req, res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    var findPatient = PATIENT.findOne({username: username, password:password});
-    findPatient.exec((err, data)=>{
-        if (err){
-            // console.log('get data json patients error');
-            res.status(404).json(err);
-        }else{
-            res.status(200).json(data);
-        }
-        
-    })
-})
-app.post('/data-login-doctor',(req, res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    var findDoctor = DOCTORS.findOne({username: username, password:password});
-    findDoctor.exec((err, data)=>{
-        if (err){
-            res.status(404).json(err);
-        }else{
-            res.status(200).json(data);
-        }
-        
-    })
-})
+
+
 app.get('/add-patient',(req, res)=>{
     res.render('addPatient');
 })
