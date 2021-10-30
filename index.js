@@ -7,8 +7,6 @@ const app =express();
 //connect mongoose
 const mongoose = require("mongoose");
 const path = require('path')
-const {log} = require("nodemon/lib/utils");
-const cors = require("cors");
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
