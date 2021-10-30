@@ -224,7 +224,7 @@ app.get('/json-devices',(req, res)=>{
     var findDevice = DEVICE.find({});
     findDevice.exec((err, data)=>{
         if (err){
-            console.log('get data json patients error');
+           res.status(404).json(err);
         }else{
         res.status(200).json(data);
         }
@@ -328,7 +328,7 @@ app.get('/json-doctors',(req, res)=>{
     var findDoctor = DOCTORS.find({});
     findDoctor.exec((err, data)=>{
         if (err){
-            console.log('get data json patients error');
+            res.status(404).json(err);
         }else{
         res.status(200).json(data);
         }
@@ -408,7 +408,7 @@ app.get('/json-patients',(req, res)=>{
     var findPatient = PATIENT.find({});
     findPatient.exec((err, data)=>{
         if (err){
-            console.log('get data json patients error');
+            res.status(404).json(err);
         }else{
             res.status(200).json(data);
         }
@@ -461,7 +461,8 @@ app.post('/data-login-patient',(req, res)=>{
     var findPatient = PATIENT.findOne({username: username, password:password});
     findPatient.exec((err, data)=>{
         if (err){
-            console.log('get data json patients error');
+            // console.log('get data json patients error');
+            res.status(404).json(err);
         }else{
             res.status(200).json(data);
         }
@@ -474,20 +475,7 @@ app.post('/data-login-doctor',(req, res)=>{
     var findDoctor = DOCTORS.findOne({username: username, password:password});
     findDoctor.exec((err, data)=>{
         if (err){
-            console.log('get data json patients error');
-        }else{
-            res.status(200).json(data);
-        }
-        
-    })
-})
-app.get('/data-login-patient', (req, res) =>{
-    const username = req.body.username;
-    const password = req.body.password;
-    var findDoctor = DOCTORS.findOne({username: username, password:password});
-    findDoctor.exec((err, data)=>{
-        if (err){
-            console.log('get data json patients error');
+            res.status(404).json(err);
         }else{
             res.status(200).json(data);
         }
