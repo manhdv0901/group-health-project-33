@@ -292,9 +292,11 @@ app.get("/list",(req, res) => {
     methodFind.exec((err,data) => {
         if (err) {throw err;
         }else{
-        console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        console.log("ham ham: ", data)
         res.render('table_2', {
-            ups: data.map(aa => aa.toJSON())
+            // ups: data.map(aa => aa.toJSON())
+            ups: data
         })}
     })
     });
@@ -408,9 +410,11 @@ app.get("/list-doctors", (req, res) => {
         console.log('name:', data.name);
         if (err) {throw err;}
         else{
-        console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        console.log("ham ham: ", data)
         res.render('listDoctor', {
-            docs: data.map(aa => aa.toJSON())
+            // docs: data.map(aa => aa.toJSON())
+            docs: data
         })
     }
     })
@@ -478,7 +482,7 @@ app.get("/list-patients", (req, res) => {
         }else{
         // console.log("ham ham: ", data.map(aa => aa.toJSON()))
         res.render('listPatients', {
-            docs: data.map(aa => aa.toJSON())
+            docs: data
         })
     }
 })
@@ -558,7 +562,8 @@ app.get('/:key',(req,res)=>{
     PATIENT.findById(req.params.key,(err, data)=>{
         if(!err){
             res.render('infoPatient',{
-                patient:data.toJSON(),
+                // patient:data.toJSON(),
+                patient:data
             })
         }
     })
