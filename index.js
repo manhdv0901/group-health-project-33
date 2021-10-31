@@ -205,7 +205,7 @@ app.get('/login', (req, res)=> {
     req.session.errors = null;
 })
 
-//get api data
+// ------------------------------------------ get api data
 app.get('/data-device',(req, res)=>{
     var findDevice = DEVICE.find({});
     findDevice.exec((err, data)=>{
@@ -217,28 +217,28 @@ app.get('/data-device',(req, res)=>{
     })
 })
 
-// app.get('/data-doctor',(req, res)=>{
-//     var findDoctor = DOCTORS.find({});
-//     findDoctor.exec((err, data)=>{
-//         if (err){
-//             res.status(404).json(err);
-//         }else{
-//         res.status(200).json(data);
-//         }
-//     })
-// })
+app.get('/data-doctor',(req, res)=>{
+    var findDoctor = DOCTORS.find({});
+    findDoctor.exec((err, data)=>{
+        if (err){
+            res.status(404).json(err);
+        }else{
+        res.status(200).json(data);
+        }
+    })
+})
 
-// app.get('/data-patient',(req, res)=>{
-//     var findPatient = PATIENT.find({});
-//     findPatient.exec((err, data)=>{
-//         if (err){
-//             res.status(404).json(err);
-//         }else{
-//             res.status(200).json(data);
-//         }
+app.get('/data-patient',(req, res)=>{
+    var findPatient = PATIENT.find({});
+    findPatient.exec((err, data)=>{
+        if (err){
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(data);
+        }
         
-//     })
-// })
+    })
+})
 app.post('/data-login-doctor',(req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
@@ -258,7 +258,6 @@ app.post('/data-login-patient',(req, res)=>{
     var findPatient = PATIENT.findOne({username: username, password:password});
     findPatient.exec((err, data)=>{
         if (err){
-            // console.log('get data json patients error');
             res.status(404).json(err);
         }else{
             res.status(200).json(data);
@@ -275,9 +274,6 @@ app.post('/data-a-patient',(req, res)=>{
         if (err){
             res.status(404).json(err);
         }else {
-            // console.log('key device: ', data.key_device);
-            // res.status(200).json(data);
-            // res.status(200).json(data);
             const keyDevice = patient.key_device;
             DEVICE.findOne({key_device: keyDevice})
                 .exec((err, device) =>{
@@ -287,7 +283,7 @@ app.post('/data-a-patient',(req, res)=>{
     })
 })
 
-//
+//---------------------------------------
 
 // get info all device
 app.get("/list",(req, res) => {
