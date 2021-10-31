@@ -106,22 +106,22 @@ var USER = mongoose.model('data-logins', USERSchema);
 app.get('/',(req, res)=>{
     res.render('login');
 })
-app.post("/add-device", (req,res) =>{
-    console.log("Received create dht11 data request post dht11");
+app.post("/add-device", (req,res) => {
+    console.log("request data sensor to sever");
     //get data request
-    console.log("heart: ",req.query.heart);
+    console.log("heart: ", req.query.heart);
     myDataHea.push(req.query.heart);
-    console.log("value: ",myDataHea);
+    console.log("value: ", myDataHea);
 
-    console.log("spO2: ",req.query.spO2);
+    console.log("spO2: ", req.query.spO2);
     myDataSpO2.push(req.query.spO2);
-    console.log("value: ",myDataSpO2);
+    console.log("value: ", myDataSpO2);
 
-    console.log("temp:",req.query.temp);
+    console.log("temp:", req.query.temp);
     myDataTem.push(req.query.temp);
-    console.log("value: ",myDataTem);
+    console.log("value: ", myDataTem);
     var newDEVICE = DEVICE({
-        key_device:'device04',
+        key_device: 'device05',
         heart:
             {
                 value: Number(req.query.heart),
@@ -130,7 +130,7 @@ app.post("/add-device", (req,res) =>{
         ,
         spO2:
             {
-                value:Number(req.query.spO2),
+                value: Number(req.query.spO2),
                 real_time: new Date(),
             }
         ,
@@ -142,19 +142,23 @@ app.post("/add-device", (req,res) =>{
         ,
 
     });
-    console.log("data post req: ",req.query);
+    console.log("data post req: ", req.query);
 
     //insert data
-    // db.collection("data-devices").insertOne(newDEVICE,(err,result)=> {
-    //     if (err) throw  err;
-    //     console.log("Thêm thành công");
-    //     console.log(result);
+    // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
+    //     if (err) {
+    //         res.status(400).json(err);
+    //     }else {
+    //         console.log("Thêm thành công");
+    //         console.log(result);
+    //         res.status(200).json(result);
+    //     }
     // });
 
 
     // update data
-    var oldValue={key_device:"device04"};
-    var newValue={
+    var oldValue = {key_device: "device05"};
+    var newValue = {
         $push: {
             heart:
                 {
@@ -179,13 +183,18 @@ app.post("/add-device", (req,res) =>{
     };
 
     //update
-    var model = db.collection("data-devices");
-    model.updateOne(oldValue,newValue,(err,obj)=>{
-        if(err) throw  err;
-        if(obj.length!=0) console.log("Cập nhật thành công");
+        var model = db.collection("data-devices");
+        model.updateOne(oldValue,newValue,(err,obj)=>{
+            if(err) {
+                res.status(400).json(err);
+            }else {
+                if(obj.length!=0){
+                    console.log("Cập nhật thành công");
+                    res.status(200).json({"messager":"update successful"});
+                }
+            }
+        });
 
-    });
-    res.send("data sensor succesfully");
 
 });
 
