@@ -1,4 +1,5 @@
 const express = require('express')
+
 const { body, validationResult } = require('express-validator');
 var expressSession=require('express-session');
 const exhbs = require('express-handlebars')
@@ -101,11 +102,14 @@ var USERSchema = new mongoose.Schema({
 var DEVICE = mongoose.model("data-devices", DEVICESchema);
 var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
-var USER = mongoose.model('data-logins', USERSchema);
+
+
+
 
 app.get('/',(req, res)=>{
     res.render('login');
-})
+});
+
 app.post("/add-device", (req,res) =>{
     console.log("Received create dht11 data request post dht11");
     //get data request
@@ -195,6 +199,28 @@ app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'/views'))
 console.log(__dirname)
 
+//update status doctor
+app.get('/updateStatus/:key',(req,res)=>{
+    console.log(req.params.key)
+    var myquery = { _id:req.params.key };
+    var newvalues = { $set: {state: "false" } };
+    DOCTORS.findByIdAndUpdate(req.params.key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                res.redirect('/list-patients');
+            } else {
+                res.status(500).json({
+                    message: "not found any relative data"
+                })
+            }
+        });
+
+
+})
+//fcm_token
+app.use('/notification',require('./notification'));
 //get login
 app.get('/login', (req, res)=> {
     res.render('login', {

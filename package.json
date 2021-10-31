@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon index.js",
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,10 @@
     "express-handlebars": "^5.3.4",
     "express-session": "^1.17.2",
     "express-validator": "^6.13.0",
-    "mongoose": "^6.0.12"
+    "fcm-node": "^1.6.1",
+    "firebase-admin": "^10.0.0",
+    "mongoose": "^6.0.12",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
