@@ -307,8 +307,8 @@ app.post('/data-a-patient',(req, res)=>{
 
 //find one patient
 app.post('/data-a-device',(req, res) => {
-    const key_device = req.body.key_device;
-    const findDevice = DEVICE.findOne({key_device: key_device});
+    const keyDevice = req.body.key_device;
+    const findDevice = DEVICE.findOne({key_device: keyDevice});
     findDevice.exec((err, device) => {
         if(err){
             res.status(404).json(err);
