@@ -190,14 +190,23 @@ app.post("/add-device", (req,res) => {
             }else {
                 if(obj.length!=0){
                     console.log("Cập nhật thành công");
-                    res.status(200).json({"messager":"update successful"});
+                    res.status(200).json({"message":"update successful"});
                 }
             }
         });
 
 
 });
-
+app.get('/add-device', (req, res) =>{
+    const findDevice =DEVICE.find({});
+        findDevice.exec((err, data) =>{
+            if (err){
+                res.status(400).json(err);
+            }else {
+                res.status(200).json(data);
+            }
+        })
+})
 
 
 app.set('view engine','hbs')
@@ -216,7 +225,7 @@ app.get('/login', (req, res)=> {
 
 // ------------------------------------------ get api data
 app.get('/data-device',(req, res)=>{
-    var findDevice = DEVICE.find({});
+    const findDevice = DEVICE.find({});
     findDevice.exec((err, data)=>{
         if (err){
            res.status(404).json(err);
