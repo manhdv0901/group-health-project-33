@@ -305,6 +305,19 @@ app.post('/data-a-patient',(req, res)=>{
     })
 })
 
+//find one patient
+app.post('/data-a-device',(req, res) => {
+    const key_device = req.body.key_device;
+    const findDevice = DEVICE.findOne({key_devive: key_device});
+    findDevice.exec((err, device) => {
+        if(err){
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(device);
+        }
+    })
+})
+
 //---------------------------------------
 
 // get info all device
