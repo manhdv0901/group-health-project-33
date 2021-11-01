@@ -293,7 +293,7 @@ app.post('/data-a-patient',(req, res)=>{
             res.status(404).json(err);
         }else {
             const keyDevice = patient.keyDevice;
-            DEVICE.findOne({key_device: key_device})
+            DEVICE.findOne({key_device: keyDevice})
                 .exec((err, device) =>{
                     if(err){
                         res.status(404).json(err);
