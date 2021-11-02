@@ -3,8 +3,9 @@
 device:'/add-device'<br/>
 login patient: '/data-login-patient'<br/>
 login doctor: '/data-login-doctor'<br/>
-findOne patient:'/data-a-patient'<br/>
+findOne patient and device:'/data-a-patient'<br/>
 findOne device: '/data-a-device'<br/>
+findOne patient: '/data-one=patinet'
 <hr/>
 --GET--<br/>
 list patients:'/data-patient'<br/>
