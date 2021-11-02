@@ -102,6 +102,7 @@ var DEVICE = mongoose.model("data-devices", DEVICESchema);
 var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
 var USER = mongoose.model('data-logins', USERSchema);
+const KEY_DEVICE = 'device07';
 
 app.get('/',(req, res)=>{
     res.render('login');
@@ -121,7 +122,7 @@ app.post("/add-device", (req,res) => {
     myDataTem.push(req.query.temp);
     console.log("value: ", myDataTem);
     var newDEVICE = DEVICE({
-        key_device: 'device05',
+        key_device: KEY_DEVICE,
         heart:
             {
                 value: Number(req.query.heart),
@@ -157,7 +158,7 @@ app.post("/add-device", (req,res) => {
 
 
     // update data
-    var oldValue = {key_device: "device05"};
+    var oldValue = {key_device: KEY_DEVICE};
     var newValue = {
         $push: {
             heart:
@@ -276,7 +277,7 @@ app.post('/data-login-patient',(req, res)=>{
     var findPatient = PATIENT.findOne({username: username, password:password});
     findPatient.exec((err, data)=>{
         if (err){
-            res.status(404).json(err);
+            res.status(400).json(err)
         }else{
             res.status(200).json(data);
         }
@@ -292,7 +293,7 @@ app.post('/data-a-patient',(req, res)=>{
         if (err){
             res.status(404).json(err);
         }else {
-            const key_device = patient.key_device;
+            const keyDevice = patient.keyDevice;
             DEVICE.findOne({key_device: key_device})
                 .exec((err, device) =>{
                     if(err){

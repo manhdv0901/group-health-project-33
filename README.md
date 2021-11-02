@@ -1,8 +1,10 @@
 ------- API --------
 --POST--
+device:'/add-device'
 login patient: '/data-login-patient'
 login doctor: '/data-login-doctor'
 findOne patient:'/data-a-patient'
+findOne device: '/data-a-device'
 --GET--
 list patients:'/data-patient'
 list doctor:'/data-doctor'
