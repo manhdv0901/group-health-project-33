@@ -285,7 +285,7 @@ app.post('/data-login-patient',(req, res)=>{
     })
 })
 
-//find one patient
+//find one patient and device
 app.post('/data-a-patient',(req, res)=>{
     const id = req.body.id;
     const findPatient = PATIENT.findOne({id: id});
@@ -311,12 +311,26 @@ app.post('/data-a-device',(req, res) => {
     const keyDevice = req.body.key_device;
     const findDevice = DEVICE.findOne({key_device: keyDevice});
     findDevice.exec((err, device) => {
-        if(err){
+        if (err) {
             res.status(404).json(err);
-        }else{
+        } else {
             res.status(200).json(device);
         }
     })
+})
+
+//find one patient
+app.post('/data-one-patient',(req, res) => {
+    const idPatient = req.body.id;
+    const findPatient = PATIENT.findOne({id:  idPatient});
+    findPatient.exec((err, patient) => {
+        if (err){
+            res.status(404).json(err);
+        }else {
+            res.status(200).json(patient);
+        }
+    });
+})
 
 
 //---------------------------------------
