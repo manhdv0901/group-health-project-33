@@ -224,7 +224,7 @@ app.get('/login', (req, res)=> {
     req.session.errors = null;
 })
 
-// ------------------------------------------ get api data
+// --------------------------API-----------------
 app.get('/data-device',(req, res)=>{
     const findDevice = DEVICE.find({});
     findDevice.exec((err, data)=>{
@@ -306,7 +306,7 @@ app.post('/data-a-patient',(req, res)=>{
     })
 })
 
-//find one patient
+//find one device
 app.post('/data-a-device',(req, res) => {
     const keyDevice = req.body.key_device;
     const findDevice = DEVICE.findOne({key_device: keyDevice});
@@ -317,7 +317,7 @@ app.post('/data-a-device',(req, res) => {
             res.status(200).json(device);
         }
     })
-})
+
 
 //---------------------------------------
 
