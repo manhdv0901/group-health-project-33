@@ -5,7 +5,8 @@ login patient: '/data-login-patient'<br/>
 login doctor: '/data-login-doctor'<br/>
 findOne patient and device:'/data-a-patient'<br/>
 findOne device: '/data-a-device'<br/>
-findOne patient: '/data-one=patinet'
+findOne patient: '/data-one-patinet'<br/>
+findOne doctor: '/data-one-doctor'<br/>
 <hr/>
 --GET--<br/>
 list patients:'/data-patient'<br/>

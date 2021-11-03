@@ -332,6 +332,19 @@ app.post('/data-one-patient',(req, res) => {
     });
 })
 
+//find one doctor
+app.post('/data-one-doctor',(req, res)=>{
+    const idDoctor = req.body.id;
+    const findDoctor = DOCTORS.findOne({id: idDoctor});
+    findDoctor.exec((err, doctor) => {
+        if(err){
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(doctor);
+        }
+    })
+})
+
 
 //---------------------------------------
 
