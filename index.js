@@ -102,7 +102,7 @@ var DEVICE = mongoose.model("data-devices", DEVICESchema);
 var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
 var USER = mongoose.model('data-logins', USERSchema);
-const KEY_DEVICE = 'device07';
+const KEY_DEVICE = 'device08';
 
 app.get('/',(req, res)=>{
     res.render('login');
