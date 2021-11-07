@@ -68,35 +68,16 @@ void connectMax30100() {
 }
 
 
-void sendRequest() {
-  newHeart = pox.getHeartRate();
-  newSpo2 = pox.getSpO2();
-  temp = dht.readTemperature();
-  pox.update();
-  if (millis() - tsLastReport > REPORTING_PERIOD_MS)
-  {
-    newHeart = pox.getHeartRate();
-    newSpo2 = pox.getSpO2();
-    temp = dht.readTemperature();
-    Serial.print("Heart rate:");
-    Serial.println(newHeart);
-    Serial.print("SpO2:");
-    Serial.print(newSpo2);
-    Serial.println(" %");
-    Serial.print("Temperature:");
-    Serial.print(temp);
-    Serial.println(" *C");
-
-    Serial.println("-------------------------------------");
-    tsLastReport = millis();
-  }
+void sendRequest(float newHeart, float newSpo2, float temp) {
+  
   //  if (WiFi.status() == WL_CONNECTED) {
   //      String url = "https://web-test-3010.herokuapp.com/add-device?heart=" + String(heart) + "&spO2=" + String(spO2);
-  String url = "http://c9f6-118-71-152-232.ngrok.io/add-device?heart=" + String(newHeart) + "&spO2=" + String(newSpo2) + "&temp=" + String(temp);
+  String url = "http://683f-118-71-152-232.ngrok.io/add-device?heart=" + String(newHeart) + "&spO2=" + String(newSpo2) + "&temp=" + String(temp);
   http.begin(wifiClient, url);
-  http.addHeader("Content-Type", "text/plain");
+//    http.addHeader("Content-Type", "text/plain");
+  http.addHeader("Content-Type","application/x-www-form-urlencoded");
 
-  int httpResponseCode = http.POST("post");
+  int httpResponseCode = http.POST(url);
   if (httpResponseCode == 200) {
     Serial.println("Send data sensor to server\n");
     String respose = http.getString();
@@ -127,8 +108,28 @@ void loop() {
   //  int newHeart = heart.toInt();
   //  int newSpo2 = spO2.toInt();
   //stringstream str2num(heart);
+ 
+  pox.update();
+   newHeart = pox.getHeartRate();
+    newSpo2 = pox.getSpO2();
+    temp = dht.readTemperature();
+  if (millis() - tsLastReport > REPORTING_PERIOD_MS)
+  {
+   
+    Serial.print("Heart rate:");
+    Serial.println(newHeart);
+    Serial.print("SpO2:");
+    Serial.print(newSpo2);
+    Serial.println(" %");
+    Serial.print("Temperature:");
+    Serial.print(temp);
+    Serial.println(" *C");
 
-  sendRequest();
+    Serial.println("-------------------------------------");
+    tsLastReport = millis();
+  }
+
+  sendRequest(newHeart, newSpo2, temp);
 
 }
 //
