@@ -52,9 +52,13 @@
                             <td class="column6">{{this.number_room}}</td>
 <!--                            <td class="column6">{{this.key_device}}</td>-->
                             <td>
-<!--                              <button href="/profile/{{this._id}}" type="button" class="btn btn-primary btn-sm">Small button</button>-->
-                               <a href="/profile/{{this._id}}" style="width: 20px; height:20px;float: left; text-align: left; background-color: red;">sửa</a>
+
+<!--                               <a href="/profile/{{this._id}}" style="width: 20px; height:20px;float: left; text-align: left; background-color: red;">sửa</a>-->
 <!--                                <a href="/delete/{{this._id}}" style="width: 10px; position: absolute;" onclick="return confirm('Bạn muốn xóa bác sĩ')" class="btn btn-danger btn-sm ">DELETE</a>-->
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <a href="/profile/{{this._id}}" type="button" class="btn btn-primary btn-sm">Thông tin</a>
+                                    <button type="button" class="btn btn-warning">Sửa</button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
