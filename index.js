@@ -1,5 +1,4 @@
 const express = require('express')
-
 const { body, validationResult } = require('express-validator');
 var expressSession=require('express-session');
 const exhbs = require('express-handlebars')
@@ -102,30 +101,28 @@ var USERSchema = new mongoose.Schema({
 var DEVICE = mongoose.model("data-devices", DEVICESchema);
 var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
-
-
-
+var USER = mongoose.model('data-logins', USERSchema);
+const KEY_DEVICE = 'device08';
 
 app.get('/',(req, res)=>{
     res.render('login');
-});
-
-app.post("/add-device", (req,res) =>{
-    console.log("Received create dht11 data request post dht11");
+})
+app.post("/add-device", (req,res) => {
+    console.log("request data sensor to sever");
     //get data request
-    console.log("heart: ",req.query.heart);
+    console.log("heart: ", req.query.heart);
     myDataHea.push(req.query.heart);
-    console.log("value: ",myDataHea);
+    console.log("value: ", myDataHea);
 
-    console.log("spO2: ",req.query.spO2);
+    console.log("spO2: ", req.query.spO2);
     myDataSpO2.push(req.query.spO2);
-    console.log("value: ",myDataSpO2);
+    console.log("value: ", myDataSpO2);
 
-    console.log("temp:",req.query.temp);
+    console.log("temp:", req.query.temp);
     myDataTem.push(req.query.temp);
-    console.log("value: ",myDataTem);
+    console.log("value: ", myDataTem);
     var newDEVICE = DEVICE({
-        key_device:'device04',
+        key_device: KEY_DEVICE,
         heart:
             {
                 value: Number(req.query.heart),
@@ -134,7 +131,7 @@ app.post("/add-device", (req,res) =>{
         ,
         spO2:
             {
-                value:Number(req.query.spO2),
+                value: Number(req.query.spO2),
                 real_time: new Date(),
             }
         ,
@@ -146,19 +143,23 @@ app.post("/add-device", (req,res) =>{
         ,
 
     });
-    console.log("data post req: ",req.query);
+    console.log("data post req: ", req.query);
 
     //insert data
-    // db.collection("data-devices").insertOne(newDEVICE,(err,result)=> {
-    //     if (err) throw  err;
-    //     console.log("Thêm thành công");
-    //     console.log(result);
+    // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
+    //     if (err) {
+    //         res.status(400).json(err);
+    //     }else {
+    //         console.log("Thêm thành công");
+    //         console.log(result);
+    //         res.status(200).json(result);
+    //     }
     // });
 
 
     // update data
-    var oldValue={key_device:"device04"};
-    var newValue={
+    var oldValue = {key_device: KEY_DEVICE};
+    var newValue = {
         $push: {
             heart:
                 {
@@ -183,44 +184,36 @@ app.post("/add-device", (req,res) =>{
     };
 
     //update
-    var model = db.collection("data-devices");
-    model.updateOne(oldValue,newValue,(err,obj)=>{
-        if(err) throw  err;
-        if(obj.length!=0) console.log("Cập nhật thành công");
+        var model = db.collection("data-devices");
+        model.updateOne(oldValue,newValue,(err,obj)=>{
+            if(err) {
+                res.status(400).json(err);
+            }else {
+                if(obj.length!=0){
+                    console.log("Cập nhật thành công");
+                    res.status(200).json({"message":"update successful"});
+                }
+            }
+        });
 
-    });
-    res.send("data sensor succesfully");
 
 });
-
+app.get('/add-device', (req, res) =>{
+    const findDevice =DEVICE.find({});
+        findDevice.exec((err, data) =>{
+            if (err){
+                res.status(400).json(err);
+            }else {
+                res.status(200).json(data);
+            }
+        })
+})
 
 
 app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'/views'))
 console.log(__dirname)
 
-//update status doctor
-app.get('/updateStatus/:key',(req,res)=>{
-    console.log(req.params.key)
-    var myquery = { _id:req.params.key };
-    var newvalues = { $set: {state: "false" } };
-    DOCTORS.findByIdAndUpdate(req.params.key , newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                res.redirect('/list-patients');
-            } else {
-                res.status(500).json({
-                    message: "not found any relative data"
-                })
-            }
-        });
-
-
-})
-//fcm_token
-app.use('/notification',require('./notification'));
 //get login
 app.get('/login', (req, res)=> {
     res.render('login', {
@@ -231,9 +224,9 @@ app.get('/login', (req, res)=> {
     req.session.errors = null;
 })
 
-//get api data
+// --------------------------API-----------------
 app.get('/data-device',(req, res)=>{
-    var findDevice = DEVICE.find({});
+    const findDevice = DEVICE.find({});
     findDevice.exec((err, data)=>{
         if (err){
            res.status(404).json(err);
@@ -243,28 +236,28 @@ app.get('/data-device',(req, res)=>{
     })
 })
 
-// app.get('/data-doctor',(req, res)=>{
-//     var findDoctor = DOCTORS.find({});
-//     findDoctor.exec((err, data)=>{
-//         if (err){
-//             res.status(404).json(err);
-//         }else{
-//         res.status(200).json(data);
-//         }
-//     })
-// })
+app.get('/data-doctor',(req, res)=>{
+    var findDoctor = DOCTORS.find({});
+    findDoctor.exec((err, data)=>{
+        if (err){
+            res.status(404).json(err);
+        }else{
+        res.status(200).json(data);
+        }
+    })
+})
 
-// app.get('/data-patient',(req, res)=>{
-//     var findPatient = PATIENT.find({});
-//     findPatient.exec((err, data)=>{
-//         if (err){
-//             res.status(404).json(err);
-//         }else{
-//             res.status(200).json(data);
-//         }
+app.get('/data-patient',(req, res)=>{
+    var findPatient = PATIENT.find({});
+    findPatient.exec((err, data)=>{
+        if (err){
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(data);
+        }
         
-//     })
-// })
+    })
+})
 app.post('/data-login-doctor',(req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
@@ -284,8 +277,7 @@ app.post('/data-login-patient',(req, res)=>{
     var findPatient = PATIENT.findOne({username: username, password:password});
     findPatient.exec((err, data)=>{
         if (err){
-            // console.log('get data json patients error');
-            res.status(404).json(err);
+            res.status(400).json(err)
         }else{
             res.status(200).json(data);
         }
@@ -293,9 +285,68 @@ app.post('/data-login-patient',(req, res)=>{
     })
 })
 
-//find one patient
+//find one patient and device
+app.post('/data-a-patient',(req, res)=>{
+    const id = req.body.id;
+    const findPatient = PATIENT.findOne({id: id});
+    findPatient.exec((err, patient)=>{
+        if (err){
+            res.status(404).json(err);
+        }else {
+            const key_device = patient.key_device;
+            DEVICE.findOne({key_device: key_device})
+                .exec((err, device) =>{
+                    if(err){
+                        res.status(404).json(err);
+                    }else{
+                        res.status(200).json({patient,device});
+                    }
+                })
+        }
+    })
+})
 
-//
+//find one device
+app.post('/data-a-device',(req, res) => {
+    const key_device = req.body.key_device;
+    const findDevice = DEVICE.findOne({key_device: key_device});
+    findDevice.exec((err, device) => {
+        if (err) {
+            res.status(404).json(err);
+        } else {
+            res.status(200).json(device);
+        }
+    })
+})
+
+//find one patient
+app.post('/data-one-patient',(req, res) => {
+    const idPatient = req.body.id;
+    const findPatient = PATIENT.findOne({id:  idPatient});
+    findPatient.exec((err, patient) => {
+        if (err){
+            res.status(404).json(err);
+        }else {
+            res.status(200).json(patient);
+        }
+    });
+})
+
+//find one doctor
+app.post('/data-one-doctor',(req, res)=>{
+    const idDoctor = req.body.id;
+    const findDoctor = DOCTORS.findOne({id: idDoctor});
+    findDoctor.exec((err, doctor) => {
+        if(err){
+            res.status(404).json(err);
+        }else{
+            res.status(200).json(doctor);
+        }
+    })
+})
+
+
+//---------------------------------------
 
 // get info all device
 app.get("/list",(req, res) => {
@@ -304,9 +355,11 @@ app.get("/list",(req, res) => {
     methodFind.exec((err,data) => {
         if (err) {throw err;
         }else{
-        console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        console.log("ham ham: ", data)
         res.render('table_2', {
-            ups: data.map(aa => aa.toJSON())
+            // ups: data.map(aa => aa.toJSON())
+            ups: data
         })}
     })
     });
@@ -420,9 +473,11 @@ app.get("/list-doctors", (req, res) => {
         console.log('name:', data.name);
         if (err) {throw err;}
         else{
-        console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+        console.log("ham ham: ", data)
         res.render('listDoctor', {
-            docs: data.map(aa => aa.toJSON())
+            // docs: data.map(aa => aa.toJSON())
+            docs: data
         })
     }
     })
@@ -490,7 +545,7 @@ app.get("/list-patients", (req, res) => {
         }else{
         // console.log("ham ham: ", data.map(aa => aa.toJSON()))
         res.render('listPatients', {
-            docs: data.map(aa => aa.toJSON())
+            docs: data
         })
     }
 })
@@ -570,7 +625,8 @@ app.get('/:key',(req,res)=>{
     PATIENT.findById(req.params.key,(err, data)=>{
         if(!err){
             res.render('infoPatient',{
-                patient:data.toJSON(),
+                // patient:data.toJSON(),
+                patient:data
             })
         }
     })
