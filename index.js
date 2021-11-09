@@ -79,6 +79,7 @@ var DOCTORSchema = new mongoose.Schema({
     username:String,
     password:String,
     state:Boolean,
+    tokenn:String
 });
 //model patient
 var PATIENTSchema = new mongoose.Schema({
@@ -100,6 +101,8 @@ var USERSchema = new mongoose.Schema({
 //create collection mongodb
 var DEVICE = mongoose.model("data-devices", DEVICESchema);
 var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
+//remove
+var DOCTORS1 = mongoose.model('data-test', DOCTORSchema);
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
 var USER = mongoose.model('data-logins', USERSchema);
 const KEY_DEVICE = 'device08';
@@ -642,6 +645,46 @@ app.post('/update-patient',(req,res)=>{
             console.log(err);
         }
     })
+});
+//update status doctor
+app.get('/updateStatus/:key',(req,res)=>{
+    console.log(req.params.key)
+    var myquery = { _id:req.params.key };
+    var newvalues = { $set: {state: "false" } };
+    DOCTORS.findByIdAndUpdate(req.params.key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                res.redirect('/list-patients');
+            } else {
+                res.status(500).json({
+                    message: "not found any relative data"
+                })
+            }
+        });
+
+})
+//update token doctor
+app.post('/update-token',(req,res)=>{
+    console.log(req.body.tokennn)
+    var myquery = { _id:req.body.key};
+    var newvalues = { tokenn: req.body.tokennn};
+    DOCTORS.findByIdAndUpdate(req.body.key, newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                // res.redirect('/list-patients');
+                res.status(200).json({
+                    message: "update token complete"
+                })
+            } else {
+                res.status(500).json({
+                    message: "not found any relative data"
+                })
+            }
+        });
 })
 ////----------------
 
