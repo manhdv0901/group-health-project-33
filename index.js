@@ -534,7 +534,7 @@ app.post('/login',
 
 
 });
-// // get json-login-patient
+
 
 // get list patient
 app.get("/list-patients", (req, res) => {
@@ -620,7 +620,7 @@ app.post('/add-patient', (req, res)=>{
     })
 })
 
-// //update
+ //update 09.11
 app.get('/:key',(req,res)=>{
     PATIENT.findById(req.params.key,(err, data)=>{
         if(!err){
@@ -631,7 +631,6 @@ app.get('/:key',(req,res)=>{
         }
     })
 })
-
 
 app.post('/update-patient',(req,res)=>{
     PATIENT.findOneAndUpdate({_id:req.body.key},req.body,{new : true},( err, doc)=>{
@@ -644,7 +643,9 @@ app.post('/update-patient',(req,res)=>{
         }
     })
 })
+////----------------
 
+//delete 09.11
 app.get('/delete/:key', async (req, res) =>{
     try{
         const patient = await PATIENT.findByIdAndDelete(req.params.key, req.body);
