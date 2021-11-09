@@ -209,7 +209,7 @@ app.get('/add-device', (req, res) =>{
         })
 })
 
-
+app.use('/api/notification',require('./notification'));
 app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'/views'))
 console.log(__dirname)
