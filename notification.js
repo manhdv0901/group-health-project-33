@@ -5,10 +5,10 @@ const  router=express.Router();
 
 router.post('/sendToAll',(req,res)=>{
     var notification={
-        'title':'Title of notification',
+        'title':'Hello World',
         'text':'Subtitle'
     };
-    var fcm_tokens=[];
+    var fcm_tokens=['dmV-fxmTSMaMex4Mu3Kgsp:APA91bE4VF0wrR8k27ZpEX6OrZO_tvYKq5A4A3swigc9dsKWtPWkwrzCAkfk78iw3AB7ci1zm7l_VjO4jdSWj2JBgJ0XT2AHsFBl5gSUnzDPbYcbKOA8fdWNfQJ5O6qhiQjDgjEmFslU'];
 
     var notification_body={
         'notification':notification,
