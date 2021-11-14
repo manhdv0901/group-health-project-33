@@ -7,6 +7,7 @@ findOne patient and device:'/data-a-patient'<br/>
 findOne device: '/data-a-device'<br/>
 findOne patient: '/data-one-patinet'<br/>
 findOne doctor: '/data-one-doctor'<br/>
+update token: '/update-token' <br/>
 <hr/>
 --GET--<br/>
 list patients:'/data-patient'<br/>
