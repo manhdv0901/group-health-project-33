@@ -7,6 +7,7 @@ const app =express();
 //connect mongoose
 const mongoose = require("mongoose");
 const path = require('path')
+const fetch = require("node-fetch");
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -70,6 +71,11 @@ var DEVICESchema = new mongoose.Schema({
         {value:Number,
             real_time :Date}
     ],
+    treatment_course:[
+        {value:String,
+            real_time :Date
+            }
+    ],
 })
 //model doctor
 var DOCTORSchema = new mongoose.Schema({
@@ -110,6 +116,65 @@ const KEY_DEVICE = 'device08';
 app.get('/',(req, res)=>{
     res.render('login');
 })
+app.post('/sendToAll/:key',(req,res)=>{
+    console.log("heart: ", req.params.key);
+    console.log("heart: ", req.query.name);
+    // console.log(req.params.key)
+    // DOCTORS.findById(req.params.key,(err, data)=>{
+    //     console.log(data.toJSON())
+    //     if(!err){
+    //         console.log(data.tokenn)
+    //         var notification={
+    //             'id':req.body.id,
+    //             'title':req.body.title,
+    //             'name':req.body.name,
+    //             'room':req.body.room,
+    //             'age':req.body.age,
+    //             'status':req.body.status,
+    //             'medicine':req.body.medicine,
+    //             'amountAndUse':req.body.amountAndUse
+    //         };
+            // var notification={
+            //     'title':'hello',
+            //     'text':'Subtitle'
+            // };
+            // var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
+            // // var fcm_tokens=['ev8StG0CSHGv4RMdH9ndkZ:APA91bFu-TlfT-meH75l4h3CmxamvsVZrCERhvmUoBintP2cSTITYmAj7oXfWmEwTRGYCaMx3IHGjRGJRF0J-3zagt8b7O7tS37eEtkzIxLGRNeY_BrWdOBngYlmKb6sPvQKgpjQCNvR'];
+            //
+            // var notification_body={
+            //     'data':notification,
+            //     'to':fcm_tokens
+            // }
+            //còn bắn node là bắn theo token, tại chiều bắn theo token k đ nên bắn console
+            // var notification_body={
+            //     'notification':notification,
+            //     'registration_ids':fcm_tokens
+            // } nch là api k liên quan đâu
+        //     console.log("notify body",notification_body)
+        //
+        //     async function fetchMovies() {
+        //         const response = await fetch('https://fcm.googleapis.com/fcm/send',{
+        //             'method':'POST',
+        //             'headers':{
+        //                 'Authorization':'key=' +SERVER_KEY,
+        //                 'Content-Type':'application/json'
+        //             },
+        //             'body':JSON.stringify(notification_body)
+        //         }).then(()=>{
+        //             res.status(200).send('Notification succcesfully')
+        //         }).catch((err)=>{
+        //             res.status(400).send('Something went wrong!');
+        //             console.log(err)
+        //         });
+        //         return response;
+        //         // waits until the request completes...
+        //     }
+        //
+        //     console.log(fetchMovies());
+    //     }
+    // })
+
+});
 app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
@@ -687,7 +752,32 @@ app.post('/update-token',(req,res)=>{
         });
 })
 ////----------------
+//update liệu trình
+app.post('/update/treatmentcourse/',(req,res)=>{
+    console.log(req.body.key_device)
+    console.log(req.body.data)
+    console.log(req.body.date)
 
+    var key=req.body.key_device;
+    var data=req.body.data;
+    var date=req.body.date;
+        DEVICE.updateOne(
+            { "key_device" : key },
+            { $push: { 'treatment_course' : {'value':data,'real_time':date} }, },function (err) {
+                if (!err) {
+                    // res.redirect('/list-patients');
+                    res.status(200).json({
+                        message: "Cập nhật liệu trình thành công"
+                    })
+                } else {
+                    res.status(500).json({
+                        message: "Cập nhật liệu trình thất bại"
+                    })
+                }
+            }
+        );
+   
+})
 //delete 09.11
 app.get('/delete/:key', async (req, res) =>{
     try{
