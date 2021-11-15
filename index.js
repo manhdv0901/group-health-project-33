@@ -413,6 +413,28 @@ app.post('/data-one-doctor',(req, res)=>{
     })
 })
 
+//update token doctor
+app.post('/update-token',(req,res)=>{
+    console.log(req.body.tokennn)
+    var myquery = { _id:req.body.key};
+    var newvalues = { tokenn: req.body.tokennn};
+    DOCTORS.findByIdAndUpdate(req.body.key, newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                // res.redirect('/list-patients');
+                res.status(200).json({
+                    message: "update token complete"
+                })
+            } else {
+                res.status(500).json({
+                    message: "not found any relative data"
+                })
+            }
+        });
+})
+
 
 //---------------------------------------
 
@@ -730,27 +752,7 @@ app.get('/updateStatus/:key',(req,res)=>{
         });
 
 })
-//update token doctor
-app.post('/update-token',(req,res)=>{
-    console.log(req.body.tokennn)
-    var myquery = { _id:req.body.key};
-    var newvalues = { tokenn: req.body.tokennn};
-    DOCTORS.findByIdAndUpdate(req.body.key, newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                // res.redirect('/list-patients');
-                res.status(200).json({
-                    message: "update token complete"
-                })
-            } else {
-                res.status(500).json({
-                    message: "not found any relative data"
-                })
-            }
-        });
-})
+
 ////----------------
 //update liệu trình
 app.post('/update/treatmentcourse/',(req,res)=>{

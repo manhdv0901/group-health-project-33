@@ -13,7 +13,7 @@ router.post('/sendToAll',(req,res)=>{
         'age':req.body.age,
         'status':req.body.status,
         'medicine':req.body.medicine,
-        'amountAndUse':req.body.amountAndUse
+        'amountAndUse':req.body.amountAndUse,
     };
     // var notification={
     //     'title':'hello',
