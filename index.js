@@ -116,9 +116,12 @@ const KEY_DEVICE = 'device08';
 app.get('/',(req, res)=>{
     res.render('login');
 })
+app.get("/sendToAll/:key", (req, res) => {
+    console.log('data id: ', req.params.key);
+});
 app.post('/sendToAll/:key',(req,res)=>{
     console.log("heart: ", req.params.key);
-    console.log("heart: ", req.query.name);
+    console.log("heart: ", req.params.name);
     // console.log(req.params.key)
     // DOCTORS.findById(req.params.key,(err, data)=>{
     //     console.log(data.toJSON())
