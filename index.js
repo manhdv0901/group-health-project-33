@@ -116,65 +116,67 @@ const KEY_DEVICE = 'device08';
 app.get('/',(req, res)=>{
     res.render('login');
 })
+//send notification
 app.post('/sendToAll/:key',(req,res)=>{
-    console.log("heart: ", req.params.key);
-    console.log("heart: ", req.query.name);
-    // console.log(req.params.key)
-    // DOCTORS.findById(req.params.key,(err, data)=>{
-    //     console.log(data.toJSON())
-    //     if(!err){
-    //         console.log(data.tokenn)
-    //         var notification={
-    //             'id':req.body.id,
-    //             'title':req.body.title,
-    //             'name':req.body.name,
-    //             'room':req.body.room,
-    //             'age':req.body.age,
-    //             'status':req.body.status,
-    //             'medicine':req.body.medicine,
-    //             'amountAndUse':req.body.amountAndUse
-    //         };
-            // var notification={
-            //     'title':'hello',
-            //     'text':'Subtitle'
-            // };
-            // var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
-            // // var fcm_tokens=['ev8StG0CSHGv4RMdH9ndkZ:APA91bFu-TlfT-meH75l4h3CmxamvsVZrCERhvmUoBintP2cSTITYmAj7oXfWmEwTRGYCaMx3IHGjRGJRF0J-3zagt8b7O7tS37eEtkzIxLGRNeY_BrWdOBngYlmKb6sPvQKgpjQCNvR'];
-            //
-            // var notification_body={
-            //     'data':notification,
-            //     'to':fcm_tokens
-            // }
-            //còn bắn node là bắn theo token, tại chiều bắn theo token k đ nên bắn console
-            // var notification_body={
-            //     'notification':notification,
-            //     'registration_ids':fcm_tokens
-            // } nch là api k liên quan đâu
-        //     console.log("notify body",notification_body)
-        //
-        //     async function fetchMovies() {
-        //         const response = await fetch('https://fcm.googleapis.com/fcm/send',{
-        //             'method':'POST',
-        //             'headers':{
-        //                 'Authorization':'key=' +SERVER_KEY,
-        //                 'Content-Type':'application/json'
-        //             },
-        //             'body':JSON.stringify(notification_body)
-        //         }).then(()=>{
-        //             res.status(200).send('Notification succcesfully')
-        //         }).catch((err)=>{
-        //             res.status(400).send('Something went wrong!');
-        //             console.log(err)
-        //         });
-        //         return response;
-        //         // waits until the request completes...
-        //     }
-        //
-        //     console.log(fetchMovies());
+    console.log(req.params.key)
+    // var id=req.body.id;
+    // var title=req.body.title;
+    // var name=req.body.name;
+    // var room=req.body.room;
+    // var age=req.body.age;
+    // var status=req.body.status;
+    // var medicine=req.body.medicine;
+    // var amountAndUse=req.body.amountAndUse;
+    //
+    //     var notification={
+    //         'id':id,
+    //         'title':title,
+    //         'name':name,
+    //         'room':room,
+    //         'age':age,
+    //         'status':status,
+    //         'medicine':medicine,
+    //         'amountAndUse':amountAndUse,
+    //     };
+    //     // var notification={
+    //     //     'title':'hello',
+    //     //     'text':'Subtitle'
+    //     // };
+    //     var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
+    //     // var fcm_tokens=['ev8StG0CSHGv4RMdH9ndkZ:APA91bFu-TlfT-meH75l4h3CmxamvsVZrCERhvmUoBintP2cSTITYmAj7oXfWmEwTRGYCaMx3IHGjRGJRF0J-3zagt8b7O7tS37eEtkzIxLGRNeY_BrWdOBngYlmKb6sPvQKgpjQCNvR'];
+    //
+    //     var notification_body={
+    //         'data':notification,
+    //         'to':fcm_tokens
     //     }
-    // })
-
-});
+    //     //còn bắn node là bắn theo token, tại chiều bắn theo token k đ nên bắn console
+    //     // var notification_body={
+    //     //     'notification':notification,
+    //     //     'registration_ids':fcm_tokens
+    //     // } nch là api k liên quan đâu
+    //     console.log("notify body",notification_body)
+    //
+    //     async function fetchMovies() {
+    //         const response = await fetch('https://fcm.googleapis.com/fcm/send',{
+    //             'method':'POST',
+    //             'headers':{
+    //                 'Authorization':'key=' +SERVER_KEY,
+    //                 'Content-Type':'application/json'
+    //             },
+    //             'body':JSON.stringify(notification_body)
+    //         }).then(()=>{
+    //             res.status(200).send('Notification succcesfully')
+    //         }).catch((err)=>{
+    //             res.status(400).send('Something went wrong!');
+    //             console.log(err)
+    //         });
+    //         return response;
+    //         // waits until the request completes...
+    //     }
+    //
+    //     console.log(fetchMovies());
+},
+);
 app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
@@ -497,7 +499,8 @@ app.get('/profile',(req, res)=>{
                 }
             })
         }
-    })
+    }
+    )
 
 })
 //get one info patient
@@ -642,49 +645,6 @@ app.get("/list-patients", (req, res) => {
     
 });
 
-
-//check login web manage
-// app.post('/login', [
-//     body('username', 'Email is required')
-//     body('username', 'Email is required')
-//         .isEmail(),
-//     body('password', 'Password is requried')
-//         .isEmail(),
-//        ],
-// (req,res)=>{
-//     const username = req.body.username;
-//     const password = req.body.password;
-//     const model = db.model('data-login', loginSchema);
-//     var errors = validationResult(req).array();
-//         // if (!errors.isEmpty()) {
-//         //         // req.errors = errors;
-//         //         // req.success = false;
-//         //         // res.redirect('/list-patients');
-//         // }
-//     if (errors) {
-//         req.session.errors = errors;
-//         req.session.success = false;
-//         res.redirect('/login');
-//     } else {
-//         req.session.success = true;
-//         model.findOne({username:username,password:password},function (err,user) {
-//             if(err){
-//                 console.log(err);
-//                 return res.status(500).send();
-//             }
-//             if(!user){
-//                 res.status(404).send();
-//             }
-//
-//             return res.redirect('/list-patients')
-//             // res.status(200).send(user);
-//
-//         });
-//     }
-//
-// })
-
-
 app.get('/add-patient',(req, res)=>{
     res.render('addPatient');
 })
@@ -734,22 +694,25 @@ app.post('/update-patient',(req,res)=>{
     })
 });
 //update status doctor
-app.get('/updateStatus/:key',(req,res)=>{
-    console.log(req.params.key)
-    var myquery = { _id:req.params.key };
-    var newvalues = { $set: {state: "false" } };
-    DOCTORS.findByIdAndUpdate(req.params.key , newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                res.redirect('/list-patients');
-            } else {
-                res.status(500).json({
-                    message: "not found any relative data"
-                })
-            }
-        });
+app.get('/updateStatus/:key/:keydevice',(req,res)=>{
+
+    var key=req.params.key;
+    var keydevice=req.params.keydevice;
+    PATIENT.find({key_device:keydevice},(err, data)=>{
+        if (err){
+            console.log('err patient:', err);
+        }else {
+            DOCTORS.find({_id:key},(err2, data2)=>{
+                if (err){
+                    console.log('err device:', err);
+                }else{
+                    console.log('data patient:',data);
+                    console.log('data device:', data2);
+                    res.render('notification',{data1:data, data2:data2})
+                }
+            })
+        }
+    });
 
 })
 
