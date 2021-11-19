@@ -3,37 +3,37 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="text-center">Gửi thông báo</h1>
-{{#each data2}}
-{{/each}}
+
     {{#each data1}}
-            <form method="post" action="/sendToAll/{{../data2.tokenn}}">
+            <form method="post" action="/sendToAll">
                 <div class="form-group mb-3"><label class="form-label">ID </label>
-                    <input class="form-control" type="text" placeholder="ID" value="{{this.id}}" readonly></div>
-                <div class="form-group mb-3"><label class="form-label">ID </label>
-                    <input class="form-control" type="text" placeholder="ID" value="" readonly></div>
+                    <input class="form-control" type="text" placeholder="ID" name="id" value="{{this.id}}" readonly></div>
+            {{#each ../data2}}
+                <div class="form-group mb-3"><label class="form-label">Token </label>
+                    <input class="form-control" type="text"  name="token" placeholder="ID" value="{{this.tokenn}}" readonly></div>
+            {{/each}}
                 <div class="form-group mb-3"><label class="form-label">Title </label>
-                    <input class="form-control" type="text" placeholder="Your email address" ></div>
+                    <input class="form-control" type="text" name="title" placeholder="Your email address" ></div>
 
                 <div class="form-group mb-3">
                     <label class="form-label">Name</label>
-
-                    <input class="form-control" type="text" placeholder="Your name" value="{{this.name}}" readonly>
+                    <input class="form-control" type="text" placeholder="Your name" name="name" value="{{this.name}}" readonly>
                 </div>
 
                 <div class="form-group mb-3"><label class="form-label">Room</label>
-                    <input class="form-control" type="text"  value="{{this.number_room}}" readonly></div>
+                    <input class="form-control" type="text" name="room" value="{{this.number_room}}" readonly></div>
 
                 <div class="form-group mb-3"><label class="form-label">Age</label>
-                    <input class="form-control" type="text"  value="{{this.age}}" readonly></div>
+                    <input class="form-control" type="text" name="age" value="{{this.age}}" readonly></div>
 
                 <div class="form-group mb-3"><label class="form-label">Status</label>
-                    <input class="form-control" type="text" placeholder="" ></div>
+                    <input class="form-control" type="text" name="status" placeholder="" ></div>
 
                 <div class="form-group mb-3"><label class="form-label">Medicine</label>
-                    <textarea class="form-control" placeholder="Type your message here" rows="5"></textarea></div>
+                    <textarea class="form-control" placeholder="Type your message here" name="medicine" rows="5"></textarea></div>
 
                 <div class="form-group mb-3"><label class="form-label">AmountAndUse </label>
-                    <textarea class="form-control" placeholder="Type your message here" rows="5"></textarea></div>
+                    <textarea class="form-control" placeholder="Type your message here" name="amountAndUse" rows="5"></textarea></div>
 
                 <button class="btn btn-light" type="submit" >Send </button>
             </form>
