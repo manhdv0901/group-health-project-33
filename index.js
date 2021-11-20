@@ -433,7 +433,22 @@ app.post('/update-token',(req,res)=>{
         });
 })
 
+//api update statuss
+app.post('/updateStatus',(req,res)=>{
+    console.log(req.body.id)
+    var newvalues = { $set: {state: "true" } };
+    DOCTORS.findByIdAndUpdate(req.body.id , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                console.log('update status doctor completr')
+            } else {
+                console.log('update status doctor fail')
+            }
+        });
 
+})
 //---------------------------------------
 
 // get info all device
@@ -691,7 +706,6 @@ app.post('/update-patient',(req,res)=>{
 });
 //update status doctor
 app.get('/updateStatus/:key/:keydevice',(req,res)=>{
-
     var key=req.params.key;
     var keydevice=req.params.keydevice;
     PATIENT.find({key_device:keydevice},(err, data)=>{
