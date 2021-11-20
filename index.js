@@ -749,7 +749,7 @@ app.get('/delete/:key', async (req, res) =>{
         }else {
             // res.status(200).send();
             console.log('delete patient success');
-            res.redirect('list-patients');
+            res.redirect('/list-patients');
             // res.render('listPatients');
         }
     }catch (e){
