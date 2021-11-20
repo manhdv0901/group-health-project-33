@@ -708,6 +708,17 @@ app.post('/update-patient',(req,res)=>{
 app.get('/updateStatus/:key/:keydevice',(req,res)=>{
     var key=req.params.key;
     var keydevice=req.params.keydevice;
+    var newvalues = { $set: {state: "false" } };
+    DOCTORS.findByIdAndUpdate(key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                console.log('update status doctor completr')
+            } else {
+                console.log('update status doctor fail')
+            }
+        });
     PATIENT.find({key_device:keydevice},(err, data)=>{
         if (err){
             console.log('err patient:', err);
@@ -723,6 +734,7 @@ app.get('/updateStatus/:key/:keydevice',(req,res)=>{
             })
         }
     });
+
 
 })
 
