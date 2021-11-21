@@ -55,7 +55,7 @@ module.exports.login1 =
                 }
                 // res.status(200).json({'mess':'success'})
                 if(user!=null){
-                    res.redirect('/list-patients');
+                    res.redirect('/list-patient');
                 }
             })
         }
