@@ -30,7 +30,7 @@ app.engine('hbs',exhbs({
 var myDataTem = [];
 var myDataHea=[];
 var myDataSpO2 =[];
-
+var myDataState = [];
 //config mongodb
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
 const DATABASE_CONNECT_OPTION  = {
@@ -56,21 +56,13 @@ var loginSchema=new mongoose.Schema({
 })
 //model device
 var DEVICESchema = new mongoose.Schema({
-    id:Number,
-    key_device:String,
-    heart:[
-        {value: Number,
-            real_time : Date}
-    ],
-    spO2: [
-        {value:Number,
-            real_time :Date}
-    ],
-    temp: [
-        {value:Number,
-            real_time :Date}
-    ],
-})
+  id: Number,
+  key_device: String,
+  heart: [{ value: Number, real_time: Date }],
+  spO2: [{ value: Number, real_time: Date }],
+  temp: [{ value: Number, real_time: Date }],
+  state: [{ value: Number, real_time: Date }],
+});
 //model doctor
 var DOCTORSchema = new mongoose.Schema({
     id:Number,
@@ -105,7 +97,7 @@ var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
 var DOCTORS1 = mongoose.model('data-test', DOCTORSchema);
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
 var USER = mongoose.model('data-logins', USERSchema);
-const KEY_DEVICE = 'device09';
+const KEY_DEVICE = 'device01';
 
 app.get('/',(req, res)=>{
     res.render('login');
@@ -124,27 +116,28 @@ app.post("/add-device", (req,res) => {
     console.log("temp:", req.query.temp);
     myDataTem.push(req.query.temp);
     console.log("value: ", myDataTem);
-    var newDEVICE = DEVICE({
-        key_device: KEY_DEVICE,
-        heart:
-            {
-                value: Number(req.query.heart),
-                real_time: new Date(),
-            }
-        ,
-        spO2:
-            {
-                value: Number(req.query.spO2),
-                real_time: new Date(),
-            }
-        ,
-        temp:
-            {
-                value: Number(req.query.temp),
-                real_time: new Date(),
-            }
-        ,
 
+    console.log("state:", req.query.state);
+    myDataState.push(req.query.state);
+    console.log("value: ", myDataState);
+    var newDEVICE = DEVICE({
+      key_device: KEY_DEVICE,
+      heart: {
+        value: Number(req.query.heart),
+        real_time: new Date(),
+      },
+      spO2: {
+        value: Number(req.query.spO2),
+        real_time: new Date(),
+      },
+      temp: {
+        value: Number(req.query.temp),
+        real_time: new Date(),
+      },
+      state: {
+        value: Number(req.query.state),
+        real_time: new Date(),
+      },
     });
     console.log("data post req: ", req.query);
 
@@ -163,27 +156,24 @@ app.post("/add-device", (req,res) => {
     // update data
     var oldValue = {key_device: KEY_DEVICE};
     var newValue = {
-        $push: {
-            heart:
-                {
-                    value: Number(req.query.heart),
-                    real_time: new Date(),
-                }
-            ,
-            spO2:
-                {
-                    value: Number(req.query.spO2),
-                    real_time: new Date(),
-                }
-            ,
-            temp:
-                {
-                    value: Number(req.query.temp),
-                    real_time: new Date(),
-                }
-            ,
-        }
-
+      $push: {
+        heart: {
+          value: Number(req.query.heart),
+          real_time: new Date(),
+        },
+        spO2: {
+          value: Number(req.query.spO2),
+          real_time: new Date(),
+        },
+        temp: {
+          value: Number(req.query.temp),
+          real_time: new Date(),
+        },
+        state: {
+          value: Number(req.query.state),
+          real_time: new Date(),
+        },
+      },
     };
 
     //update
