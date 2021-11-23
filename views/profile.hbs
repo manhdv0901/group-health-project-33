@@ -49,25 +49,32 @@
                             <th>Selection</th>
                         </tr>
                         </thead>
-
                         <tbody>
-                        {{#each doctors}}
-                            <tr>
-                                <th scope="row">{{id}}</th>
-                                <td id="name">{{name}}</td>
-                                <td>{{state}}</td>
-                                <td>
-                                    <a id="sumbmit" href="/updateStatus/{{this._id}}" type="button"
-                                       class="btn btn-danger btn-sm btn-rounded"><i
-                                            class="fas fa-plane pr-2 pt-1" aria-hidden="true"> </i>Gọi hỗ trợ
-                                    </a>
-                                </td>
-                            </tr>
-                        {{/each}}
+                {{#each doctors}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td id="name">{{name}}</td>
+                    <td>{{state}}</td>
+                    <td>
+                        <a id="sumbmit" href="/updateStatus/{{this._id}}/{{../patient.key_device}}" type="button"
+                            onclick="document.getElementById('myform').submit();" class="btn btn-danger btn-sm btn-rounded"><i
+                                class="fas fa-plane pr-2 pt-1" aria-hidden="true"> </i>Gọi hỗ trợ
+                        </a>
+                        <!--                                    $("#sumbmit").click(function () {-->
+                        <!--                                    var name = $("#name").val();-->
+                        <!--                                    swal({-->
+                        <!--                                    title: "Thành công!",-->
+                        <!--                                    text: "Bạn đã gọi bác sĩ thành công",-->
+                        <!--                                    icon: "success",-->
+                        <!--                                    });-->
+                        <!--                                    });-->
+                
+                    </td>
+                </tr>
+                {{/each}}
                         </tbody>
 
                     </table>
-
                 </div>
 
                 <!--Footer-->
@@ -77,206 +84,6 @@
             </div>
         </div>
     </div>
-    <!--    <div id="content">-->
-    <!--        <div class="container-fluid">-->
-    <!--            <h3 class="text-dark mb-4">Profile</h3>-->
-    <!--            <div class="card-header py-3" style="background: rgb(248,249,252);">-->
-    <!--                <h6 class="text-primary fw-bold m-0">Thông tin bệnh nhân</h6>-->
-    <!--            </div>-->
-    <!--            {{!-- <div class="row mb-3"> --}}-->
-    <!--            <section class="section about-section gray-bg" id="about">-->
-    <!--                <div class="container">-->
-    <!--                    <div class="row align-items-center flex-row-reverse">-->
-    <!--                        <div class="col-lg-8">-->
-    <!--                            <div class="about-text go-to">-->
-    <!--                                <h3 class="dark-color name">{{patient.name}}</h3>-->
-    <!--                                <div class="row about-list content">-->
-    <!--                                    <div class="col-md-6">-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label class="col-md-5">Key Thiết Bị</label>-->
-    <!--                                            <p class="col-md-7" name="na">{{patient.id}}</p>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label class="col-md-5">ID</label>-->
-    <!--                                            <p class="col-md-7" name="id">{{patient.id}}</p>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label class="col-md-5" style="text-align: left;">Tuổi</label>-->
-    <!--                                            <p class="col-md-7" name="age">{{patient.age}}</p>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label class="col-md-5">Phòng</label>-->
-    <!--                                            <p class="col-md-7" name="number_room">{{patient.number_room}}</p>-->
-    <!--                                        </div>-->
-
-    <!--                                    </div>-->
-    <!--                                    <div class="col-md-6">-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label col-md-5>Tên đăng nhập</label>-->
-    <!--                                            <p class="col-md-7" name="username">{{patient.username}}</p>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label col-md-5>Số điện thoại</label>-->
-    <!--                                            <p class="col-md-7" name="phone">{{patient.phone}}</p>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <label col-md-5>Thiết bị</label>-->
-    <!--                                            <p class="col-md-7" name="key_device">{{patient.key_device}}</p>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <button type="button" class="btn btn-danger btn-sm btn-rounded"-->
-    <!--                                                    data-toggle="modal"-->
-    <!--                                                    data-target="#modalCart"><i class="fas fa-plane pr-2 pt-1"-->
-    <!--                                                                                aria-hidden="true"></i>Gọi hỗ-->
-    <!--                                                trợ-->
-    <!--                                            </button>-->
-    <!--                                        </div>-->
-    <!--                                        <div class="media">-->
-    <!--                                            <button type="button" class="btn btn-danger btn-sm btn-rounded"-->
-    <!--                                            ><i class="fas  pr-2 pt-1"-->
-    <!--                                                aria-hidden="true" ></i><a href="http://192.168.1.102/">Camera</a>-->
-    <!--                                            </button>-->
-    <!--                                        </div>-->
-    <!--                                    </div>-->
-    <!--                                </div>-->
-    <!--                                <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since-->
-    <!--                                    last month</p>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        <div class="col-lg-4">-->
-    <!--                            <div class="about-avatar">-->
-    <!--                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" title="" alt="">-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                    <div class="counter">-->
-    <!--                        <div class="row">-->
-    <!--                            <div class="col-6 col-lg-3">-->
-    <!--                                <div class="count-data text-center">-->
-    <!--                                    <h6 class="count h2" data-to="500" data-speed="500">39.6 <label>°C</label></h6>-->
-    <!--                                    <p class="m-0px font-w-600">Nhiệt độ cơ thể</p>-->
-    <!--                                </div>-->
-    <!--                            </div>-->
-    <!--                            <div class="col-6 col-lg-3">-->
-    <!--                                <div class="count-data text-center">-->
-    <!--                                    <h6 class="count h2" data-to="150" data-speed="150">96 <label>%</label></h6>-->
-    <!--                                    <p class="m-0px font-w-600">Nồng độ oxy trong-->
-    <!--                                        máu</p>-->
-    <!--                                </div>-->
-    <!--                            </div>-->
-    <!--                            <div class="col-6 col-lg-3">-->
-    <!--                                <div class="count-data text-center">-->
-    <!--                                    <h6 class="count h2" data-to="850" data-speed="850">88 <label>Nhịp/Phút</label>-->
-    <!--                                    </h6>-->
-    <!--                                    <p class="m-0px font-w-600">Nhịp tim</p>-->
-    <!--                                </div>-->
-    <!--                            </div>-->
-    <!--                            <div class="col-6 col-lg-3">-->
-    <!--                                <div class="count-data text-center">-->
-    <!--                                    <h6 class="count h2" data-to="190" data-speed="190">Nhiệt độ cao</h6>-->
-    <!--                                    <p class="m-0px font-w-600">Trạng thái</p>-->
-    <!--                                </div>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </section>-->
-    <!--            {{!-- </div> --}}-->
-    <!--            <div class="card">-->
-    <!--                <div class="card-header py-3">-->
-    <!--                    <p class="text-primary m-0 fw-bold">Thông số kỹ thuật</p>-->
-    <!--                </div>-->
-    <!--                <div class="card-body">-->
-    <!--                    <div class="row">-->
-    <!--                        <div class="col">-->
-    <!--                            <div id="chartContainer" style="height: 370px; width:100%;"></div>-->
-    <!--                            <div class="text-center" style="margin-top: 20px;">-->
-    <!--                                <label class="form-label">TRẠNG THÁI:</label>-->
-    <!--                                <label class="form-label">&nbsp;BÌNH-->
-    <!--                                    THƯỜNG</label>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        <div class="col">-->
-    <!--                            <div id="chartContainer" style="height: 370px; width:100%;"></div>-->
-    <!--                            <div class="text-center" style="margin-top: 20px;">-->
-    <!--                                <label class="form-label">TRẠNG THÁI:&nbsp;</label><label class="form-label">BÌNH-->
-    <!--                                THƯỜNG</label>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        <div class="col">-->
-    <!--                            <div id="chartContainer" style="height: 370px; width:100%;"></div>-->
-    <!--                            <div class="text-center" style="margin-top: 20px;">-->
-    <!--                                <label class="form-label">TRẠNG THÁI:&nbsp;</label><label class="form-label">BÌNH-->
-    <!--                                THƯỜNG</label>-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="card shadow mb-5" style="margin-top: 20px;">-->
-    <!--                <div class="card-header py-3">-->
-    <!--                    <p class="text-primary m-0 fw-bold">Lịch sử đo bệnh nhân</p>-->
-    <!--                </div>-->
-    <!--                <div class="card-body">-->
-    <!--                    <div>-->
-    <!--                        <div class="table-responsive text-center">-->
-    <!--                            <table class="table">-->
-    <!--                                <thead>-->
-    <!--                                <tr>-->
-    <!--                                    <th class="text-sm-start text-md-start text-lg-start text-xl-start text-xxl-center text-primary float-none"-->
-    <!--                                        style="color: #000000;">Thiết bị-->
-    <!--                                    </th>-->
-    <!--                                    <th class="text-primary" style="color: #000000;">Nhiệt độ&nbsp;</th>-->
-    <!--                                    <th class="text-primary" style="color: #000000;">SPO2</th>-->
-    <!--                                    <th class="text-primary" style="color: #000000;">Nhịp tim</th>-->
-    <!--                                    <th class=" text-primary" style="color: #000000;">Thời gian</th>-->
-    <!--                                </tr>-->
-    <!--                                </thead>-->
-    <!--                                <tbody>-->
-        <!--                                {{#each device}}-->
-    <!--                                    <tr>-->
-    <!--                                        <td style="margin-top: 50px"><b>{{this.key_device}}</b></td>-->
-    <!--                                        <td style="margin-top: 50px">-->
-        <!--                                            {{#each this.heart}}-->
-        <!--                                                <div style="margin-top: 50px"><b>Nhịp tim:</b>{{this.value}} nhịp/phút-->
-        <!--                                                </div>-->
-        <!--                                                &lt;!&ndash;                                                    <div style="margin-top: 50px">real time:{{this.real_time}}</div>&ndash;&gt;-->
-        <!--                                                <hr/>-->
-            <!--                                            {{/each}}-->
-    <!--                                        </td>-->
-    <!--                                        <td style="margin-top: 50px">-->
-        <!--                                            {{#each this.spO2}}-->
-        <!--                                                <div style="margin-top: 50px"><b>SpO2:</b>{{this.value}} %</div>-->
-        <!--                                                &lt;!&ndash;                                                    <div style="margin-top: 50px">real time:{{this.real_time}}</div>&ndash;&gt;-->
-        <!--                                                <hr/>-->
-            <!--                                            {{/each}}-->
-    <!--                                        </td>-->
-    <!--                                        <td style="margin-top: 50px">-->
-        <!--                                            {{#each this.temp}}-->
-        <!--                                                <div style="margin-top: 50px"><b>Nhiệt độ:</b>{{this.value}} *C</div>-->
-        <!--                                                &lt;!&ndash;                                                    <div style="margin-top: 50px">real time:{{this.real_time}}</div>&ndash;&gt;-->
-        <!--                                                <hr/>-->
-            <!--                                            {{/each}}-->
-    <!--                                        </td>-->
-    <!--                                        <td style="margin-top: 50px">-->
-        <!--                                            {{#each this.temp}}-->
-        <!--                                                &lt;!&ndash;                                                    <div style="margin-top: 50px">temp:{{this.value}} *C</div>&ndash;&gt;-->
-        <!--                                                <div style="margin-top: 50px"><b>Thời gian đo:</b>{{this.real_time}}-->
-        <!--                                                </div>-->
-        <!--                                                <hr/>-->
-            <!--                                            {{/each}}-->
-    <!--                                        </td>-->
-    <!--                                    </tr>-->
-        <!--                                {{/each}}-->
-
-    <!--                                </tbody>-->
-    <!--                            </table>-->
-    <!--                        </div>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
 <!--    //profile new-->
     <div class="container">
         <div class="main-body">
@@ -405,6 +212,37 @@
                                     <small>Thở mặt nạ,Thở Oxi</small>
                                     <small>Uống thuốc,.....</small>
                                     <small>Thở mặt nạ,Thở Oxi</small>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Thêm lịch trình điều trị</button>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" action="/update/treatmentcourse/{{patient.key_device}}">
+                                                        <div class="form-group">
+                                                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                            <input type="text" class="form-control" id="recipient-name" name="input1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="message-text" class="col-form-label">Message:</label>
+                                                            <textarea class="form-control" id="message-text" name="input2"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Send message</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -475,52 +313,6 @@
 </div>
 <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </div>
-<!--<script>-->
-<!--    window.onload = function () {-->
-
-<!--        var dps = []; // dataPoints-->
-<!--        var chart = new CanvasJS.Chart("chartContainer", {-->
-<!--            title: {-->
-<!--                text: "Dynamic Data"-->
-<!--            },-->
-<!--            data: [{-->
-<!--                type: "line",-->
-<!--                dataPoints: dps-->
-<!--            }]-->
-<!--        });-->
-
-<!--        var xVal = 0;-->
-<!--        var yVal = 100;-->
-<!--        var updateInterval = 1000;-->
-<!--        var dataLength = 20; // number of dataPoints visible at any point-->
-
-<!--        var updateChart = function (count) {-->
-
-<!--            count = count || 1;-->
-
-<!--            for (var j = 0; j < count; j++) {-->
-<!--                yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));-->
-<!--                dps.push({-->
-<!--                    x: xVal,-->
-<!--                    y: yVal-->
-<!--                });-->
-<!--                xVal++;-->
-<!--            }-->
-
-<!--            if (dps.length > dataLength) {-->
-<!--                dps.shift();-->
-<!--            }-->
-
-<!--            chart.render();-->
-<!--        };-->
-
-<!--        updateChart(dataLength);-->
-<!--        setInterval(function () {-->
-<!--            updateChart()-->
-<!--        }, updateInterval);-->
-
-<!--    }-->
-<!--</script>-->
 <script>
     $("#sumbmit").click(function () {
         var name = $("#name").val();
@@ -531,6 +323,8 @@
         });
     });
 </script>
+
+
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="js/chart.min.js"></script>
 <script src="js/bs-init.js"></script>
