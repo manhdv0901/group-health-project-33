@@ -52,60 +52,8 @@ mongoose.connection.on("disconnected", function (){
 });
 //connect mongoose
 var db=mongoose.connection;
-<<<<<<< HEAD
-//model login
-var loginSchema=new mongoose.Schema({
-    username:String,
-    password:String
-})
-//model device
-var DEVICESchema = new mongoose.Schema({
-  id: Number,
-  key_device: String,
-  heart: [{ value: Number, real_time: Date }],
-  spO2: [{ value: Number, real_time: Date }],
-  temp: [{ value: Number, real_time: Date }],
-  state: [{ value: Number, real_time: Date }],
-});
-//model doctor
-var DOCTORSchema = new mongoose.Schema({
-    id:Number,
-    name:String,
-    gender:String,
-    username:String,
-    password:String,
-    state:Boolean,
-    tokenn:String
-});
-//model patient
-var PATIENTSchema = new mongoose.Schema({
-    id:Number,
-    name: String,
-    username:String,
-    password: String,
-    age:Number,
-    birth_day:String,
-    phone:Number,
-    number_room:Number,
-    key_device:String
-})
-//model admin web manage
-var USERSchema = new mongoose.Schema({
-    username : String,
-    password: String,
-})
-//create collection mongodb
-var DEVICE = mongoose.model("data-devices", DEVICESchema);
-var DOCTORS = mongoose.model('data-doctors', DOCTORSchema);
-//remove
-var DOCTORS1 = mongoose.model('data-test', DOCTORSchema);
-var PATIENT = mongoose.model('data-patients', PATIENTSchema);
-var USER = mongoose.model('data-logins', USERSchema);
-const KEY_DEVICE = 'device01';
-=======
 
 const KEY_DEVICE = 'device08';
->>>>>>> update_big_ui
 
 //model
 var DEVICE = require('./app/src/model/device_model');
