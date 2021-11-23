@@ -5,6 +5,8 @@ var PATIENT = require('../model/patient_model');
 const mongoose = require("mongoose");
 const DEVICE = require("../model/device_model");
 const DOCTORS = require("../model/doctor_model");
+
+
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
 const DATABASE_CONNECT_OPTION  = {
     useNewUrlParser: true,
@@ -15,7 +17,7 @@ mongoose.connect(DATABASE_URL, DATABASE_CONNECT_OPTION);
 var db=mongoose.connection;
 
 module.exports.listpatient =  (req, res) => {
-    var model = db.model('data-patients', DEVICE.schema);
+    var model = db.model('data-patients', PATIENT.schema);
     var methodFind = model.find({});
     methodFind.exec((err,data) => {
         if (err) {throw err;

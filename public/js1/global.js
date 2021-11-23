@@ -3,7 +3,7 @@
     /*==================================================================
         [ Daterangepicker ]*/
     try {
-        $('.js-datepicker').daterangepicker({
+        $('.js1-datepicker').daterangepicker({
             "singleDatePicker": true,
             "showDropdowns": true,
             "autoUpdateInput": false,
@@ -12,7 +12,7 @@
             },
         });
     
-        var myCalendar = $('.js-datepicker');
+        var myCalendar = $('.js1-datepicker');
         var isClick = 0;
     
         $(window).on('click',function(){
@@ -25,7 +25,7 @@
     
         });
     
-        $('.js-btn-calendar').on('click',function(e){
+        $('.js1-btn-calendar').on('click',function(e){
             e.stopPropagation();
     
             if(isClick === 1) isClick = 0;
@@ -51,7 +51,7 @@
         ===========================================================*/
     
     try {
-        var selectSimple = $('.js-select-simple');
+        var selectSimple = $('.js1-select-simple');
     
         selectSimple.each(function () {
             var that = $(this);
