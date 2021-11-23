@@ -367,7 +367,7 @@ tbody tr:hover {
    ========================================================================== */
 /**
  * More sensible default box-sizing:
- * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+ * css1-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
  */
 html {
   -webkit-box-sizing: border-box;
@@ -390,7 +390,7 @@ html {
    #RESET
    ========================================================================== */
 /**
- * A very simple reset that sits on top of Normalize.css.
+ * A very simple reset that sits on top of Normalize.css1.
  */
 body,
 h1, h2, h3, h4, h5, h6,

@@ -1,89 +1,147 @@
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-    <div class="container-fluid d-flex flex-column p-0"><a
-            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-        <div class="sidebar-brand-text mx-3"><span>Profile</span></div>
-    </a>
-        <hr class="sidebar-divider my-0">
-        <ul class="navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item"><a class="nav-link active" href="/list-patients"><i
-                    class="fas fa-tachometer-alt"></i><span>Danh sách bệnh nhân</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="/list"><i
-                    class="fas fa-user"></i><span>Danh sách bác sĩ</span></a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="/add-patient"><i
-                    class="fas fa-table"></i><span>Add patient</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="/login"><i
-                    class="fas fa-user-circle"></i><span>Đăng xuất</span></a>
-            </li>
-        </ul>
-        <div class="text-center d-none d-md-inline">
-            <button class=" rounded-circle border-0" id="sidebarToggle" type="button"></button>
+
+<!--<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">-->
+<!--    <div class="container-fluid d-flex flex-column p-0"><a-->
+<!--            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">-->
+<!--        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>-->
+<!--        <div class="sidebar-brand-text mx-3"><span>Profile</span></div>-->
+<!--    </a>-->
+<!--        <hr class="sidebar-divider my-0">-->
+<!--        <ul class="navbar-nav text-light" id="accordionSidebar">-->
+<!--            <li class="nav-item"><a class="nav-link active" href="/list-patients"><i-->
+<!--                    class="fas fa-tachometer-alt"></i><span>Danh sách bệnh nhân</span></a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/list"><i-->
+<!--                    class="fas fa-user"></i><span>Danh sách bác sĩ</span></a>-->
+<!--            </li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/add-patient"><i-->
+<!--                    class="fas fa-table"></i><span>Add patient</span></a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="/login"><i-->
+<!--                    class="fas fa-user-circle"></i><span>Đăng xuất</span></a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <div class="text-center d-none d-md-inline">-->
+<!--            <button class=" rounded-circle border-0" id="sidebarToggle" type="button"></button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+<!DOCTYPE html>
+<head>
+    <title>Sidebar 05</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap5/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="bootstrap5/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="bootstrap5/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="bootstrap5css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
+    <link rel="stylesheet" href="bootstrap5/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
         </div>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div class="card" id="TableSorterCard">
-        <div class="card-header py-3">
-            <div class="row table-topper align-items-center">
-                <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
-                    <p class="text-primary m-0 fw-bold">Danh sách bệnh nhân</p>
-                </div>
-                <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;">
-                    <button class="btn btn-primary btn-sm reset" type="button" style="margin: 2px;">Borrar Filtros
-                    </button>
-                    <button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);"
-                            style="margin: 2px;"><i class="fa fa-search-plus"></i></button>
-                    <button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);"
-                            style="margin: 2px;"><i class="fa fa-search-minus"></i></button>
+        <div class="p-4">
+                <h1><a href="index.html" class="logo">Xin chào <span></span></a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a href="/list-patients"><span class="fa fa-home mr-3"></span> Danh sách bệnh nhân</a>
+                </li>
+                <li>
+                    <a href="/list"><span class="fa fa-user mr-3"></span> Danh sách bác sĩ</a>
+                </li>
+                <li>
+                    <a href="/add-patient"><span class="fa fa-briefcase mr-3"></span> Thêm bệnh nhân</a>
+                </li>
+                <li>
+                    <a href="/login"><span class="fa fa-sticky-note mr-3"></span> Đăng xuất</a>
+                </li>
+                <li>
+                    <a href="#"><span class="fa fa-suitcase mr-3"></span> Phản hồi</a>
+                </li>
+            </ul>
+
+
+        </div>
+    </nav>
+
+    <!-- Page Content  -->
+    <div class="w-100 p-2"  >
+        <div class="card" id="TableSorterCard">
+            <div class="card-header py-2">
+                <div class="row table-topper align-items-center">
+                    <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
+                        <p class="text-primary m-0 fw-bold">Danh sách bệnh nhân</p>
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;">
+                        <button class="btn btn-primary btn-sm reset" type="button" style="margin: 2px;">Borrar Filtros
+                        </button>
+                        <button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);"
+                                style="margin: 2px;"><i class="fa fa-search-plus"></i></button>
+                        <button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);"
+                                style="margin: 2px;"><i class="fa fa-search-minus"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table tablesorter" id="ipi-table">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="column1">Ảnh</th>
-                            <th class="column2">ID</th>
-                            <th class="column3">Họ Và Tên</th>
-                            <th class="column4">Tên đăng nhập</th>
-                            <th class="column5">Mật khẩu</th>
-                            <th class="column4">Số điện thoại</th>
-                            <th class="column6">Số phòng</th>
-                            <th class="column6">Sự kiện</th>
-                        </tr>
-                        </thead>
-                        {{#each docs}}
-                            <tbody>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table tablesorter" id="ipi-table">
+                            <thead class="thead-dark">
                             <tr>
-                                <td class="column1"><img class="rounded-circle me-2" width="30" height="30"
-                                                         src="img/avatars/avatar{{this.id}}.jpeg"/></td>
-                                <td class="column2">{{this.id}}</td>
-                                <td class="column3">{{this.name}}</td>
-                                <td class="column4">{{this.username}}</td>
-                                <td class="column5">{{this.password}}</td>
-                                <td class="column4">{{this.phone}}</td>
-                                <td class="column6">{{this.number_room}}</td>
-                                <td class="text-center align-middle" style="max-height: 60px;height: 60px;">
-                                    <a class="btn btnMaterial btn-flat primary semicircle" role="button"
-                                       href="/list-patients/{{this._id}}"><i class="far fa-eye"></i></a>
-                                    <a class="btn btnMaterial btn-flat success semicircle" role="button"
-                                       href="/list-patients/update/{{this._id}}"><i class="fas fa-pen"></i></a>
-                                    <a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button"
-                                       href="/delete/{{this._id}}">
-                                        <i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a>
-                                </td>
+                                <th class="column1">Ảnh</th>
+                                <th class="column2">ID</th>
+                                <th class="column3">Họ Và Tên</th>
+                                <th class="column4">Tên đăng nhập</th>
+                                <th class="column5">Mật khẩu</th>
+                                <th class="column4">Số điện thoại</th>
+                                <th class="column6">Số phòng</th>
+                                <th class="column6">Sự kiện</th>
                             </tr>
-                            </tbody>
-                        {{/each}}
-                    </table>
+                            </thead>
+                            {{#each docs}}
+                                <tbody>
+                                <tr>
+                                    <td class="column1"><img class="rounded-circle me-2" width="30" height="30"
+                                                             src="img/avatars/avatar{{this.id}}.jpeg"/></td>
+                                    <td class="column2">{{this.id}}</td>
+                                    <td class="column3">{{this.name}}</td>
+                                    <td class="column4">{{this.username}}</td>
+                                    <td class="column5">{{this.password}}</td>
+                                    <td class="column4">{{this.phone}}</td>
+                                    <td class="column6">{{this.number_room}}</td>
+                                    <td class="text-center align-middle" style="max-height: 60px;height: 60px;">
+                                        <a class="btn btnMaterial btn-flat primary semicircle" role="button"
+                                           href="/list-patients/{{this._id}}"><i class="far fa-eye"></i></a>
+                                        <a class="btn btnMaterial btn-flat success semicircle" role="button"
+                                           href="/list-patients/update/{{this._id}}"><i class="fas fa-pen"></i></a>
+                                        <a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button"
+                                           href="/delete/{{this._id}}">
+                                            <i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            {{/each}}
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</body>
+</html>
+
+
 
 
