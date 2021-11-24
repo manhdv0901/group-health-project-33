@@ -50,29 +50,28 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{#each doctors}}
-                            <tr>
-                                <th scope="row">{{id}}</th>
-                                <td id="name">{{name}}</td>
-                                <td>{{state}}</td>
-                                <td>
-                                    <a id="sumbmit" href="/updateStatus/{{this._id}}/{{../patient.key_device}}"  type="button"
-                                       onclick="document.getElementById('myform').submit();"
-                                       class="btn btn-danger btn-sm btn-rounded"><i
-                                            class="fas fa-plane pr-2 pt-1" aria-hidden="true"> </i>Gọi hỗ trợ
-                                    </a>
-<!--                                    $("#sumbmit").click(function () {-->
-<!--                                    var name = $("#name").val();-->
-<!--                                    swal({-->
-<!--                                    title: "Thành công!",-->
-<!--                                    text: "Bạn đã gọi bác sĩ thành công",-->
-<!--                                    icon: "success",-->
-<!--                                    });-->
-<!--                                    });-->
-
-                                </td>
-                            </tr>
-                        {{/each}}
+                {{#each doctors}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td id="name">{{name}}</td>
+                    <td>{{state}}</td>
+                    <td>
+                        <a id="sumbmit" href="/updateStatus/{{this._id}}/{{../patient.key_device}}" type="button"
+                            onclick="document.getElementById('myform').submit();" class="btn btn-danger btn-sm btn-rounded"><i
+                                class="fas fa-plane pr-2 pt-1" aria-hidden="true"> </i>Gọi hỗ trợ
+                        </a>
+                        <!--                                    $("#sumbmit").click(function () {-->
+                        <!--                                    var name = $("#name").val();-->
+                        <!--                                    swal({-->
+                        <!--                                    title: "Thành công!",-->
+                        <!--                                    text: "Bạn đã gọi bác sĩ thành công",-->
+                        <!--                                    icon: "success",-->
+                        <!--                                    });-->
+                        <!--                                    });-->
+                
+                    </td>
+                </tr>
+                {{/each}}
                         </tbody>
 
                     </table>
