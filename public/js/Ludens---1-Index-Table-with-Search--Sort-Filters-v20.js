@@ -60,10 +60,10 @@ $(function() {
 			// if true, allows using "#:{query}" in AnyMatch searches (column:query; added v2.20.0)
 			filter_columnAnyMatch: true,
 
-			// extra css1 class name (string or array) added to the filter element (input or select)
+			// extra css class name (string or array) added to the filter element (input or select)
 			filter_cellFilter : '',
 
-			// extra css1 class name(s) applied to the table row containing the filters & the inputs within that row
+			// extra css class name(s) applied to the table row containing the filters & the inputs within that row
 			// this option can either be a string (class applied to all filters) or an array (class applied to indexed filter)
 			filter_cssFilter : '', // or []
 
