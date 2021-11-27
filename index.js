@@ -10,6 +10,7 @@ const path = require('path')
 const fetch = require("node-fetch");
 const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
 
+app.use(express.static(path.join(__dirname,'public/css')))
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -72,7 +73,20 @@ app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
 
 app.get('/',(req, res)=>{
-    res.render('login');
+    var model = db.model('data-doctors', DOCTORS.schema);
+    var methodFind = model.find({});
+    methodFind.exec((err,data) => {
+        if (err) {throw err;}
+        else{
+            // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+            console.log("ham ham: ", data)
+            res.render('dashboard', {
+                // docs: data.map(aa => aa.toJSON())
+                docs: data
+            })
+        }
+    })
+
 })
 //send notification
 app.post('/sendToAll',(req,res)=>{
