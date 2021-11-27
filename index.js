@@ -72,7 +72,7 @@ app.use('/', listPatientRouter)
 app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
 
-app.get('/',(req, res)=>{
+app.get('/dashboard',(req, res)=>{
 
     var model = db.model('data-doctors', DOCTORS.schema);
     var model1 = db.model('data-patients', PATIENT.schema);
@@ -594,10 +594,10 @@ app.get('/updateStatusPatient2/:key',(req,res)=>{
         },
         function(err, model) {
             if (!err) {
-               res.redirect('/')
+               res.redirect('/dashboard')
                 console.log('Complete')
             } else {
-                res.redirect('/')
+                res.redirect('/dashboard')
                 console.log('update status doctor fail')
             }
         });
@@ -612,10 +612,10 @@ app.get('/updateStatusPatient1/:key',(req,res)=>{
         },
         function(err, model) {
             if (!err) {
-                res.redirect('/')
+                res.redirect('/dashboard')
                 console.log('Complete')
             } else {
-                res.redirect('/')
+                res.redirect('/dashboard')
                 console.log('update status doctor fail')
             }
         });
