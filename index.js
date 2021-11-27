@@ -500,6 +500,12 @@ app.get("/list",(req, res) => {
             })}
     })
 });
+app.get("/dashboard",(req ,res) => {
+    res.render('index')
+});
+app.get('/instruct',(req, res) => {
+    res.render('instruct');
+});
 //api update statuss
 app.post('/updateStatus',(req,res)=>{
     console.log(req.body.id)
