@@ -485,56 +485,14 @@
 <!--</body>-->
 
 <!--</html>-->
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Users / Profile - NiceAdmin Bootstrap Template</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="img/favicon.png" rel="icon">
-    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="css/style.css" type="text/css" rel="stylesheet">
-    <style>
-
-    </style>
-
-    <!-- =======================================================
-    * Template Name: NiceAdmin - v2.2.0
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
-</head>
-
-<body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
+            <img src="img/logo.png" alt="">
             <span class="d-none d-lg-block">NiceAdmin</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -649,7 +607,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <img src="img/messages-1.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Maria Hudson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -663,7 +621,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Anna Nelson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -677,7 +635,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                            <img src="img/messages-3.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>David Muldon</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -700,14 +658,14 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img src="img/profile-img.jpg" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
+                        <h6>{{patient.name}}</h6>
+                        <span>d</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -1015,16 +973,56 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2>Kevin Anderson</h2>
-                        <h3>Web Designer</h3>
-                        <div class="social-links mt-2">
-                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                        <img src="img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <h2>{{patient.name}}</h2>
+                        <h3>Phòng {{patient.number_room}}</h3>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Gọi khẩn cấp</h5>
+                                <p>Nếu thấy bệnh nhân không ổn hay gọi ngay bác sĩ đến nơi!</p>
+
+                                <!-- Basic Modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal">
+                                    Gọi Khẩn Cấp
+                                </button>
+                                <div class="modal fade" id="basicModal" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <table class="table table-borderless">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>State</th>
+                                                    <th>Selection</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {{#each doctors}}
+                                                    <tr>
+                                                        <th scope="row">{{id}}</th>
+                                                        <td id="name">{{name}}</td>
+                                                        <td>{{state}}</td>
+                                                        <td>
+                                                            <a id="sumbmit" href="/updateStatus/{{this._id}}/{{../patient.key_device}}" type="button"
+                                                               onclick="document.getElementById('myform').submit();" class="btn btn-danger btn-sm btn-rounded"><i
+                                                                    class="fas fa-plane pr-2 pt-1" aria-hidden="true"> </i>Gọi hỗ trợ
+                                                            </a>
+
+                                                        </td>
+                                                    </tr>
+                                                {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                </div><!-- End Basic Modal-->
+
+                            </div>
                         </div>
-                    </div>
+
                 </div>
 
             </div>
@@ -1037,75 +1035,72 @@
                         <ul class="nav nav-tabs nav-tabs-bordered">
 
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Tổng quan</button>
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Chỉnh sửa bệnh nhân</button>
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Lịch sử đo</button>
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Gọi khẩn cấp</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change">Cập nhật tình trạng</button>
                             </li>
 
                         </ul>
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                <h5 class="card-title">About</h5>
-                                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
 
-                                <h5 class="card-title">Profile Details</h5>
+                                <h5 class="card-title">Thông tin bệnh nhân</h5>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                    <div class="col-lg-9 col-md-8">{{patient.name}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Company</div>
-                                    <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                                    <div class="col-lg-3 col-md-4 label">Thiết bị</div>
+                                    <div class="col-lg-9 col-md-8">{{patient.key_device}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Job</div>
-                                    <div class="col-lg-9 col-md-8">Web Designer</div>
+                                    <div class="col-lg-3 col-md-4 label">Số điên thoại</div>
+                                    <div class="col-lg-9 col-md-8"> {{patient.phone}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Country</div>
-                                    <div class="col-lg-9 col-md-8">USA</div>
+                                    <div class="col-lg-3 col-md-4 label">Số phòng</div>
+                                    <div class="col-lg-9 col-md-8"> {{patient.number_room}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Address</div>
-                                    <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                                    <div class="col-lg-3 col-md-4 label">Tuổi</div>
+                                    <div class="col-lg-9 col-md-8">{{patient.age}}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Phone</div>
+                                    <div class="col-lg-3 col-md-4 label">Tình trạng</div>
                                     <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Email</div>
-                                    <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
-                                </div>
 
                             </div>
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                 <!-- Profile Edit Form -->
-                                <form>
+                                <form action="/update-patient" method="post">
                                     <div class="row mb-3">
-                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                                        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Ảnh</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="assets/img/profile-img.jpg" alt="Profile">
+                                            <img src="img/profile-img.jpg" alt="Profile">
                                             <div class="pt-2">
                                                 <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                                 <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -1114,91 +1109,50 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
+                                            <input readonly  name="key" type="text" class="form-control" id="fullName" value="{{patient._id}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                                        <label for="company" class="col-md-4 col-lg-3 col-form-label">Họ và tên</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+                                            <input name="name" value="{{patient.name}}" type="text" class="form-control" id="company" >
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Sinh nhật</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                                            <input name="birth_day" value="{{patient.birth_day}}" type="date" class="form-control" id="Job" >
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Tuổi</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
+                                            <input  type="number" class="form-control" id="Country" name="age" value="{{patient.age}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Số điện thoại</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="country" type="text" class="form-control" id="Country" value="USA">
+                                            <input name="phone" value="{{patient.phone}}" type="number" class="form-control" id="Address">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Số phòng</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
+                                            <input name="number_room" value="{{patient.number_room}}" type="text" class="form-control" id="Phone">
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
-                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                                        </div>
-                                    </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary">Thay đổi</button>
                                     </div>
                                 </form><!-- End Profile Edit Form -->
 
@@ -1209,38 +1163,61 @@
                                 <!-- Settings Form -->
                                 <form>
 
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                                                <label class="form-check-label" for="changesMade">
-                                                    Changes made to your account
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                                                <label class="form-check-label" for="newProducts">
-                                                    Information on new products and services
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="proOffers">
-                                                <label class="form-check-label" for="proOffers">
-                                                    Marketing and promo offers
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-                                                <label class="form-check-label" for="securityNotify">
-                                                    Security alerts
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Lịch sử đo bệnh nhân</h5>
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            <!-- Table with stripped rows -->
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Nhịp Tim</th>
+                                                    <th scope="col">SP02</th>
+                                                    <th scope="col">Nhiệt độ</th>
+                                                    <th scope="col">Thời gian</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+{{#each device}}
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>{{#each this.heart}}
+                                                        <div style="margin-top: 20px"><b>Nhịp tim:</b>{{this.value}} nhịp/phút
+                                                                                                </div>
+                                                    {{/each}}
+                                                    </td>
+                                                    <td>
+                                                        {{#each this.spO2}}
+                                                            <div style="margin-top: 20px"><b>SPO2:</b>{{this.value}}
+                                                            </div>
+                                                        {{/each}}
+                                                    </td>
+                                                    <td>
+                                                        {{#each this.temp}}
+                                                            <div style="margin-top: 20px"><b>Nhiệt độ:</b>{{this.value}} nhịp/phút
+                                                            </div>
+                                                        {{/each}}
+                                                    </td>
+                                                    <td>{{#each this.temp}}
+                                                        <div style="margin-top: 20px"><b>Nhiệt độ:</b>{{this.real_time}} nhịp/phút
+                                                        </div>
+                                                    {{/each}}</td>
+                                                </tr>
+{{/each}}
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Bridie Kessler</td>
+                                                    <td>Developer</td>
+                                                    <td>35</td>
+                                                    <td>2014-12-05</td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <!-- End Table with stripped rows -->
+
+                                        </div>
                                     </div>
                                 </form><!-- End settings Form -->
 
@@ -1278,6 +1255,21 @@
 
                             </div>
 
+                            <div class="tab-pane fade pt-3" id="profile-change">
+                                <!-- Change Password Form -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Cập nhật tình trạng của bệnh nhân</h5>
+
+                                        <a type="button" class="btn btn-primary"href="/updateStatusPatient1/{{patient._id  }}" >Đã khỏi bệnh</a>
+                                        <a type="button" href="/updateStatusPatient1/{{patient._id  }}" class="btn btn-secondary">Tử Vong</a>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div><!-- End Bordered Tabs -->
 
                     </div>
@@ -1306,18 +1298,6 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="vendor/apexcharts/apexcharts.min.js"></script>
-<script src="endor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/chart.js/chart.min.js"></script>
-<script src="vendor/echarts/echarts.min.js"></script>
-<script src="vendor/quill/quill.min.js"></script>
-<script src="vendor/simple-datatables/simple-datatables.js"></script>
-<script src="vendor/tinymce/tinymce.min.js"></script>
-<script src="/vendor/php-email-form/validate.js"></script>
 
-<!-- Template Main JS File -->
-<script src="js/main.js"></script>
 
-</body>
 
-</html>

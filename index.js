@@ -10,7 +10,7 @@ const path = require('path')
 const fetch = require("node-fetch");
 const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
 
-app.use(express.static(path.join(__dirname,'public/css')))
+
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -73,20 +73,72 @@ app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
 
 app.get('/',(req, res)=>{
+
     var model = db.model('data-doctors', DOCTORS.schema);
+    var model1 = db.model('data-patients', PATIENT.schema);
+
+
     var methodFind = model.find({});
     methodFind.exec((err,data) => {
         if (err) {throw err;}
         else{
-            // console.log("ham ham: ", data.map(aa => aa.toJSON()))
-            console.log("ham ham: ", data)
-            res.render('dashboard', {
-                // docs: data.map(aa => aa.toJSON())
-                docs: data
-            })
-        }
-    })
+            model1.find().count().exec((err,data1)=>{
+                if(err) {throw err;}
+                else {
+                    model1.find({done:"2"}).count().exec((err,data2)=>{
+                       if(err) {throw err}
+                       else{
+                           model1.find({done:"1"}).count().exec((err,data3)=>{
+                               console.log("tổng bn: ", data1)
+                               console.log("tổng bn khỏi: ", data2)
+                               console.log("tổng bn die: ", data3)
+                               res.render('dashboard', {
+                                   // docs: data.map(aa => aa.toJSON())
+                                   docs: data,
+                                   total:data1,
+                                   totaldn:data2,
+                                   totaldi:data3
+                               })
+                           })
+                       }
+                    })
+                }
 
+            });
+            // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+
+        }
+    });
+
+})
+//
+app.get('/:na',(req,res)=>{
+    PATIENT.findById(req.params.na,(err, data)=>{
+        if(err){
+            console.log('err get data one item patient');
+            res.render('listPatients');
+        }else {
+            var myDevice = data.key_device;
+            console.log('key device', data.key_device);
+            DEVICE.find({key_device: myDevice})
+                .exec((er, data2) => {
+                    if (er) throw er;
+                    else {
+                        DOCTORS.find({state: true})
+                            .exec((er3,  data3) => {
+                                if (er3) throw er3;
+                                else{
+                                    console.log(`devices:`, data2)
+                                    res.render('profile', {
+                                        patient: data, device:data2, doctors: data3,
+                                    })
+                                }
+                            })
+                    }
+                })
+        }
+
+    })
 })
 //send notification
 app.post('/sendToAll',(req,res)=>{
@@ -132,7 +184,7 @@ app.post('/sendToAll',(req,res)=>{
                 },
                 'body':JSON.stringify(notification_body)
             }).then(()=>{
-                res.status(200).send('Notification succcesfully')
+                res.redirect('/')
             }).catch((err)=>{
                 res.status(400).send('Something went wrong!');
                 console.log(err)
@@ -144,6 +196,7 @@ app.post('/sendToAll',(req,res)=>{
         console.log(fetchMovies());
 },
 );
+
 app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
@@ -251,7 +304,9 @@ app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'/views'))
 console.log(__dirname)
 
-
+app.get('/contact/to',(req,res)=>{
+    res.render('contact')
+})
 // get infomation detail patient
 // app.get("/profile", (req, res) => {
 //     var modelPatient = db.model('data-patients', PATIENTSchema);
@@ -525,6 +580,42 @@ app.post('/updateStatus',(req,res)=>{
             if (!err) {
                 console.log('update status doctor completr')
             } else {
+                console.log('update status doctor fail')
+            }
+        });
+
+})
+//update tình trạng bệnh nhân đã khỏi
+app.get('/updateStatusPatient2/:key',(req,res)=>{
+    console.log(req.params.key)
+    var newvalues = { $set: {done: "2" } };
+    PATIENT.findByIdAndUpdate(req.params.key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+               res.redirect('/')
+                console.log('Complete')
+            } else {
+                res.redirect('/')
+                console.log('update status doctor fail')
+            }
+        });
+
+})
+//update tình tranng benh nhan tu vong
+app.get('/updateStatusPatient1/:key',(req,res)=>{
+    console.log(req.params.key)
+    var newvalues = { $set: {done: "1" } };
+    PATIENT.findByIdAndUpdate(req.params.key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                res.redirect('/')
+                console.log('Complete')
+            } else {
+                res.redirect('/')
                 console.log('update status doctor fail')
             }
         });

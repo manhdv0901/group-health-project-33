@@ -265,17 +265,15 @@
 {{#each docs}}
                             <tbody>
                             <tr>
-                                < <th scope="row"><a href="#">#</a></th>
+                                <th scope="row"><a href="#">#</a></th>
                                 <td>{{this.id}}</td>
                                 <td>{{this.name}}</td>
                                 <td>{{this.phone}}</td>
                                 <td>{{this.number_room}}</td>
                                 <td>
-
-
                                         <div class="card-body">
 
-                                            <a type="button" href="/list-patients/{{this._id}}" class="btn btn-secondary"><i class="bi bi-collection"></i></a>
+                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary"><i class="bi bi-collection"></i></a>
 
                                             <a type="button" href="/delete/{{this._id}}" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i></a>
 

@@ -9,7 +9,8 @@ var PATIENTSchema = new mongoose.Schema({
     birth_day:String,
     phone:Number,
     number_room:Number,
-    key_device:String
+    key_device:String,
+    done:String
 })
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
 module.exports = PATIENT
