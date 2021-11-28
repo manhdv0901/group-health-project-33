@@ -4,6 +4,7 @@ var expressSession=require('express-session');
 const exhbs = require('express-handlebars')
 const PORT = process.env.PORT || 3000
 const app =express();
+var helpers = require('handlebars-helpers')();
 //connect mongoose
 const mongoose = require("mongoose");
 const path = require('path')
@@ -69,11 +70,14 @@ const deviceRoute = require('./app/src/router/login_router')
 const listPatientRouter = require('./app/src/router/list_patient_router')
 const listDoctorRouter = require('./app/src/router/list_doctor_router')
 const addPatientRouter = require('./app/src/router/addpatient_router')
+const addDoctor = require('./app/src/router/add_doctor_router')
 
 app.use('/', deviceRoute)
 app.use('/', listPatientRouter)
 app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
+app.use('/', addDoctor)
+
 
 app.get('/dashboard',(req, res)=>{
 
@@ -153,6 +157,7 @@ app.post('/sendToAll',(req,res)=>{
     var status=req.body.status;
     var medicine=req.body.medicine;
     var amountAndUse=req.body.amountAndUse;
+        var key_device=req.body.key_device;
         var notification={
             'id':id,
             'title':title,
@@ -162,6 +167,7 @@ app.post('/sendToAll',(req,res)=>{
             'status':status,
             'medicine':medicine,
             'amountAndUse':amountAndUse,
+            'key_device':key_device
         };
 
         var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
@@ -187,7 +193,7 @@ app.post('/sendToAll',(req,res)=>{
                 },
                 'body':JSON.stringify(notification_body)
             }).then(()=>{
-                res.redirect('/')
+                res.redirect('/dashboard')
             }).catch((err)=>{
                 res.status(400).send('Something went wrong!');
                 console.log(err)
@@ -204,102 +210,122 @@ app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
     console.log("heart: ", req.query.heart);
-    myDataHea.push(req.query.heart);
-    console.log("value: ", myDataHea);
 
     console.log("spO2: ", req.query.spO2);
-    myDataSpO2.push(req.query.spO2);
-    console.log("value: ", myDataSpO2);
 
     console.log("temp:", req.query.temp);
-    myDataTem.push(req.query.temp);
-    console.log("value: ", myDataTem);
 
-    console.log("state:", req.query.state);
-    myDataState.push(req.query.state);
-    console.log("value: ", myDataState);
+    console.log("key: ", req.query.key);
 
-    console.log("key:", req.query.key_device);
-    myDataKey.push(req.query.key_device);
-    console.log("value: ", myDataKey);
-    var newDEVICE = DEVICE({
-        key_device:req.query.key_device,
-        state: req.query.state,
-        heart:
-            {
-                value: Number(req.query.heart),
-                real_time: new Date(),
-            }
-        ,
-        spO2:
-            {
-                value: Number(req.query.spO2),
-                real_time: new Date(),
-            }
-        ,
-        temp:
-            {
-                value: Number(req.query.temp),
-                real_time: new Date(),
-            }
-
-
-    });
-    console.log("data post req: ", req.query);
-
-    //insert data
-    // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
-    //     if (err) {
-    //         res.status(400).json(err);
-    //     }else {
-    //         console.log("Thêm thành công: ", result);
-    //         console.log(newDEVICE);
-    //         res.status(200).json(result);
-    //     }
-    // });
-
-
-    // update data
-    var oldValue = {key_device: req.query.key_device};
-    var newValue = {
-        $push: {
-            heart:
-                {
-                    value: Number(req.query.heart),
-                    real_time: new Date(),
-                }
-            ,
-            spO2:
-                {
-                    value: Number(req.query.spO2),
-                    real_time: new Date(),
-                }
-            ,
-            temp:
-                {
-                    value: Number(req.query.temp),
-                    real_time: new Date(),
-                }
-            ,
-            state: req.query.state,
-        }
-
-    };
-
-    //update
-        var model = db.collection("data-devices");
-        model.updateOne(oldValue,newValue,(err,obj)=>{
-            if(err) {
-                res.status(400).json(err);
-            }else {
-                if(obj.length!=0){
-                    console.log("Cập nhật thành công");
-                    res.status(200).json({"message":"update successful"});
-                }
+    console.log("state: ", req.query.state);
+    PATIENT.updateOne( {"key_device" : req.query.key } , { $set: {'state': Number(req.query.state) } }, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                console.log('update status doctor completr')
+            } else {
+                console.log('update status doctor fail')
             }
         });
-
-
+    DEVICE.updateOne(
+        { "key_device" : req.query.key },
+        {$push: { 'heart' :
+                    {'value':Number(req.query.heart),'real_time':Date.now()} ,
+                'spO2' :
+                    {'value':Number(req.query.spO2),'real_time':Date.now()} ,
+                'temp' :
+                    {'value':Number(req.query.temp),'real_time':Date.now()} ,
+            },},function (err) {
+            if (!err) {
+                // res.redirect('/list-patients');
+                res.status(200).json({
+                    message: "ok"
+                })
+                console.log(res.json)
+            } else {
+                res.status(500).json({
+                    message: "err"
+                })
+            }
+        }
+    );
+    // var newDEVICE = DEVICE({
+    //     key_device: req.query.key,
+    //     heart:
+    //         {
+    //             value: Number(req.query.heart),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //     spO2:
+    //         {
+    //             value: Number(req.query.spO2),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //     temp:
+    //         {
+    //             value: Number(req.query.temp),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //
+    // });
+    // console.log("data post req: ", req.query);
+    //
+    // //insert data
+    // // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
+    // //     if (err) {
+    // //         res.status(400).json(err);
+    // //     }else {
+    // //         console.log("Thêm thành công");
+    // //         console.log(result);
+    // //         res.status(200).json(result);
+    // //     }
+    // // });
+    //
+    // // update data
+    //
+    // var oldValue = {key_device:  req.query.key};
+    // var newValue = {
+    //     $push: {
+    //         heart:
+    //             {
+    //                 value: Number(req.query.heart),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //         spO2:
+    //             {
+    //                 value: Number(req.query.spO2),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //         temp:
+    //             {
+    //                 value: Number(req.query.temp),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //     }
+    //
+    // };
+    // //update
+    //
+    // // PATIENT.find({key_device:keydevice}
+    //
+    //     var model = db.collection("data-devices");
+    //     model.updateOne(oldValue,newValue,(err,obj)=>{
+    //         if(err) {
+    //             res.status(400).json(err);
+    //         }else {
+    //             if(obj.length!=0){
+    //                 console.log("Cập nhật thành công");
+    //                 res.status(200).json({"message":"update successful"});
+    //             }
+    //         }
+    //     });
 });
 app.get('/add-device', (req, res) =>{
     const findDevice =DEVICE.find({});
