@@ -218,80 +218,6 @@ app.post("/add-device", (req,res) => {
     console.log("spO2: ", req.query.spO2);
 
     console.log("temp:", req.query.temp);
-<<<<<<< HEAD
-    myDataTem.push(req.query.temp);
-    console.log("value: ", myDataTem);
-
-    console.log("state:", req.query.state);
-    myDataState.push(req.query.state);
-    console.log("value: ", myDataState);
-    var newDEVICE = DEVICE({
-      key_device: KEY_DEVICE,
-      heart: {
-        value: Number(req.query.heart),
-        real_time: new Date(),
-      },
-      spO2: {
-        value: Number(req.query.spO2),
-        real_time: new Date(),
-      },
-      temp: {
-        value: Number(req.query.temp),
-        real_time: new Date(),
-      },
-      state: {
-        value: Number(req.query.state),
-        real_time: new Date(),
-      },
-    });
-    console.log("data post req: ", req.query);
-
-    //insert data
-    // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
-    //     if (err) {
-    //         res.status(400).json(err);
-    //     }else {
-    //         console.log("Thêm thành công");
-    //         console.log(result);
-    //         res.status(200).json(result);
-    //     }
-    // });
-
-
-    // update data
-    var oldValue = {key_device: KEY_DEVICE};
-    var newValue = {
-      $push: {
-        heart: {
-          value: Number(req.query.heart),
-          real_time: new Date(),
-        },
-        spO2: {
-          value: Number(req.query.spO2),
-          real_time: new Date(),
-        },
-        temp: {
-          value: Number(req.query.temp),
-          real_time: new Date(),
-        },
-        state: {
-          value: Number(req.query.state),
-          real_time: new Date(),
-        },
-      },
-    };
-
-    //update
-        var model = db.collection("data-devices");
-        model.updateOne(oldValue,newValue,(err,obj)=>{
-            if(err) {
-                res.status(400).json(err);
-            }else {
-                if(obj.length!=0){
-                    console.log("Cập nhật thành công");
-                    res.status(200).json({"message":"update successful"});
-                }
-=======
 
     console.log("key: ", req.query.key);
 
@@ -304,7 +230,6 @@ app.post("/add-device", (req,res) => {
                 console.log('update status doctor completr')
             } else {
                 console.log('update status doctor fail')
->>>>>>> ui_by_duc
             }
         });
     DEVICE.updateOne(
