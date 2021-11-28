@@ -214,6 +214,17 @@ app.post("/add-device", (req,res) => {
 
     console.log("key: ", req.query.key);
 
+    console.log("state: ", req.query.state);
+    PATIENT.updateOne( {"key_device" : req.query.key } , { $set: {'state': Number(req.query.state) } }, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                console.log('update status doctor completr')
+            } else {
+                console.log('update status doctor fail')
+            }
+        });
     DEVICE.updateOne(
         { "key_device" : req.query.key },
         {$push: { 'heart' :
@@ -297,21 +308,6 @@ app.post("/add-device", (req,res) => {
     //     }
     //
     // };
-    // // PATIENT.updateOne(
-    // //     { "key_device" :  req.query.key},
-    // //     { $push: { 'track_history' : {'value':data,'real_time':date} }, },function (err) {
-    // //         if (!err) {
-    // //             // res.redirect('/list-patients');
-    // //             res.status(200).json({
-    // //                 message: "Cập nhật lịch sử thành công"
-    // //             })
-    // //         } else {
-    // //             res.status(500).json({
-    // //                 message: "Cập nhật lịch sử thất bại"
-    // //             })
-    // //         }
-    // //     }
-    // // );
     // //update
     //
     // // PATIENT.find({key_device:keydevice}
