@@ -154,6 +154,7 @@ app.post('/sendToAll',(req,res)=>{
     var status=req.body.status;
     var medicine=req.body.medicine;
     var amountAndUse=req.body.amountAndUse;
+        var key_device=req.body.key_device;
         var notification={
             'id':id,
             'title':title,
@@ -163,6 +164,7 @@ app.post('/sendToAll',(req,res)=>{
             'status':status,
             'medicine':medicine,
             'amountAndUse':amountAndUse,
+            'key_device':key_device
         };
 
         var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
@@ -188,7 +190,7 @@ app.post('/sendToAll',(req,res)=>{
                 },
                 'body':JSON.stringify(notification_body)
             }).then(()=>{
-                res.redirect('/')
+                res.redirect('/dashboard')
             }).catch((err)=>{
                 res.status(400).send('Something went wrong!');
                 console.log(err)
@@ -205,93 +207,126 @@ app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
     console.log("heart: ", req.query.heart);
-    myDataHea.push(req.query.heart);
-    console.log("value: ", myDataHea);
 
     console.log("spO2: ", req.query.spO2);
-    myDataSpO2.push(req.query.spO2);
-    console.log("value: ", myDataSpO2);
 
     console.log("temp:", req.query.temp);
-    myDataTem.push(req.query.temp);
-    console.log("value: ", myDataTem);
 
-    var newDEVICE = DEVICE({
-        key_device: KEY_DEVICE,
-        heart:
-            {
-                value: Number(req.query.heart),
-                real_time: new Date(),
+    console.log("key: ", req.query.key);
+
+    DEVICE.updateOne(
+        { "key_device" : req.query.key },
+        {$push: { 'heart' :
+                    {'value':Number(req.query.heart),'real_time':Date.now()} ,
+                'spO2' :
+                    {'value':Number(req.query.spO2),'real_time':Date.now()} ,
+                'temp' :
+                    {'value':Number(req.query.temp),'real_time':Date.now()} ,
+            },},function (err) {
+            if (!err) {
+                // res.redirect('/list-patients');
+                res.status(200).json({
+                    message: "ok"
+                })
+                console.log(res.json)
+            } else {
+                res.status(500).json({
+                    message: "err"
+                })
             }
-        ,
-        spO2:
-            {
-                value: Number(req.query.spO2),
-                real_time: new Date(),
-            }
-        ,
-        temp:
-            {
-                value: Number(req.query.temp),
-                real_time: new Date(),
-            }
-        ,
-
-    });
-    console.log("data post req: ", req.query);
-
-    //insert data
-    // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
-    //     if (err) {
-    //         res.status(400).json(err);
-    //     }else {
-    //         console.log("Thêm thành công");
-    //         console.log(result);
-    //         res.status(200).json(result);
-    //     }
-    // });
-
-
-    // update data
-    var oldValue = {key_device: KEY_DEVICE};
-    var newValue = {
-        $push: {
-            heart:
-                {
-                    value: Number(req.query.heart),
-                    real_time: new Date(),
-                }
-            ,
-            spO2:
-                {
-                    value: Number(req.query.spO2),
-                    real_time: new Date(),
-                }
-            ,
-            temp:
-                {
-                    value: Number(req.query.temp),
-                    real_time: new Date(),
-                }
-            ,
         }
-
-    };
-
-    //update
-        var model = db.collection("data-devices");
-        model.updateOne(oldValue,newValue,(err,obj)=>{
-            if(err) {
-                res.status(400).json(err);
-            }else {
-                if(obj.length!=0){
-                    console.log("Cập nhật thành công");
-                    res.status(200).json({"message":"update successful"});
-                }
-            }
-        });
-
-
+    );
+    // var newDEVICE = DEVICE({
+    //     key_device: req.query.key,
+    //     heart:
+    //         {
+    //             value: Number(req.query.heart),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //     spO2:
+    //         {
+    //             value: Number(req.query.spO2),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //     temp:
+    //         {
+    //             value: Number(req.query.temp),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //
+    // });
+    // console.log("data post req: ", req.query);
+    //
+    // //insert data
+    // // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
+    // //     if (err) {
+    // //         res.status(400).json(err);
+    // //     }else {
+    // //         console.log("Thêm thành công");
+    // //         console.log(result);
+    // //         res.status(200).json(result);
+    // //     }
+    // // });
+    //
+    // // update data
+    //
+    // var oldValue = {key_device:  req.query.key};
+    // var newValue = {
+    //     $push: {
+    //         heart:
+    //             {
+    //                 value: Number(req.query.heart),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //         spO2:
+    //             {
+    //                 value: Number(req.query.spO2),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //         temp:
+    //             {
+    //                 value: Number(req.query.temp),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //     }
+    //
+    // };
+    // // PATIENT.updateOne(
+    // //     { "key_device" :  req.query.key},
+    // //     { $push: { 'track_history' : {'value':data,'real_time':date} }, },function (err) {
+    // //         if (!err) {
+    // //             // res.redirect('/list-patients');
+    // //             res.status(200).json({
+    // //                 message: "Cập nhật lịch sử thành công"
+    // //             })
+    // //         } else {
+    // //             res.status(500).json({
+    // //                 message: "Cập nhật lịch sử thất bại"
+    // //             })
+    // //         }
+    // //     }
+    // // );
+    // //update
+    //
+    // // PATIENT.find({key_device:keydevice}
+    //
+    //     var model = db.collection("data-devices");
+    //     model.updateOne(oldValue,newValue,(err,obj)=>{
+    //         if(err) {
+    //             res.status(400).json(err);
+    //         }else {
+    //             if(obj.length!=0){
+    //                 console.log("Cập nhật thành công");
+    //                 res.status(200).json({"message":"update successful"});
+    //             }
+    //         }
+    //     });
 });
 app.get('/add-device', (req, res) =>{
     const findDevice =DEVICE.find({});
