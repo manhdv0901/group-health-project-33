@@ -24,39 +24,15 @@ module.exports.listpatient =  (req, res) => {
         }else{
             // console.log("ham ham: ", data.map(aa => aa.toJSON()))
             res.render('listPatients', {
-                docs: data
+                docs: data,
+
             })
         }
     })
 
 }
 module.exports.listpatientone= (req, res)=>{
-    PATIENT.findById(req.params.na,(err, data)=>{
-        if(err){
-            console.log('err get data one item patient');
-            res.render('listPatient');
-        }else {
-            var myDevice = data.key_device;
-            console.log('key device', data.key_device);
-            DEVICE.find({key_device: myDevice})
-                .exec((er, data2) => {
-                    if (er) throw er;
-                    else {
-                        DOCTORS.find({state: true})
-                            .exec((er3,  data3) => {
-                                if (er3) throw er3;
-                                else{
-                                    console.log(`devices:`, data2)
-                                    res.render('profile', {
-                                        patient: data, device:data2, doctors: data3,
-                                    })
-                                }
-                            })
-                    }
-                })
-        }
 
-    })
 }
 module.exports.updatepatient=(req,res)=>{
     PATIENT.findById(req.params.key,(err, data)=>{
@@ -69,12 +45,16 @@ module.exports.updatepatient=(req,res)=>{
     })
 }
 module.exports.updatepatientpost=(req,res)=>{
+    console.log(
+        req.body
+    )
     PATIENT.findOneAndUpdate({_id:req.body.key}, {$set:{
             "name":req.body.name,
             "age":req.body.age,
             "birth_day":req.body.birth_day,
             "phone":req.body.phone,
             "number_room":req.body.number_room,
+            "key_device":req.body.key_device
         }},{new : true},( err, doc)=>{
         if(!err){
             res.redirect('/list-patients');

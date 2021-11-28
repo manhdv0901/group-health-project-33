@@ -4,12 +4,15 @@ var expressSession=require('express-session');
 const exhbs = require('express-handlebars')
 const PORT = process.env.PORT || 3000
 const app =express();
+var helpers = require('handlebars-helpers')();
 //connect mongoose
 const mongoose = require("mongoose");
 const path = require('path')
 const fetch = require("node-fetch");
 const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
 
+// import device from './app/src/model/device_model';
+const device = require('./app/src/model/device_model');
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -33,7 +36,13 @@ app.engine('hbs',exhbs({
 var myDataTem = [];
 var myDataHea=[];
 var myDataSpO2 =[];
+<<<<<<< HEAD
 var myDataState = [];
+=======
+var myDataState =[];
+var myDataKey =[];
+
+>>>>>>> ui_by_duc
 //config mongodb
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
 const DATABASE_CONNECT_OPTION  = {
@@ -53,7 +62,7 @@ mongoose.connection.on("disconnected", function (){
 //connect mongoose
 var db=mongoose.connection;
 
-const KEY_DEVICE = 'device08';
+const KEY_DEVICE = 'device05';
 
 //model
 var DEVICE = require('./app/src/model/device_model');
@@ -65,14 +74,82 @@ const deviceRoute = require('./app/src/router/login_router')
 const listPatientRouter = require('./app/src/router/list_patient_router')
 const listDoctorRouter = require('./app/src/router/list_doctor_router')
 const addPatientRouter = require('./app/src/router/addpatient_router')
+const addDoctor = require('./app/src/router/add_doctor_router')
 
 app.use('/', deviceRoute)
 app.use('/', listPatientRouter)
 app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
+app.use('/', addDoctor)
 
-app.get('/',(req, res)=>{
-    res.render('login');
+
+app.get('/dashboard',(req, res)=>{
+
+    var model = db.model('data-doctors', DOCTORS.schema);
+    var model1 = db.model('data-patients', PATIENT.schema);
+
+
+    var methodFind = model.find({});
+    methodFind.exec((err,data) => {
+        if (err) {throw err;}
+        else{
+            model1.find().count().exec((err,data1)=>{
+                if(err) {throw err;}
+                else {
+                    model1.find({done:"2"}).count().exec((err,data2)=>{
+                       if(err) {throw err}
+                       else{
+                           model1.find({done:"1"}).count().exec((err,data3)=>{
+                               console.log("tổng bn: ", data1)
+                               console.log("tổng bn khỏi: ", data2)
+                               console.log("tổng bn die: ", data3)
+                               res.render('dashboard', {
+                                   // docs: data.map(aa => aa.toJSON())
+                                   docs: data,
+                                   total:data1,
+                                   totaldn:data2,
+                                   totaldi:data3
+                               })
+                           })
+                       }
+                    })
+                }
+
+            });
+            // console.log("ham ham: ", data.map(aa => aa.toJSON()))
+
+        }
+    });
+
+})
+//
+app.get('/:na',(req,res)=>{
+    PATIENT.findById(req.params.na,(err, data)=>{
+        if(err){
+            console.log('err get data one item patient');
+            res.render('listPatients');
+        }else {
+            var myDevice = data.key_device;
+            console.log('key device', data.key_device);
+            DEVICE.find({key_device: myDevice})
+                .exec((er, data2) => {
+                    if (er) throw er;
+                    else {
+                        DOCTORS.find({state: true})
+                            .exec((er3,  data3) => {
+                                if (er3) throw er3;
+                                else{
+                                    console.log(`devices:`, data2)
+                                    res.render('profile', {
+                                        patient: data, device:data2, doctors: data3,
+                                    })
+                                }
+                            })
+                    }
+                })
+        }
+
+    })
 })
 //send notification
 app.post('/sendToAll',(req,res)=>{
@@ -84,6 +161,7 @@ app.post('/sendToAll',(req,res)=>{
     var status=req.body.status;
     var medicine=req.body.medicine;
     var amountAndUse=req.body.amountAndUse;
+        var key_device=req.body.key_device;
         var notification={
             'id':id,
             'title':title,
@@ -93,6 +171,7 @@ app.post('/sendToAll',(req,res)=>{
             'status':status,
             'medicine':medicine,
             'amountAndUse':amountAndUse,
+            'key_device':key_device
         };
 
         var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
@@ -118,7 +197,7 @@ app.post('/sendToAll',(req,res)=>{
                 },
                 'body':JSON.stringify(notification_body)
             }).then(()=>{
-                res.status(200).send('Notification succcesfully')
+                res.redirect('/dashboard')
             }).catch((err)=>{
                 res.status(400).send('Something went wrong!');
                 console.log(err)
@@ -130,18 +209,16 @@ app.post('/sendToAll',(req,res)=>{
         console.log(fetchMovies());
 },
 );
+
 app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
     console.log("heart: ", req.query.heart);
-    myDataHea.push(req.query.heart);
-    console.log("value: ", myDataHea);
 
     console.log("spO2: ", req.query.spO2);
-    myDataSpO2.push(req.query.spO2);
-    console.log("value: ", myDataSpO2);
 
     console.log("temp:", req.query.temp);
+<<<<<<< HEAD
     myDataTem.push(req.query.temp);
     console.log("value: ", myDataTem);
 
@@ -214,10 +291,120 @@ app.post("/add-device", (req,res) => {
                     console.log("Cập nhật thành công");
                     res.status(200).json({"message":"update successful"});
                 }
+=======
+
+    console.log("key: ", req.query.key);
+
+    console.log("state: ", req.query.state);
+    PATIENT.updateOne( {"key_device" : req.query.key } , { $set: {'state': Number(req.query.state) } }, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                console.log('update status doctor completr')
+            } else {
+                console.log('update status doctor fail')
+>>>>>>> ui_by_duc
             }
         });
-
-
+    DEVICE.updateOne(
+        { "key_device" : req.query.key },
+        {$push: { 'heart' :
+                    {'value':Number(req.query.heart),'real_time':Date.now()} ,
+                'spO2' :
+                    {'value':Number(req.query.spO2),'real_time':Date.now()} ,
+                'temp' :
+                    {'value':Number(req.query.temp),'real_time':Date.now()} ,
+            },},function (err) {
+            if (!err) {
+                // res.redirect('/list-patients');
+                res.status(200).json({
+                    message: "ok"
+                })
+                console.log(res.json)
+            } else {
+                res.status(500).json({
+                    message: "err"
+                })
+            }
+        }
+    );
+    // var newDEVICE = DEVICE({
+    //     key_device: req.query.key,
+    //     heart:
+    //         {
+    //             value: Number(req.query.heart),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //     spO2:
+    //         {
+    //             value: Number(req.query.spO2),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //     temp:
+    //         {
+    //             value: Number(req.query.temp),
+    //             real_time: new Date(),
+    //         }
+    //     ,
+    //
+    // });
+    // console.log("data post req: ", req.query);
+    //
+    // //insert data
+    // // db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
+    // //     if (err) {
+    // //         res.status(400).json(err);
+    // //     }else {
+    // //         console.log("Thêm thành công");
+    // //         console.log(result);
+    // //         res.status(200).json(result);
+    // //     }
+    // // });
+    //
+    // // update data
+    //
+    // var oldValue = {key_device:  req.query.key};
+    // var newValue = {
+    //     $push: {
+    //         heart:
+    //             {
+    //                 value: Number(req.query.heart),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //         spO2:
+    //             {
+    //                 value: Number(req.query.spO2),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //         temp:
+    //             {
+    //                 value: Number(req.query.temp),
+    //                 real_time: new Date(),
+    //             }
+    //         ,
+    //     }
+    //
+    // };
+    // //update
+    //
+    // // PATIENT.find({key_device:keydevice}
+    //
+    //     var model = db.collection("data-devices");
+    //     model.updateOne(oldValue,newValue,(err,obj)=>{
+    //         if(err) {
+    //             res.status(400).json(err);
+    //         }else {
+    //             if(obj.length!=0){
+    //                 console.log("Cập nhật thành công");
+    //                 res.status(200).json({"message":"update successful"});
+    //             }
+    //         }
+    //     });
 });
 app.get('/add-device', (req, res) =>{
     const findDevice =DEVICE.find({});
@@ -235,7 +422,9 @@ app.set('view engine','hbs')
 app.set('views',path.join(__dirname,'/views'))
 console.log(__dirname)
 
-
+app.get('/contact/to',(req,res)=>{
+    res.render('contact')
+})
 // get infomation detail patient
 // app.get("/profile", (req, res) => {
 //     var modelPatient = db.model('data-patients', PATIENTSchema);
@@ -509,6 +698,42 @@ app.post('/updateStatus',(req,res)=>{
             if (!err) {
                 console.log('update status doctor completr')
             } else {
+                console.log('update status doctor fail')
+            }
+        });
+
+})
+//update tình trạng bệnh nhân đã khỏi
+app.get('/updateStatusPatient2/:key',(req,res)=>{
+    console.log(req.params.key)
+    var newvalues = { $set: {done: "2" } };
+    PATIENT.findByIdAndUpdate(req.params.key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+               res.redirect('/dashboard')
+                console.log('Complete')
+            } else {
+                res.redirect('/dashboard')
+                console.log('update status doctor fail')
+            }
+        });
+
+})
+//update tình tranng benh nhan tu vong
+app.get('/updateStatusPatient1/:key',(req,res)=>{
+    console.log(req.params.key)
+    var newvalues = { $set: {done: "1" } };
+    PATIENT.findByIdAndUpdate(req.params.key , newvalues, {
+            new: true
+        },
+        function(err, model) {
+            if (!err) {
+                res.redirect('/dashboard')
+                console.log('Complete')
+            } else {
+                res.redirect('/dashboard')
                 console.log('update status doctor fail')
             }
         });

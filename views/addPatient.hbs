@@ -1,240 +1,387 @@
-<!DOCTYPE html>
-<head>
-    <title>Sidebar 05</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="css1/addpatient.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-</head>
-<body>
-<div class="wrapper d-flex align-items-stretch">
-    <nav id="sidebar">
-        <div class="custom-menu">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                <i class="fa fa-bars"></i>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
-        </div>
-        <div class="p-4">
-            <h1><a href="index.html" class="logo">Xin chào <span></span></a></h1>
-            <ul class="list-unstyled components mb-5">
-                <li >
-                    <a href="/list-patients"><span class="fa fa-home mr-3"></span> Danh sách bệnh nhân</a>
-                </li>
-                <li >
-                    <a href="/list"><span class="fa fa-user mr-3"></span> Danh sách bác sĩ</a>
-                </li>
-                <li class="active">
-                    <a href="/add-patient"><span class="fa fa-briefcase mr-3"></span> Thêm bệnh nhân</a>
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">Hệ thống quản trị</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="/dashboard">
+            <input type="text" name="query" placeholder="Tìm kiếm" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number">4</span>
+                </a><!-- End Notification Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <li class="dropdown-header">
+                        You have 4 new notifications
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>Lorem Ipsum</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>30 min. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-x-circle text-danger"></i>
+                        <div>
+                            <h4>Atque rerum nesciunt</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>1 hr. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-check-circle text-success"></i>
+                        <div>
+                            <h4>Sit rerum fuga</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>2 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <div>
+                            <h4>Dicta reprehenderit</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>4 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Show all notifications</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">3</span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        You have 3 new messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Maria Hudson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Anna Nelson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>6 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>David Muldon</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>8 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="dropdown-footer">
+                        <a href="#">Show all messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+
+            </li><!-- End Messages Nav -->
+
+            <!--            <li class="nav-item dropdown pe-3">-->
+
+            <!--                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">-->
+            <!--                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">-->
+            <!--                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>-->
+            <!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+
+            <!--                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">-->
+            <!--                    <li class="dropdown-header">-->
+            <!--                        <h6>Kevin Anderson</h6>-->
+            <!--                        <span>Web Designer</span>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
+
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">-->
+            <!--                            <i class="bi bi-person"></i>-->
+            <!--                            <span>My Profile</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
+
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">-->
+            <!--                            <i class="bi bi-gear"></i>-->
+            <!--                            <span>Account Settings</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
+
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">-->
+            <!--                            <i class="bi bi-question-circle"></i>-->
+            <!--                            <span>Need Help?</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
+
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="#">-->
+            <!--                            <i class="bi bi-box-arrow-right"></i>-->
+            <!--                            <span>Sign Out</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+
+            <!--                </ul>&lt;!&ndash; End Profile Dropdown Items &ndash;&gt;-->
+            <!--            </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " href="/dashboard">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Bệnh Nhân</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/list-patients">
+                        <i class="bi bi-circle"></i><span>Danh Sách Bệnh Nhân</span>
+                    </a>
                 </li>
                 <li>
-                    <a href="/login"><span class="fa fa-sticky-note mr-3"></span> Đăng xuất</a>
+                    <a href="/add-patient">
+                        <i class="bi bi-circle"></i><span>Thêm Bệnh Nhân</span>
+                    </a>
                 </li>
-                <li>
-                    <a href="#"><span class="fa fa-suitcase mr-3"></span> Phản hồi</a>
-                </li>
-
 
             </ul>
+        </li><!-- End Components Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Bác sĩ</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/list">
+                        <i class="bi bi-circle"></i><span>Danh sách bác sĩ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/adddoctor">
+                        <i class="bi bi-circle"></i><span>Thêm bác sĩ</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Forms Nav -->
 
 
 
 
+
+
+
+        <li class="nav-heading">Pages</li>
+
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/">
+                <i class="bi bi-question-circle"></i>
+                <span>F.A.Q</span>
+            </a>
+        </li><!-- End F.A.Q Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/contact/to">
+                <i class="bi bi-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
+
+
+
+
+
+
+    </ul>
+
+</aside>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Thêm bệnh nhân</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active">Thêm bệnh nhân</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Vertical Form</h5>
+
+                <!-- Vertical Form -->
+                <form class="row g-3" action="/add-patient" id="application-form" method="post">
+                    <div class="col-12">
+                        <label for="inputNanme4" class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" id="inputNanme4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputEmail4" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputPassword4" class="form-label">ID</label>
+                        <input type="number" name="id" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Tuổi</label>
+                        <input type="text" min="1" max="120"  name="age" class="form-control" id="inputAddress" placeholder="18">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Họ Và Tên</label>
+                        <input type="text" name="name" class="form-control" id="inputAddress" placeholder="Nguyen Van A">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Số Điện Thoại</label>
+                        <input type="number" name="phone" class="form-control" id="inputAddress" placeholder="03456789900">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Ngày Sinh</label>
+                        <input type="date"name="birth_day" class="form-control" id="inputAddress" placeholder="01/01/2021">
+                    </div>
+                    <div class="col-2">
+                                                        <label class="label">Giới Tính</label>
+                                                        <div class="input-group">
+                                                            <div class="p-t-10">
+                                                                <label class="radio-container m-r-45">Male
+                                                                    <input type="radio" checked="checked" name="gender">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                                <label class="radio-container">Female
+                                                                    <input type="radio" name="gender">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Phòng</label>
+                        <input type="text"name="number_room" class="form-control" id="inputAddress" placeholder="Phòng 01">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Key device</label>
+                        <input type="text"name="key_device"class="form-control" id="inputAddress" placeholder="device02">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form><!-- Vertical Form -->
+
+            </div>
         </div>
-    </nav>
-<!--    <div class="addpatient">-->
-<!--        <div class="wrapper bg-gra-02 wrapper--w680 p-t-130 p-b-100">-->
-<!--            <div class="card card-4">-->
-<!--                <div class="card-body">-->
-<!--                    <h2 class="title">Thêm bệnh nhân</h2>-->
-<!--                    <form method="POST" action="/add-patient">-->
-<!--                        <div class="row row-space">-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Username</label>-->
-<!--                                    <input class="input--style-4" type="text" name="username">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Password</label>-->
-<!--                                    <input class="input--style-4" type="text" name="password">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row row-space">-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">ID</label>-->
-<!--                                    <input class="input--style-4" maxlength="99" type="text" name="id">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Tuổi</label>-->
-<!--                                    <input class="input--style-4" min="1" max="120" type="number" name="age">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row row-space">-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Họ Và Tên</label>-->
-<!--                                    <input class="input--style-4" type="text" name="name">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Số Điện Thoại</label>-->
-<!--                                    <input class="input--style-4" type="text" name="phone">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row row-space">-->
-<!--                            <div class="col-2">-->
-<!--                                <label class="label">Ngày Sinh</label>-->
-<!--                                <div class="input-group">-->
+    </section>
 
-<!--                                    <div class="input-group-icon">-->
-<!--                                        <input class="input--style-4 js-datepicker" type="text" name="birth_day">-->
-<!--                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-2">-->
-<!--                                <label class="label">Giới Tính</label>-->
-<!--                                <div class="input-group">-->
-<!--                                    <div class="p-t-10">-->
-<!--                                        <label class="radio-container m-r-45">Male-->
-<!--                                            <input type="radio" checked="checked" name="gender">-->
-<!--                                            <span class="checkmark"></span>-->
-<!--                                        </label>-->
-<!--                                        <label class="radio-container">Female-->
-<!--                                            <input type="radio" name="gender">-->
-<!--                                            <span class="checkmark"></span>-->
-<!--                                        </label>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row row-space">-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Phòng</label>-->
-<!--                                    <input class="input--style-4"  name="number_room">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-2">-->
-<!--                                <div class="input-group">-->
-<!--                                    <label class="label">Key Device</label>-->
-<!--                                    <input class="input--style-4" type="text" name="key_device">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+</main><!-- End #main -->
 
-<!--                        <div class="p-t-15">-->
-<!--                            <button class="btn btn--radius-2 btn--blue" type="submit">Thêm Bệnh Nhân</button>-->
-<!--                        </div>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-
-        <div class="w-75 p-3">
-            <form action="/add-patient" id="application-form" method="post">
-                <div class="form-group mb-3">
-                        <div class="col">
-                            <p><strong>ID</strong>&nbsp;<span class="text-danger">*</span></p>
-                            <input class="form-control" type="text" required="" name="id" placeholder="Ex. John">
-                        </div>
-
-                </div>
-                <div class="form-group mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <p><strong>Name</strong>&nbsp;<span class="text-danger">*</span></p>
-                            <input class="form-control" type="text" required="" name="name">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group mb-3">
-                    <p><strong>UserName&nbsp;</strong><span class="text-danger">*</span></p>
-                    <input class="form-control" type="text" name="username" placeholder="user@domain.com">
-                </div>
-                <div class="form-group mb-3">
-                    <p><strong>Password&nbsp;</strong><span class="text-danger">*</span></p>
-                    <input class="form-control" type="text" name="password" placeholder="7777777777">
-                </div>
-                <div class="form-group mb-3">
-                    <div class="row">
-                        <div class="col">
-                            <p>Age</p><textarea class="form-control" type="number"  required="" placeholder="Ex.  2000 - 2004   Prague Engineer College ,etc" name="age"></textarea>
-                        </div>
-                        <div class="col">
-                            <p>BirthDay</p><input class="form-control" type="date" required="" name="birth_day" placeholder="Ex. Associate Software Engineer at Zendesk">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group mb-3">
-                    <p><strong>Number Phone&nbsp;</strong><span class="text-danger">*</span></p>
-                    <input class="form-control" type="number" name="phone" placeholder="7777777777">
-                </div>
-
-                <div class="form-group mb-3">
-                    <p><strong>Number Room&nbsp;</strong><span class="text-danger">*</span></p>
-                    <input class="form-control" type="text" name="number_room" placeholder="7777777777">
-                </div>
-
-                <div class="form-group mb-3">
-                    <p><strong>Key Device&nbsp;</strong><span class="text-danger">*</span></p>
-                    <input class="form-control" type="text" name="key_device" placeholder="7777777777">
-                </div>
-
-                <div class="justify-content-center d-flex form-group mb-3">
-                    <div id="submit-btn">
-                        <div class="row"><button class="btn btn-primary " type="submit" style="min-width: 500px;" action method="POST" target="hidden_iframe">Thêm bệnh nhân</button></div>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-</div>
-</body>
-</html>
-
-
-<!--<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">-->
-<!--    <div class="container-fluid d-flex flex-column p-0"><a-->
-<!--            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">-->
-<!--        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>-->
-<!--        <div class="sidebar-brand-text mx-3"><span>Profile</span></div>-->
-<!--    </a>-->
-<!--        <hr class="sidebar-divider my-0">-->
-<!--        <ul class="navbar-nav text-light" id="accordionSidebar">-->
-<!--            <li class="nav-item"><a class="nav-link active" href="/list-patients"><i-->
-<!--                    class="fas fa-tachometer-alt"></i><span>Danh sách bệnh nhân</span></a></li>-->
-<!--            <li class="nav-item"><a class="nav-link" href="/list-doctors"><i class="fas fa-user"></i><span>Danh sách bác sĩ</span></a>-->
-<!--            </li>-->
-<!--            <li class="nav-item"><a class="nav-link" href="/add-patient"><i-->
-<!--                    class="fas fa-table"></i><span>Add patient</span></a></li>-->
-<!--            <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-user-circle"></i><span>Đăng xuất</span></a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <div class="text-center d-none d-md-inline">-->
-<!--            <button class=" rounded-circle border-0" id="sidebarToggle" type="button"></button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
-<!-- day la phan code layout them benh nhan, cai phan mau cua layput chua full ddk het cai man hinh,  -->
-<!--<div class=" bg-gra-02 p-t-130 p-b-100 font-poppins">-->
-
-
+<!-- ======= Footer ======= -->
