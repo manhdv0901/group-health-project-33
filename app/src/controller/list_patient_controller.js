@@ -45,12 +45,16 @@ module.exports.updatepatient=(req,res)=>{
     })
 }
 module.exports.updatepatientpost=(req,res)=>{
+    console.log(
+        req.body
+    )
     PATIENT.findOneAndUpdate({_id:req.body.key}, {$set:{
             "name":req.body.name,
             "age":req.body.age,
             "birth_day":req.body.birth_day,
             "phone":req.body.phone,
             "number_room":req.body.number_room,
+            "key_device":req.body.key_device
         }},{new : true},( err, doc)=>{
         if(!err){
             res.redirect('/list-patients');

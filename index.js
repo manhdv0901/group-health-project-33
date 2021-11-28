@@ -4,6 +4,7 @@ var expressSession=require('express-session');
 const exhbs = require('express-handlebars')
 const PORT = process.env.PORT || 3000
 const app =express();
+var helpers = require('handlebars-helpers')();
 //connect mongoose
 const mongoose = require("mongoose");
 const path = require('path')
@@ -66,11 +67,14 @@ const deviceRoute = require('./app/src/router/login_router')
 const listPatientRouter = require('./app/src/router/list_patient_router')
 const listDoctorRouter = require('./app/src/router/list_doctor_router')
 const addPatientRouter = require('./app/src/router/addpatient_router')
+const addDoctor = require('./app/src/router/add_doctor_router')
 
 app.use('/', deviceRoute)
 app.use('/', listPatientRouter)
 app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
+app.use('/', addDoctor)
+
 
 app.get('/dashboard',(req, res)=>{
 
@@ -211,6 +215,7 @@ app.post("/add-device", (req,res) => {
     console.log("temp:", req.query.temp);
     myDataTem.push(req.query.temp);
     console.log("value: ", myDataTem);
+
     var newDEVICE = DEVICE({
         key_device: KEY_DEVICE,
         heart:

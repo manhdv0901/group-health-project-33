@@ -5,22 +5,21 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="img/logo.png" alt="">
-            <span class="d-none d-lg-block">NiceAdmin</span>
+            <img src="assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">Hệ thống quản trị</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <form class="search-form d-flex align-items-center" method="POST" action="/dashboard">
+            <input type="text" name="query" placeholder="Tìm kiếm" title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-
             <li class="nav-item d-block d-lg-none">
                 <a class="nav-link nav-icon search-bar-toggle " href="#">
                     <i class="bi bi-search"></i>
@@ -120,7 +119,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="img/messages-1.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Maria Hudson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -134,7 +133,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Anna Nelson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -148,7 +147,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="img/messages-3.jpg" alt="" class="rounded-circle">
+                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>David Muldon</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -168,61 +167,61 @@
 
             </li><!-- End Messages Nav -->
 
-            <li class="nav-item dropdown pe-3">
+            <!--            <li class="nav-item dropdown pe-3">-->
 
-                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-                </a><!-- End Profile Iamge Icon -->
+            <!--                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">-->
+            <!--                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">-->
+            <!--                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>-->
+            <!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                    <li class="dropdown-header">
-                        <h6>{{patient.name}}</h6>
-                        <span>d</span>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+            <!--                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">-->
+            <!--                    <li class="dropdown-header">-->
+            <!--                        <h6>Kevin Anderson</h6>-->
+            <!--                        <span>Web Designer</span>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                            <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">-->
+            <!--                            <i class="bi bi-person"></i>-->
+            <!--                            <span>My Profile</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                            <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">-->
+            <!--                            <i class="bi bi-gear"></i>-->
+            <!--                            <span>Account Settings</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">-->
+            <!--                            <i class="bi bi-question-circle"></i>-->
+            <!--                            <span>Need Help?</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
+            <!--                    <li>-->
+            <!--                        <hr class="dropdown-divider">-->
+            <!--                    </li>-->
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
-                        </a>
-                    </li>
+            <!--                    <li>-->
+            <!--                        <a class="dropdown-item d-flex align-items-center" href="#">-->
+            <!--                            <i class="bi bi-box-arrow-right"></i>-->
+            <!--                            <span>Sign Out</span>-->
+            <!--                        </a>-->
+            <!--                    </li>-->
 
-                </ul><!-- End Profile Dropdown Items -->
-            </li><!-- End Profile Nav -->
+            <!--                </ul>&lt;!&ndash; End Profile Dropdown Items &ndash;&gt;-->
+            <!--            </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
 
         </ul>
     </nav><!-- End Icons Navigation -->
@@ -314,12 +313,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Profile</h1>
+        <h1>Thông tin chi tiết bệnh nhân</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active">Profile</li>
+                <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/list-patients">Danh sách bệnh nhân</a></li>
+                <li class="breadcrumb-item active">Thông tin bệnh nhân</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -405,7 +404,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Gọi khẩn cấp</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Lịch sử điều trị</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change">Cập nhật tình trạng</button>
@@ -419,7 +418,7 @@
                                 <h5 class="card-title">Thông tin bệnh nhân</h5>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                                    <div class="col-lg-3 col-md-4 label ">Họ và tên</div>
                                     <div class="col-lg-9 col-md-8">{{patient.name}}</div>
                                 </div>
 
@@ -507,7 +506,12 @@
                                             <input name="number_room" value="{{patient.number_room}}" type="text" class="form-control" id="Phone">
                                         </div>
                                     </div>
-
+                                    <div class="row mb-3">
+                                        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Key Device</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="key_device" value="{{patient.key_device}}" type="text" class="form-control" id="Phone">
+                                        </div>
+                                    </div>
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Thay đổi</button>
@@ -558,7 +562,8 @@
                                                         {{/each}}
                                                     </td>
                                                     <td>{{#each this.temp}}
-                                                        <div style="margin-top: 20px"><b>Nhiệt độ:</b>{{this.real_time}} nhịp/phút
+
+                                                        <div style="margin-top: 20px">{{moment real_time format="YYYY-MM-DD hh:MM"}}
                                                         </div>
                                                     {{/each}}</td>
                                                 </tr>
@@ -577,33 +582,33 @@
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <!-- Change Password Form -->
-                                <form>
+                               <!-- End Change Password Form -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Lịch sử điều trị</h5>
+            <!-- Default Accordion -->
+            <div class="accordion" id="accordionExample">
+{{#each device}}
+                <div class="accordion-item">
+                {{#each this.track_history}}
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            {{moment real_time format="YYYY-MM-DD"}}
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p>{{this.value}} </p>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
 
-                                    <div class="row mb-3">
-                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="password" type="password" class="form-control" id="currentPassword">
-                                        </div>
-                                    </div>
+{{/each}}
+            </div><!-- End Default Accordion Example -->
 
-                                    <div class="row mb-3">
-                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="newpassword" type="password" class="form-control" id="newPassword">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Change Password</button>
-                                    </div>
-                                </form><!-- End Change Password Form -->
+        </div>
+    </div>
 
                             </div>
 
@@ -613,7 +618,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Cập nhật tình trạng của bệnh nhân</h5>
 
-                                        <a type="button" class="btn btn-primary"href="/updateStatusPatient1/{{patient._id  }}" >Đã khỏi bệnh</a>
+                                        <a type="button" class="btn btn-primary"href="/updateStatusPatient2/{{patient._id  }}" >Đã khỏi bệnh</a>
                                         <a type="button" href="/updateStatusPatient1/{{patient._id  }}" class="btn btn-secondary">Tử Vong</a>
 
 
