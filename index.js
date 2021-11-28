@@ -10,7 +10,8 @@ const path = require('path')
 const fetch = require("node-fetch");
 const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
 
-
+// import device from './app/src/model/device_model';
+const device = require('./app/src/model/device_model');
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -34,6 +35,8 @@ app.engine('hbs',exhbs({
 var myDataTem = [];
 var myDataHea=[];
 var myDataSpO2 =[];
+var myDataState =[];
+var myDataKey =[];
 
 //config mongodb
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
@@ -54,7 +57,7 @@ mongoose.connection.on("disconnected", function (){
 //connect mongoose
 var db=mongoose.connection;
 
-const KEY_DEVICE = 'device08';
+const KEY_DEVICE = 'device05';
 
 //model
 var DEVICE = require('./app/src/model/device_model');
@@ -211,8 +214,17 @@ app.post("/add-device", (req,res) => {
     console.log("temp:", req.query.temp);
     myDataTem.push(req.query.temp);
     console.log("value: ", myDataTem);
+
+    console.log("state:", req.query.state);
+    myDataState.push(req.query.state);
+    console.log("value: ", myDataState);
+
+    console.log("key:", req.query.key_device);
+    myDataKey.push(req.query.key_device);
+    console.log("value: ", myDataKey);
     var newDEVICE = DEVICE({
-        key_device: KEY_DEVICE,
+        key_device:req.query.key_device,
+        state: req.query.state,
         heart:
             {
                 value: Number(req.query.heart),
@@ -230,7 +242,7 @@ app.post("/add-device", (req,res) => {
                 value: Number(req.query.temp),
                 real_time: new Date(),
             }
-        ,
+
 
     });
     console.log("data post req: ", req.query);
@@ -240,15 +252,15 @@ app.post("/add-device", (req,res) => {
     //     if (err) {
     //         res.status(400).json(err);
     //     }else {
-    //         console.log("Thêm thành công");
-    //         console.log(result);
+    //         console.log("Thêm thành công: ", result);
+    //         console.log(newDEVICE);
     //         res.status(200).json(result);
     //     }
     // });
 
 
     // update data
-    var oldValue = {key_device: KEY_DEVICE};
+    var oldValue = {key_device: req.query.key_device};
     var newValue = {
         $push: {
             heart:
@@ -269,6 +281,7 @@ app.post("/add-device", (req,res) => {
                     real_time: new Date(),
                 }
             ,
+            state: req.query.state,
         }
 
     };
