@@ -36,13 +36,9 @@ app.engine('hbs',exhbs({
 var myDataTem = [];
 var myDataHea=[];
 var myDataSpO2 =[];
-<<<<<<< HEAD
-var myDataState = [];
-=======
 var myDataState =[];
 var myDataKey =[];
 
->>>>>>> ui_by_duc
 //config mongodb
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
 const DATABASE_CONNECT_OPTION  = {
