@@ -11,7 +11,8 @@ const path = require('path')
 const fetch = require("node-fetch");
 const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
 
-
+// import device from './app/src/model/device_model';
+const device = require('./app/src/model/device_model');
 app.use(expressSession({secret:'max',saveUninitialized:false,resave:false}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -35,6 +36,8 @@ app.engine('hbs',exhbs({
 var myDataTem = [];
 var myDataHea=[];
 var myDataSpO2 =[];
+var myDataState =[];
+var myDataKey =[];
 
 //config mongodb
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
@@ -55,7 +58,7 @@ mongoose.connection.on("disconnected", function (){
 //connect mongoose
 var db=mongoose.connection;
 
-const KEY_DEVICE = 'device08';
+const KEY_DEVICE = 'device05';
 
 //model
 var DEVICE = require('./app/src/model/device_model');

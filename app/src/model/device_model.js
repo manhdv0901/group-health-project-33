@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 var DEVICESchema = new mongoose.Schema({
     id:Number,
     key_device:String,
+    state:String,
     heart:[
         {value: Number,
             real_time : Date}
@@ -20,7 +21,7 @@ var DEVICESchema = new mongoose.Schema({
             real_time :Date
         }
     ],
-    status:Number,
+
     treatment_course:[
         {value:String,
             real_time :Date
