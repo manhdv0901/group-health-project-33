@@ -134,7 +134,7 @@ app.get('/:na',(req,res)=>{
                                 else{
                                     console.log(`devices:`, data2)
                                     res.render('profile', {
-                                        patient: data, device:data2, doctors: data3,
+                                        patient: data, device:data2, doctors: data3,data:[10,20,30]
                                     })
                                 }
                             })
@@ -369,7 +369,28 @@ app.get('/contact/to',(req,res)=>{
 //     })
 //
 // });
+//thêm thiết bị
+app.post('/add-device2',(req,res)=>{
+    DEVICE({
+        key_device:req.body.key_device,
+        // name: req.body.name,
+        // username:req.body.username,
+        // password: req.body.password,
+        // age:req.body.age,
+        // birth_day:req.body.birth_day,
+        // phone:req.body.phone,
+        // number_room:req.body.number_room,
+        // key_device:req.body.key_device
+    }).save((err) =>{
+        if (err){
+            console.log('Thêm không thành công:', err);
+        }else{
 
+            console.log('Thành công, : ', req.body);
+        }
+
+    })
+})
 
 
 app.post('/data-patient', (req, res)=>{
