@@ -78,7 +78,9 @@ app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
 app.use('/', addDoctor)
 
-
+app.get('/',(req,res)=>{
+    res.redirect('/dashboard')
+})
 app.get('/dashboard',(req, res)=>{
 
     var model = db.model('data-doctors', DOCTORS.schema);

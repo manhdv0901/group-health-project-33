@@ -1,5 +1,3 @@
-
-
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -278,13 +276,7 @@
         </li><!-- End Forms Nav -->
 
 
-
-
-
-
-
         <li class="nav-heading">Pages</li>
-
 
 
         <li class="nav-item">
@@ -300,10 +292,6 @@
                 <span>Contact</span>
             </a>
         </li><!-- End Contact Page Nav -->
-
-
-
-
 
 
     </ul>
@@ -323,6 +311,8 @@
         </nav>
     </div><!-- End Page Title -->
 
+
+    </div>
     <section class="section profile">
         <div class="row">
             <div class="col-xl-4">
@@ -339,7 +329,8 @@
                                 <p>Nếu thấy bệnh nhân không ổn hay gọi ngay bác sĩ đến nơi!</p>
 
                                 <!-- Basic Modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#basicModal">
                                     Gọi Khẩn Cấp
                                 </button>
                                 <div class="modal fade" id="basicModal" tabindex="-1">
@@ -357,13 +348,17 @@
                                                 <tbody>
                                                 {{#each doctors}}
                                                     <tr>
-                                                        <th scope="row">{{id}}</th>
+                                                        <th scope="row" >{{id}}</th>
                                                         <td id="name">{{name}}</td>
                                                         <td>{{state}}</td>
                                                         <td>
-                                                            <a id="sumbmit" href="/updateStatus/{{this._id}}/{{../patient.key_device}}" type="button"
-                                                               onclick="document.getElementById('myform').submit();" class="btn btn-danger btn-sm btn-rounded"><i
-                                                                    class="fas fa-plane pr-2 pt-1" aria-hidden="true"> </i>Gọi hỗ trợ
+                                                            <a id="sumbmit"
+                                                               href="/updateStatus/{{this._id}}/{{../patient.key_device}}"
+                                                               type="button"
+                                                               onclick="document.getElementById('myform').submit();"
+                                                               class="btn btn-danger btn-sm btn-rounded"><i
+                                                                    class="fas fa-plane pr-2 pt-1"
+                                                                    aria-hidden="true"> </i>Gọi hỗ trợ
                                                             </a>
 
                                                         </td>
@@ -374,11 +369,11 @@
                                         </div>
                                     </div>
 
-                                    </div>
-                                </div><!-- End Basic Modal-->
+                                </div>
+                            </div><!-- End Basic Modal-->
 
-                            </div>
                         </div>
+                    </div>
 
                 </div>
 
@@ -392,22 +387,32 @@
                         <ul class="nav nav-tabs nav-tabs-bordered">
 
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Tổng quan</button>
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">
+                                    Tổng quan
+                                </button>
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Chỉnh sửa bệnh nhân</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Chỉnh sửa
+                                    bệnh nhân
+                                </button>
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Lịch sử đo</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Lịch sử
+                                    đo
+                                </button>
                             </li>
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Lịch sử điều trị</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">
+                                    Lịch sử điều trị
+                                </button>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change">Cập nhật tình trạng</button>
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change">Cập nhật
+                                    tình trạng
+                                </button>
                             </li>
 
                         </ul>
@@ -459,8 +464,10 @@
                                         <div class="col-md-8 col-lg-9">
                                             <img src="img/profile-img.jpg" alt="Profile">
                                             <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                <a href="#" class="btn btn-primary btn-sm"
+                                                   title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                                                <a href="#" class="btn btn-danger btn-sm"
+                                                   title="Remove my profile image"><i class="bi bi-trash"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -468,48 +475,56 @@
                                     <div class="row mb-3">
                                         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input readonly  name="key" type="text" class="form-control" id="fullName" value="{{patient._id}}">
+                                            <input readonly name="key" type="text" class="form-control" id="fullName"
+                                                   value="{{patient._id}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="company" class="col-md-4 col-lg-3 col-form-label">Họ và tên</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="name" value="{{patient.name}}" type="text" class="form-control" id="company" >
+                                            <input name="name" value="{{patient.name}}" type="text" class="form-control"
+                                                   id="company">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="Job" class="col-md-4 col-lg-3 col-form-label">Sinh nhật</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="birth_day" value="{{patient.birth_day}}" type="date" class="form-control" id="Job" >
+                                            <input name="birth_day" value="{{patient.birth_day}}" type="date"
+                                                   class="form-control" id="Job">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="Country" class="col-md-4 col-lg-3 col-form-label">Tuổi</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input  type="number" class="form-control" id="Country" name="age" value="{{patient.age}}">
+                                            <input type="number" class="form-control" id="Country" name="age"
+                                                   value="{{patient.age}}">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Số điện thoại</label>
+                                        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Số điện
+                                            thoại</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="phone" value="{{patient.phone}}" type="number" class="form-control" id="Address">
+                                            <input name="phone" value="{{patient.phone}}" type="number"
+                                                   class="form-control" id="Address">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Số phòng</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="number_room" value="{{patient.number_room}}" type="text" class="form-control" id="Phone">
+                                            <input name="number_room" value="{{patient.number_room}}" type="text"
+                                                   class="form-control" id="Phone">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Key Device</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="key_device" value="{{patient.key_device}}" type="text" class="form-control" id="Phone">
+                                            <input name="key_device" value="{{patient.key_device}}" type="text"
+                                                   class="form-control" id="Phone">
                                         </div>
                                     </div>
 
@@ -541,33 +556,36 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-{{#each device}}
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>{{#each this.heart}}
-                                                        <div style="margin-top: 20px"><b>Nhịp tim:</b>{{this.value}} nhịp/phút
-                                                                                                </div>
-                                                    {{/each}}
-                                                    </td>
-                                                    <td>
-                                                        {{#each this.spO2}}
-                                                            <div style="margin-top: 20px"><b>SPO2:</b>{{this.value}}
+                                                {{#each device}}
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>{{#each this.heart}}
+                                                            <div style="margin-top: 20px"><b>Nhịp tim:</b>{{this.value}}
+                                                                nhịp/phút
                                                             </div>
                                                         {{/each}}
-                                                    </td>
-                                                    <td>
-                                                        {{#each this.temp}}
-                                                            <div style="margin-top: 20px"><b>Nhiệt độ:</b>{{this.value}} nhịp/phút
-                                                            </div>
-                                                        {{/each}}
-                                                    </td>
-                                                    <td>{{#each this.temp}}
+                                                        </td>
+                                                        <td>
+                                                            {{#each this.spO2}}
+                                                                <div style="margin-top: 20px"><b>SPO2:</b>{{this.value}}
+                                                                </div>
+                                                            {{/each}}
+                                                        </td>
+                                                        <td>
+                                                            {{#each this.temp}}
+                                                                <div style="margin-top: 20px"><b>Nhiệt
+                                                                    độ:</b>{{this.value}} nhịp/phút
+                                                                </div>
+                                                            {{/each}}
+                                                        </td>
+                                                        <td>{{#each this.temp}}
 
-                                                        <div style="margin-top: 20px">{{moment real_time format="YYYY-MM-DD hh:MM"}}
-                                                        </div>
-                                                    {{/each}}</td>
-                                                </tr>
-{{/each}}
+                                                            <div style="margin-top: 20px">{{moment real_time
+                                                                                                   format="YYYY-MM-DD hh:MM"}}
+                                                            </div>
+                                                        {{/each}}</td>
+                                                    </tr>
+                                                {{/each}}
 
 
                                                 </tbody>
@@ -582,33 +600,38 @@
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <!-- Change Password Form -->
-                               <!-- End Change Password Form -->
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Lịch sử điều trị</h5>
-            <!-- Default Accordion -->
-            <div class="accordion" id="accordionExample">
-{{#each device}}
-                <div class="accordion-item">
-                {{#each this.track_history}}
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            {{moment real_time format="YYYY-MM-DD"}}
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <p>{{this.value}} </p>
-                        </div>
-                    </div>
-                    {{/each}}
-                </div>
+                                <!-- End Change Password Form -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Lịch sử điều trị</h5>
+                                        <!-- Default Accordion -->
+                                        <div class="accordion" id="accordionExample">
+                                            {{#each device}}
+                                                <div class="accordion-item">
+                                                    {{#each this.track_history}}
+                                                        <h2 class="accordion-header" id="headingOne">
+                                                            <button class="accordion-button" type="button"
+                                                                    data-bs-toggle="collapse"
+                                                                    data-bs-target="#collapseOne" aria-expanded="true"
+                                                                    aria-controls="collapseOne">
+                                                                {{moment real_time format="YYYY-MM-DD"}}
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                                             aria-labelledby="headingOne"
+                                                             data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <p>{{this.value}} </p>
+                                                            </div>
+                                                        </div>
+                                                    {{/each}}
+                                                </div>
 
-{{/each}}
-            </div><!-- End Default Accordion Example -->
+                                            {{/each}}
+                                        </div><!-- End Default Accordion Example -->
 
-        </div>
-    </div>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -618,8 +641,10 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Cập nhật tình trạng của bệnh nhân</h5>
 
-                                        <a type="button" class="btn btn-primary"href="/updateStatusPatient2/{{patient._id  }}" >Đã khỏi bệnh</a>
-                                        <a type="button" href="/updateStatusPatient1/{{patient._id  }}" class="btn btn-secondary">Tử Vong</a>
+                                        <a type="button" class="btn btn-primary"
+                                           href="/updateStatusPatient2/{{patient._id  }}">Đã khỏi bệnh</a>
+                                        <a type="button" href="/updateStatusPatient1/{{patient._id  }}"
+                                           class="btn btn-secondary">Tử Vong</a>
 
 
                                     </div>
@@ -635,7 +660,7 @@
             </div>
         </div>
     </section>
-<!--    report-->
+    <!--    report-->
     <div class="col-12">
         <div class="card">
 
@@ -745,7 +770,8 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 
