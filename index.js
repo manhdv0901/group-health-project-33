@@ -9,7 +9,7 @@ var helpers = require('handlebars-helpers')();
 const mongoose = require("mongoose");
 const path = require('path')
 const fetch = require("node-fetch");
-const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
+
 
 // import device from './app/src/model/device_model';
 const device = require('./app/src/model/device_model');
@@ -71,40 +71,28 @@ const listPatientRouter = require('./app/src/router/list_patient_router')
 const listDoctorRouter = require('./app/src/router/list_doctor_router')
 const addPatientRouter = require('./app/src/router/addpatient_router')
 const addDoctor = require('./app/src/router/add_doctor_router')
+const statuspatient = require('./app/src/router/status_patient_router')
+const page = require('./app/src/router/404_router')
+const updatetoken = require('./app/src/router/update_token_doctor_router')
+const device1 = require('./app/src/router/device_router')
+const sendnotification = require('./app/src/router/sennotication_router')
 
 app.use('/', deviceRoute)
 app.use('/', listPatientRouter)
 app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
 app.use('/', addDoctor)
-var hbs = exhbs.create({
-    // Specify helpers which are only registered on this instance.
-    helpers: {
-        foo: function () { return 'FOO!'; },
-        bar: function () { return 'BAR!'; }
-    }
-});
-app.engine('handlebars', hbs.engine);
+app.use('/', statuspatient)
+app.use('/', page)
+app.use('/', updatetoken)
+app.use('/', device1)
+app.use('/', sendnotification)
 
-app.get('/404',(req,res)=>{
-    res.render('404')
-})
 app.get('/',(req,res)=>{
     res.redirect('/dashboard')
 })
-app.get('/test/ok',(req,res)=>{
-    res.render('test',
-        {
-            showTitle: true,
 
-            // Override `foo` helper only for this rendering.
-            helpers: {
-
-                foo: function () { return 'foo.'; }
-            }
-        }
-        )
-})
+//màn hình dashboard
 app.get('/dashboard',(req, res)=>{
 
     var model = db.model('data-doctors', DOCTORS.schema);
@@ -144,7 +132,7 @@ app.get('/dashboard',(req, res)=>{
     });
 
 })
-//
+//chi tiết bệnh nhân
 app.get('/:na',(req,res)=>{
     PATIENT.findById(req.params.na,(err, data)=>{
         if(err){
@@ -173,65 +161,8 @@ app.get('/:na',(req,res)=>{
 
     })
 })
-//send notification
-app.post('/sendToAll',(req,res)=>{
-    var id=req.body.id;
-    var title=req.body.title;
-    var name=req.body.name;
-    var room=req.body.room;
-    var age=req.body.age;
-    var status=req.body.status;
-    var medicine=req.body.medicine;
-    var amountAndUse=req.body.amountAndUse;
-        var key_device=req.body.key_device;
-        var notification={
-            'id':id,
-            'title':title,
-            'name':name,
-            'room':room,
-            'age':age,
-            'status':status,
-            'medicine':medicine,
-            'amountAndUse':amountAndUse,
-            'key_device':key_device
-        };
 
-        var fcm_tokens=req.body.token;//lấy từ body mà. m ảo thế
-        // var fcm_tokens=['ev8StG0CSHGv4RMdH9ndkZ:APA91bFu-TlfT-meH75l4h3CmxamvsVZrCERhvmUoBintP2cSTITYmAj7oXfWmEwTRGYCaMx3IHGjRGJRF0J-3zagt8b7O7tS37eEtkzIxLGRNeY_BrWdOBngYlmKb6sPvQKgpjQCNvR'];
-
-        var notification_body={
-            'data':notification,
-            'to':fcm_tokens
-        }
-        //còn bắn node là bắn theo token, tại chiều bắn theo token k đ nên bắn console
-        // var notification_body={
-        //     'notification':notification,
-        //     'registration_ids':fcm_tokens
-        // } nch là api k liên quan đâu
-        console.log("notify body",notification_body)
-
-        async function fetchMovies() {
-            const response = await fetch('https://fcm.googleapis.com/fcm/send',{
-                'method':'POST',
-                'headers':{
-                    'Authorization':'key=' +SERVER_KEY,
-                    'Content-Type':'application/json'
-                },
-                'body':JSON.stringify(notification_body)
-            }).then(()=>{
-                res.redirect('/dashboard')
-            }).catch((err)=>{
-                res.status(400).send('Something went wrong!');
-                console.log(err)
-            });
-            return response;
-            // waits until the request completes...
-        }
-
-        console.log(fetchMovies());
-},
-);
-
+//api phần thêm dư liệu và thêm dữ liệu thiết bị-----------------------------------------------------------------------
 app.post("/add-device", (req,res) => {
     console.log("request data sensor to sever");
     //get data request
@@ -352,7 +283,7 @@ app.post("/add-device", (req,res) => {
     //             }
     //         }
     //     });
-});
+});//--|
 app.get('/add-device', (req, res) =>{
     const findDevice =DEVICE.find({});
         findDevice.exec((err, data) =>{
@@ -362,43 +293,7 @@ app.get('/add-device', (req, res) =>{
                 res.status(200).json(data);
             }
         })
-})
-
-app.use('/api/notification',require('./notification'));
-app.set('view engine','hbs')
-app.set('views',path.join(__dirname,'/views'))
-console.log(__dirname)
-
-app.get('/contact/to',(req,res)=>{
-    res.render('contact')
-})
-// get infomation detail patient
-// app.get("/profile", (req, res) => {
-//     var modelPatient = db.model('data-patients', PATIENTSchema);
-//     var modelDevice = db.model('data-devices', DEVICESchema);
-//
-//     var dataPatient = modelPatient.find({key_device:"device01"})
-//     var dataDevice=modelDevice.find({key_device:"device01"});
-//
-//     //set data chi tiết bệnh nhân
-//     dataPatient.exec((err,data) => {
-//         if (err) throw err;
-//         console.log("data patient: ", data.map(aa => aa.toJSON()))
-//         res.render('profile', {
-//             patient: data.map(aa => aa.toJSON())
-//         })
-//     })
-//     //set data lịch sử
-//     dataDevice.exec((err,data)=>{
-//         if (err) throw err;
-//         console.log("data device: ", data.map(aa => aa.toJSON()))
-//         res.render('profile', {
-//                 device: data.map(aa => aa.toJSON())
-//             })
-//     })
-//
-// });
-//thêm thiết bị
+})//-----------------|
 app.post('/add-device2',(req,res)=>{
     DEVICE({
         key_device:req.body.key_device,
@@ -419,9 +314,15 @@ app.post('/add-device2',(req,res)=>{
         }
 
     })
+})//-----|
+//--------------------------------------------------------------------------------------------------------------------|
+
+app.set('view engine','hbs')
+app.set('views',path.join(__dirname,'/views'))
+console.log(__dirname)
+app.get('/contact/to',(req,res)=>{
+    res.render('contact')
 })
-
-
 app.post('/data-patient', (req, res)=>{
     const id = req.body.username;
     // var findDevice = DEVICE.findOne({key_device: device});
@@ -444,8 +345,6 @@ app.post('/data-patient', (req, res)=>{
          }
      })
 })
-
-
 //update status doctor
 app.get('/updateStatus/:key/:keydevice',(req,res)=>{
     var key=req.params.key;
@@ -479,9 +378,6 @@ app.get('/updateStatus/:key/:keydevice',(req,res)=>{
 
 
 })
-
-
-
 //------------------------------------------------------------------------------------------------------------
 //-----------------API------------------------------------------------------------------------------------------
 app.get('/data-device',(req, res)=>{
@@ -589,145 +485,7 @@ app.post('/data-one-doctor',(req, res)=>{
         }
     })
 })
-//update lịch sử điều trị
-app.post('/update/track-history/',(req,res)=>{
-    console.log(req.body.key_device)
-    console.log(req.body.data)
-    console.log(req.body.date)
-    var key=req.body.key_device;
-    var data=req.body.data;
-    var date=req.body.date;
-    DEVICE.updateOne(
-        { "key_device" : key},
-        { $push: { 'track_history' : {'value':data,'real_time':date} }, },function (err) {
-            if (!err) {
-                // res.redirect('/list-patients');
-                res.status(200).json({
-                    message: "Cập nhật lịch sử thành công"
-                })
-            } else {
-                res.status(500).json({
-                    message: "Cập nhật lịch sử thất bại"
-                })
-            }
-        }
-    );
 
-})
-//update liệu trình
-app.post('/update/treatmentcourse/',(req,res)=>{
-    console.log(req.body.key_device)
-    console.log(req.body.data)
-    console.log(req.body.date)
-
-    var key=req.body.key_device;
-    var data=req.body.data;
-    var date=req.body.date;
-    DEVICE.updateOne(
-        { "key_device" : key },
-        { $push: { 'treatment_course' : {'value':data,'real_time':date} }, },function (err) {
-            if (!err) {
-                // res.redirect('/list-patients');
-                res.status(200).json({
-                    message: "Cập nhật liệu trình thành công"
-                })
-            } else {
-                res.status(500).json({
-                    message: "Cập nhật liệu trình thất bại"
-                })
-            }
-        }
-    );
-
-})
-// get info all device
-app.get("/list",(req, res) => {
-    var model = db.model('data-devices', DEVICESchema);
-    var methodFind = model.find({});
-    methodFind.exec((err,data) => {
-        if (err) {throw err;
-        }else{
-            // console.log("ham ham: ", data.map(aa => aa.toJSON()))
-            console.log("ham ham: ", data)
-            res.render('table_2', {
-                // ups: data.map(aa => aa.toJSON())
-                ups: data
-            })}
-    })
-});
-//api update statuss
-app.post('/updateStatus',(req,res)=>{
-    console.log(req.body.id)
-    var newvalues = { $set: {state: "true" } };
-    DOCTORS.findByIdAndUpdate(req.body.id , newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                console.log('update status doctor completr')
-            } else {
-                console.log('update status doctor fail')
-            }
-        });
-
-})
-//update tình trạng bệnh nhân đã khỏi
-app.get('/updateStatusPatient2/:key',(req,res)=>{
-    console.log(req.params.key)
-    var newvalues = { $set: {done: "2" } };
-    PATIENT.findByIdAndUpdate(req.params.key , newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-               res.redirect('/dashboard')
-                console.log('Complete')
-            } else {
-                res.redirect('/dashboard')
-                console.log('update status doctor fail')
-            }
-        });
-
-})
-//update tình tranng benh nhan tu vong
-app.get('/updateStatusPatient1/:key',(req,res)=>{
-    console.log(req.params.key)
-    var newvalues = { $set: {done: "1" } };
-    PATIENT.findByIdAndUpdate(req.params.key , newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                res.redirect('/dashboard')
-                console.log('Complete')
-            } else {
-                res.redirect('/dashboard')
-                console.log('update status doctor fail')
-            }
-        });
-
-})
-//update token doctor
-app.post('/update-token',(req,res)=>{
-    console.log(req.body.tokennn)
-    var myquery = { _id:req.body.key};
-    var newvalues = { tokenn: req.body.tokennn};
-    DOCTORS.findByIdAndUpdate(req.body.key, newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                // res.redirect('/list-patients');
-                res.status(200).json({
-                    message: "update token complete"
-                })
-            } else {
-                res.status(500).json({
-                    message: "not found any relative data"
-                })
-            }
-        });
-})
 //-------------------------------------------------------------------------------------------------
 // //delete 09.11
 app.get('/delete/:key', async (req, res) =>{
@@ -746,9 +504,6 @@ app.get('/delete/:key', async (req, res) =>{
         res.status(500).send(e);
     }
 })
-
-
-
 
 app.listen(PORT,()=>{
     console.log(`http://localhost:${PORT}/login`);

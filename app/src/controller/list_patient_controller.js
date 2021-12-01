@@ -65,17 +65,14 @@ module.exports.updatepatientpost=(req,res)=>{
         }
     })
 }
-module.exports.deletepatient= (req, res) =>{
+module.exports.deletepatient= (req, res) =>  {
     try{
         const patient =  PATIENT.findByIdAndDelete(req.params.key, req.body);
         if (!patient){
-            // res.status(400).send('Không tìm thấy bệnh nhân');
             console.log('delete patient fail');
         }else {
-            // res.status(200).send();
             console.log('delete patient success');
             res.redirect('/list-patients');
-            // res.render('listPatients');
         }
     }catch (e){
         res.status(500).send(e);
