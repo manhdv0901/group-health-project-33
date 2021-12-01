@@ -215,10 +215,11 @@ app.post("/add-device", (req,res) => {
 
     console.log("temp:", req.query.temp);
 
-    console.log("key: ", req.query.key);
+    console.log("key: ", req.query.key_device);
 
     console.log("state: ", req.query.state);
-    PATIENT.updateOne( {"key_device" : req.query.key } , { $set: {'state': Number(req.query.state) } }, {
+    console.log("------------------------------------------- ");
+    PATIENT.updateOne( {"key_device" : req.query.key_device } , { $set: {'state': Number(req.query.state) } }, {
             new: true
         },
         function(err, model) {
@@ -229,7 +230,7 @@ app.post("/add-device", (req,res) => {
             }
         });
     DEVICE.updateOne(
-        { "key_device" : req.query.key },
+        { "key_device" : req.query.key_device },
         {$push: { 'heart' :
                     {'value':Number(req.query.heart),'real_time':Date.now()} ,
                 'spO2' :
@@ -374,25 +375,64 @@ app.get('/contact/to',(req,res)=>{
 // });
 //thêm thiết bị
 app.post('/add-device2',(req,res)=>{
-    DEVICE({
-        key_device:req.body.key_device,
-        // name: req.body.name,
-        // username:req.body.username,
-        // password: req.body.password,
-        // age:req.body.age,
-        // birth_day:req.body.birth_day,
-        // phone:req.body.phone,
-        // number_room:req.body.number_room,
-        // key_device:req.body.key_device
-    }).save((err) =>{
-        if (err){
-            console.log('Thêm không thành công:', err);
-        }else{
+    // DEVICE({
+    //     key_device:req.body.key_device,
+    //     // name: req.body.name,
+    //     // username:req.body.username,
+    //     // password: req.body.password,
+    //     // age:req.body.age,
+    //     // birth_day:req.body.birth_day,
+    //     // phone:req.body.phone,
+    //     // number_room:req.body.number_room,
+    //     // key_device:req.body.key_device
+    // }).save((err) =>{
+    //     if (err){
+    //         console.log('Thêm không thành công:', err);
+    //     }else{
+    //
+    //         console.log('Thành công, : ', req.body);
+    //     }
+    //
+    // })
+    var newDEVICE = DEVICE({
+        key_device: req.query.key_device,
+        heart:
+            {
+                value: Number(req.query.heart),
+                real_time: new Date(),
+            }
+        ,
+        spO2:
+            {
+                value: Number(req.query.spO2),
+                real_time: new Date(),
+            }
+        ,
+        temp:
+            {
+                value: Number(req.query.temp),
+                real_time: new Date(),
+            }
+        ,
+        state:
+            {
+                value: Number(req.query.temp),
+                real_time: new Date(),
+            },
 
-            console.log('Thành công, : ', req.body);
+    });
+    console.log("data post req: ", req.query);
+
+    //insert data
+    db.collection("data-devices").insertOne(newDEVICE, (err, result) => {
+        if (err) {
+            res.status(400).json(err);
+        }else {
+            console.log("Thêm thành công");
+            console.log(result);
+            res.status(200).json(result);
         }
-
-    })
+    });
 })
 
 
