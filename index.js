@@ -77,9 +77,33 @@ app.use('/', listPatientRouter)
 app.use('/', listDoctorRouter)
 app.use('/', addPatientRouter)
 app.use('/', addDoctor)
+var hbs = exhbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        foo: function () { return 'FOO!'; },
+        bar: function () { return 'BAR!'; }
+    }
+});
+app.engine('handlebars', hbs.engine);
 
+app.get('/404',(req,res)=>{
+    res.render('404')
+})
 app.get('/',(req,res)=>{
     res.redirect('/dashboard')
+})
+app.get('/test/ok',(req,res)=>{
+    res.render('test',
+        {
+            showTitle: true,
+
+            // Override `foo` helper only for this rendering.
+            helpers: {
+
+                foo: function () { return 'foo.'; }
+            }
+        }
+        )
 })
 app.get('/dashboard',(req, res)=>{
 
@@ -106,7 +130,7 @@ app.get('/dashboard',(req, res)=>{
                                    docs: data,
                                    total:data1,
                                    totaldn:data2,
-                                   totaldi:data3
+                                   totaldi:data3,
                                })
                            })
                        }

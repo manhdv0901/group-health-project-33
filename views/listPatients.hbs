@@ -342,13 +342,13 @@
                             </thead>
 {{#each docs}}
                             <tbody >
-                            <tr id="centerbox1">
+                            {{#compare this.state "==" 2}}
+                            <tr class="table-danger">
                                 <th scope="row"><a href="#">#</a></th>
                                 <td>{{this.id}}</td>
                                 <td>{{this.name}}</td>
                                 <td>{{this.phone}}</td>
                                 <td>{{this.number_room}}</td>
-
                                 <td>
                                         <div class="card-body">
 
@@ -361,7 +361,59 @@
                                         </div>
 
                                 </td>
+<!--                              -->
+<!--                                    <td><a href="#" class="btn btn-success">{{this.state}}</a></td>-->
+<!--                               -->
                             </tr>
+                            {{/compare}}
+                            {{#compare this.state "==" 1}}
+                                <tr class="table-warning">
+                                    <th scope="row"><a href="#">#</a></th>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.phone}}</td>
+                                    <td>{{this.number_room}}</td>
+                                    <td>
+                                        <div class="card-body">
+
+                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary">Chi Tiết <i class="bi bi-collection"></i></a>
+
+                                            <a type="button" href="/delete/{{this._id}}" class="btn btn-danger">Xóa <i class="bi bi-exclamation-octagon"></i></a>
+
+                                            <!--                                            <a type="button" href="/list-patients/update/{{this._id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>-->
+
+                                        </div>
+
+                                    </td>
+                                    <!--                              -->
+                                    <!--                                    <td><a href="#" class="btn btn-success">{{this.state}}</a></td>-->
+                                    <!--                               -->
+                                </tr>
+                            {{/compare}}
+                            {{#compare this.state "==" 0}}
+                                <tr  class="table-info">
+                                    <th scope="row"><a href="#">#</a></th>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.phone}}</td>
+                                    <td>{{this.number_room}}</td>
+                                    <td>
+                                        <div class="card-body">
+
+                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary">Chi Tiết <i class="bi bi-collection"></i></a>
+
+                                            <a type="button" href="/delete/{{this._id}}" class="btn btn-danger">Xóa <i class="bi bi-exclamation-octagon"></i></a>
+
+                                            <!--                                            <a type="button" href="/list-patients/update/{{this._id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>-->
+
+                                        </div>
+
+                                    </td>
+                                    <!--                              -->
+                                    <!--                                    <td><a href="#" class="btn btn-success">{{this.state}}</a></td>-->
+                                    <!--                               -->
+                                </tr>
+                            {{/compare}}
                             </tbody>
 
 <!--        <script>-->
@@ -402,14 +454,14 @@
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Quản Lý Bệnh Nhân</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
     </div>
 </footer><!-- End Footer -->
 
