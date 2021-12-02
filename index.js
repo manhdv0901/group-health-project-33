@@ -219,9 +219,9 @@ app.get("/:na", (req, res) => {
       console.log("err get data one item patient");
       res.render("listPatients");
     } else {
-      var myDevice = data.key_device;
+      var key_device = data.key_device;
       console.log("key device", data.key_device);
-      DEVICE.find({ key_device: myDevice }).exec((er, data2) => {
+      DEVICE.find({ key_device: key_device }).exec((er, data2) => {
         if (er) throw er;
         else {
           DOCTORS.find({ state: true }).exec((er3, data3) => {
