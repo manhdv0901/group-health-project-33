@@ -1,5 +1,6 @@
 const {body, validationResult} = require("express-validator");
 var PATIENT = require('../model/patient_model');
+var session = require('express-session')
 
 var USER = require('../model/user_model');
 const mongoose = require("mongoose");
@@ -22,6 +23,7 @@ module.exports.login = (req, res)=> {
 
 module.exports.login1 =
     (req, res)=> {
+        console.log(req.session.User)
         var username =  req.body.username;
         var password = req.body.password;
         var errors = validationResult(req).array();

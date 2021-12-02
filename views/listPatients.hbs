@@ -325,7 +325,6 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Danh sách bệnh nhân</h5>
@@ -342,8 +341,9 @@
                             </tr>
                             </thead>
 {{#each docs}}
-                            <tbody>
-                            <tr>
+                            <tbody >
+                            {{#compare this.state "==" 2}}
+                            <tr class="table-danger">
                                 <th scope="row"><a href="#">#</a></th>
                                 <td>{{this.id}}</td>
                                 <td>{{this.name}}</td>
@@ -352,17 +352,92 @@
                                 <td>
                                         <div class="card-body">
 
-                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary"><i class="bi bi-collection"></i></a>
+                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary">Chi Tiết <i class="bi bi-collection"></i></a>
 
-                                            <a type="button" href="/delete/{{this._id}}" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i></a>
+                                            <a type="button" href="/delete/{{this._id}}" class="btn btn-danger">Xóa <i class="bi bi-exclamation-octagon"></i></a>
 
-                                            <a type="button" href="/list-patients/update/{{this._id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>
+<!--                                            <a type="button" href="/list-patients/update/{{this._id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>-->
 
                                         </div>
 
                                 </td>
+<!--                              -->
+<!--                                    <td><a href="#" class="btn btn-success">{{this.state}}</a></td>-->
+<!--                               -->
                             </tr>
+                            {{/compare}}
+                            {{#compare this.state "==" 1}}
+                                <tr class="table-warning">
+                                    <th scope="row"><a href="#">#</a></th>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.phone}}</td>
+                                    <td>{{this.number_room}}</td>
+                                    <td>
+                                        <div class="card-body">
+
+                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary">Chi Tiết <i class="bi bi-collection"></i></a>
+
+                                            <a type="button" href="/delete/{{this._id}}" class="btn btn-danger">Xóa <i class="bi bi-exclamation-octagon"></i></a>
+
+                                            <!--                                            <a type="button" href="/list-patients/update/{{this._id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>-->
+
+                                        </div>
+
+                                    </td>
+                                    <!--                              -->
+                                    <!--                                    <td><a href="#" class="btn btn-success">{{this.state}}</a></td>-->
+                                    <!--                               -->
+                                </tr>
+                            {{/compare}}
+                            {{#compare this.state "==" 0}}
+                                <tr  class="table-info">
+                                    <th scope="row"><a href="#">#</a></th>
+                                    <td>{{this.id}}</td>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.phone}}</td>
+                                    <td>{{this.number_room}}</td>
+                                    <td>
+                                        <div class="card-body">
+
+                                            <a type="button" href="/{{this._id}}" class="btn btn-secondary">Chi Tiết <i class="bi bi-collection"></i></a>
+
+                                            <a type="button" href="/delete/{{this._id}}" class="btn btn-danger">Xóa <i class="bi bi-exclamation-octagon"></i></a>
+
+                                            <!--                                            <a type="button" href="/list-patients/update/{{this._id}}" class="btn btn-info"><i class="bi bi-info-circle"></i></a>-->
+
+                                        </div>
+
+                                    </td>
+                                    <!--                              -->
+                                    <!--                                    <td><a href="#" class="btn btn-success">{{this.state}}</a></td>-->
+                                    <!--                               -->
+                                </tr>
+                            {{/compare}}
                             </tbody>
+
+<!--        <script>-->
+<!--            (function () {-->
+<!--                        var state;-->
+<!--                        state={{this.state}};-->
+<!--                        console.log(state)-->
+
+<!--                        if (state == 2) {-->
+<!--                            document.getElementById("centerbox1").style.backgroundColor = '#99C262';-->
+<!--                        }-->
+<!--                        else if (state == 1)-->
+<!--                        {-->
+<!--                            document.getElementById("centerbox1").style.backgroundColor = '#F8D347';-->
+<!--                        }-->
+<!--                       else if (state == 0)-->
+<!--                        {-->
+<!--                            document.getElementById("centerbox1").style.backgroundColor = '#FF6C60';-->
+<!--                        }-->
+
+<!--                    }-->
+<!--            )();-->
+<!--        </script>-->
+
 {{/each}}
                         </table>
                         <!-- End Table with stripped rows -->
@@ -379,16 +454,15 @@
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Quản Lý Bệnh Nhân</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
     </div>
 </footer><!-- End Footer -->
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-

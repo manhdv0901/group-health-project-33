@@ -25,7 +25,8 @@ module.exports.postaddpatient=(req, res)=>{
         birth_day:req.body.birth_day,
         phone:req.body.phone,
         number_room:req.body.number_room,
-        key_device:req.body.key_device
+        key_device:req.body.key_device,
+
     }).save((err) =>{
         if (err){
             console.log('Thêm bệnh nhân thất bại:', err);
