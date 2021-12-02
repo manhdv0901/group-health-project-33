@@ -371,7 +371,7 @@ console.log(__dirname)
 app.get('/contact/to',(req,res)=>{
     res.render('contact')
 })
-app.post('/data-patient', (req, res)=>{
+app.post('/data/data-patient', (req, res)=>{
     const id = req.body.username;
     // var findDevice = DEVICE.findOne({key_device: device});
     var findPatient = PATIENT.findOne({username: id});
@@ -450,11 +450,11 @@ app.get('/data-doctor',(req, res)=>{
     })
 })
 
-app.get('/data-patient',(req, res)=>{
+app.get('/data/data-patient',(req, res)=>{
     var findPatient = PATIENT.find({});
     findPatient.exec((err, data)=>{
         if (err){
-            res.status(404).json(err);
+            res.status(400).json(err);
         }else{
             res.status(200).json(data);
         }
