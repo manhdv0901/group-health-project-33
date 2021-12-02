@@ -88,10 +88,30 @@ app.use('/', updatetoken)
 app.use('/', device1)
 app.use('/', sendnotification)
 
+
 app.get('/',(req,res)=>{
     res.redirect('/dashboard')
 })
+app.post('/test',(req,res)=>{
 
+});
+//api thay đổi trạng thái bệnh nhân
+
+app.post('/updatestatuspt',(req,res)=>{
+        console.log(req.body.id)
+        var newvalues = { $set: {state: 3 } };
+        PATIENT.findByIdAndUpdate(req.body.id , newvalues, {
+                new: true
+            },
+            function(err, model) {
+                if (!err) {
+                   res.status(200).send('Cập nhật trạng thái khẩn cấp thành công')
+                } else {
+                    res.status(401).send('Cập nhật trạng thái khẩn cấp không thành công')
+                }
+            });
+
+})
 //màn hình dashboard
 app.get('/dashboard',(req, res)=>{
 
@@ -110,16 +130,44 @@ app.get('/dashboard',(req, res)=>{
                        if(err) {throw err}
                        else{
                            model1.find({done:"1"}).count().exec((err,data3)=>{
-                               console.log("tổng bn: ", data1)
-                               console.log("tổng bn khỏi: ", data2)
-                               console.log("tổng bn die: ", data3)
-                               res.render('dashboard', {
-                                   // docs: data.map(aa => aa.toJSON())
-                                   docs: data,
-                                   total:data1,
-                                   totaldn:data2,
-                                   totaldi:data3,
-                               })
+                               if(err){throw err}
+                               else{
+                                   model1.find({state:0}).count((err,data4)=>{
+                                       if(err) {throw err}
+                                       else{
+                                           model1.find({state:1}).count((err,data5)=>{
+                                               if(err) {throw err}
+                                               else{
+                                                   model1.find({state:2}).count((err,data6)=>{
+                                                       if(err) {throw err}
+                                                       else{
+                                                           model1.find({state:3}).count((err,data7)=>{
+                                                               console.log("tổng bn: ", data1)
+                                                               console.log("tổng bn khỏi: ", data2)
+                                                               console.log("tổng bn die: ", data3)
+                                                               console.log("tổng số bn bình thường: ", data4)
+                                                               console.log("tổng bn cần theo dõi: ", data5)
+                                                               console.log("tổng bn cảnh báo: ", data6)
+                                                               console.log("tổng bn nguy cấp: ", data7)
+                                                               res.render('dashboard', {
+                                                                   // docs: data.map(aa => aa.toJSON())
+                                                                   docs: data,
+                                                                   total:data1,
+                                                                   totaldn:data2,
+                                                                   totaldi:data3,
+                                                                   totalbt:data4,
+                                                                   totaltd:data5,
+                                                                   totalcb:data6,
+                                                                   totalnc:data7
+                                                               })
+                                                           })
+                                                       }
+                                                   })
+                                               }
+                                           })
+                                       }
+                                   })
+                               }
                            })
                        }
                     })

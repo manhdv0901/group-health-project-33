@@ -15,23 +15,17 @@ var db=mongoose.connection;
 module.exports.updatetoken =(req,res)=>{
     console.log(req.body.tokennn)
     console.log(req.body.key)
-    var myquery = { _id:req.body.key};
-    var newvalues = { tokenn: req.body.tokennn};
-    DOCTORS.findByIdAndUpdate(req.body.key, newvalues, {
-            new: true
-        },
-        function(err, model) {
-            if (!err) {
-                // res.redirect('/list-patients');
-                res.status(200).json({
-                    message: "update token complete"
-                })
-            } else {
-                res.status(99).json({
-                    message: "not found any relative data"
-                })
-            }
-        });
+    try {
+        var myquery = { _id:req.body.key};
+        var newvalues = { tokenn: req.body.tokennn};
+        var status= DOCTORS.findByIdAndUpdate(req.body.key, newvalues, {
+                new: true
+            },
+            ).exec();
+        res.send(status);
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 //API UPDATE TRẠNG THÁI BÁC SĨ -->>TRUE
 module.exports.updatestatus =(req,res)=>{

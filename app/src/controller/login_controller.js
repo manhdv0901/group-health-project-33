@@ -23,7 +23,6 @@ module.exports.login = (req, res)=> {
 
 module.exports.login1 =
     (req, res)=> {
-        console.log(req.session.User)
         var username =  req.body.username;
         var password = req.body.password;
         var errors = validationResult(req).array();
