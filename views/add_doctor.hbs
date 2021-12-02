@@ -15,158 +15,7 @@
         </form>
     </div><!-- End Search Bar -->
 
-    <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
-            <li class="nav-item d-block d-lg-none">
-                <a class="nav-link nav-icon search-bar-toggle " href="#">
-                    <i class="bi bi-search"></i>
-                </a>
-            </li><!-- End Search Icon-->
 
-            <li class="nav-item dropdown">
-
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">4</span>
-                </a><!-- End Notification Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        You have 4 new notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>Lorem Ipsum</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>30 min. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-x-circle text-danger"></i>
-                        <div>
-                            <h4>Atque rerum nesciunt</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>1 hr. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-check-circle text-success"></i>
-                        <div>
-                            <h4>Sit rerum fuga</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>2 hrs. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>Dicta reprehenderit</h4>
-                            <p>Quae dolorem earum veritatis oditseno</p>
-                            <p>4 hrs. ago</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
-                    </li>
-
-                </ul><!-- End Notification Dropdown Items -->
-
-            </li><!-- End Notification Nav -->
-
-            <li class="nav-item dropdown">
-
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span class="badge bg-success badge-number">3</span>
-                </a><!-- End Messages Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                    <li class="dropdown-header">
-                        You have 3 new messages
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Maria Hudson</h4>
-                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Anna Nelson</h4>
-                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                <p>6 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                            <div>
-                                <h4>David Muldon</h4>
-                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                <p>8 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="dropdown-footer">
-                        <a href="#">Show all messages</a>
-                    </li>
-
-                </ul><!-- End Messages Dropdown Items -->
-
-            </li><!-- End Messages Nav -->
-
-
-        </ul>
-    </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
 <aside id="sidebar" class="sidebar">
@@ -263,23 +112,46 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Thêm bác sĩ</h5>
+                {{# if success }}
+                    <section class="success">
+                        <h2> </h2>
+                    </section>
+                {{ else }}
+                    {{# if errors }}
+                        <section class="errors">
+                            <ul>
+                                {{# each errors }}
+                                    <li class="alert alert-danger">{{ this.msg }}</li>
+                                {{/each}}
+                            </ul>
+                        </section>
+                    {{/if}}
+                {{/if}}
                 <!-- Vertical Form -->
                 <form class="row g-3" action="/adddoctor" id="application-form" method="post">
                     <div class="col-12">
                         <label for="inputNanme4" class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" id="inputNanme4">
+                        <div class="input-group has-validation">
+                        <input type="text" name="username" class="form-control" id="inputNanme4" required>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="inputEmail4" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="inputEmail4">
+                        <div class="input-group has-validation">
+                        <input type="password" name="password" class="form-control" id="inputEmail4" required>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="inputPassword4" class="form-label">ID</label>
-                        <input type="number" name="id" class="form-control" id="inputPassword4">
+                        <div class="input-group has-validation">
+                        <input type="number" name="id" class="form-control" id="inputPassword4" required>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Họ Và Tên</label>
-                        <input type="text" name="name" class="form-control" id="inputAddress" placeholder="Nguyen Van A">
+                        <div class="input-group has-validation">
+                        <input type="text" name="name" class="form-control" id="inputAddress" placeholder="Nguyen Van A" required>
+                        </div>
                     </div>
                     <div class="col-2">
                         <label class="label">Giới Tính</label>
@@ -298,7 +170,7 @@
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Thêm</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="reset" class="btn btn-secondary">Đặt lại</button>
                     </div>
                 </form><!-- Vertical Form -->
 
