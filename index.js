@@ -92,9 +92,46 @@ app.use('/', sendnotification)
 app.get('/',(req,res)=>{
     res.redirect('/dashboard')
 })
+
+app.post('/o/logintest',(req,res)=>{
+    var username =  req.body.username;
+    var password = req.body.password;
+    var model = db.model('data-logins', USER);
+    model.find({'_id':'6175387f0ed1fff9a8ef2c39'}).exec((err,data)=>{
+        res.send(data.toString())
+    })
+    // const findUser=userId=>{
+    //     return user.users.find(user => user.id === userId)
+    // }
+    // const authUser=(req,res,next)=>{
+    //     const {userId}=req.body;
+    //     const user=findUser(userId);
+    //     if(!user){
+    //         res.status(403).json('Sign in!')
+    //     }
+    //     req.user=user;
+    //     next();
+    // }
+})
 app.post('/test',(req,res)=>{
 
 });
+
+//login bệnh nhân
+app.post('/data-login-patient',(req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+    var findDoctor = PATIENT.findOne({username: username, password:password});
+    findDoctor.exec((err, data)=>{
+        if (!data){
+            res.status(500).send('Không có bệnh nhân này')
+        }else{
+            res.status(200).json(data);
+        }
+
+    })
+
+})
 //api thay đổi trạng thái bệnh nhân
 
 app.post('/updatestatuspt',(req,res)=>{
