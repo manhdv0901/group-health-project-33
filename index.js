@@ -497,34 +497,33 @@ app.post("/add-device2", (req, res) => {
 });
 //--------------------------------------------------------------------------------------------------------------------|
 
-app.set('view engine','hbs')
-app.set('views',path.join(__dirname,'/views'))
-console.log(__dirname)
-app.get('/contact/to',(req,res)=>{
-    res.render('contact')
-})
-app.post('/data/data-patient', (req, res)=>{
-    const id = req.body.username;
-    // var findDevice = DEVICE.findOne({key_device: device});
-    var findPatient = PATIENT.findOne({username: id});
-     findPatient.exec((err, data) =>{
-         if (err){
-             res.status(404).json(err);
-         }else {
-             // res.status(200).json(data);
-             const device = data.key_device;
-             console.log('thiết bị:', device)
-             DEVICE.findOne({key_device: device})
-                 .exec((err, data2) => {
-                     if (err){
-                         res.status(404).json(err);
-                     }else {
-                         res.status(200).json(data);
-                     }
-                 })
-         }
-     })
-})
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "/views"));
+console.log(__dirname);
+app.get("/contact/to", (req, res) => {
+  res.render("contact");
+});
+app.post("/data/data-patient", (req, res) => {
+  const id = req.body.username;
+  // var findDevice = DEVICE.findOne({key_device: device});
+  var findPatient = PATIENT.findOne({ username: id });
+  findPatient.exec((err, data) => {
+    if (err) {
+      res.status(404).json(err);
+    } else {
+      // res.status(200).json(data);
+      const device = data.key_device;
+      console.log("thiết bị:", device);
+      DEVICE.findOne({ key_device: device }).exec((err, data2) => {
+        if (err) {
+          res.status(404).json(err);
+        } else {
+          res.status(200).json(data);
+        }
+      });
+    }
+  });
+});
 //update status doctor
 app.get("/updateStatus/:key/:keydevice", (req, res) => {
   var key = req.params.key;
@@ -573,15 +572,16 @@ app.get("/data-device", (req, res) => {
   });
 });
 
-app.get('/data/data-patient',(req, res)=>{
-    var findPatient = PATIENT.find({});
-    findPatient.exec((err, data)=>{
-        if (err){
-            res.status(400).json(err);
-        }else{
-            res.status(200).json(data);
-        }
-
+app.get("/data/data-patient", (req, res) => {
+  var findPatient = PATIENT.find({});
+  findPatient.exec((err, data) => {
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      res.status(200).json(data);
+    }
+  });
+});
 app.get("/data-patient", (req, res) => {
   var findPatient = PATIENT.find({});
   findPatient.exec((err, data) => {
@@ -683,5 +683,3 @@ app.get("/delete/:key", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/login`);
 });
-
-// app.listen(process.env.PORT || 3000);
