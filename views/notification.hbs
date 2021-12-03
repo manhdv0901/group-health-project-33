@@ -1317,12 +1317,14 @@
     {{#each ../data2}}
                     <div class="col-12">
                         <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="text" name="tokenn" class="form-control" id="inputEmail4" value="{{this.tokenn}}" readonly>
+                        <input type="text" name="token" class="form-control" id="inputEmail4" value="{{this.tokenn}}" readonly>
                     </div>
     {{/each}}
                     <div class="col-12">
                         <label for="inputPassword4" class="form-label">Tiêu đề</label>
-                        <input type="text" name="title" class="form-control" id="inputPassword4">
+                        <div class="input-group has-validation">
+                        <input type="text" name="title" class="form-control" id="inputPassword4" required>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Họ Và Tên</label>
@@ -1341,12 +1343,17 @@
                         <input type="text" class="form-control" id="inputAddress"  name="key_device" value="{{this.key_device}}" readonly>
                     </div>
                     <div class="col-12">
+
                         <label for="inputAddress" class="form-label">Hội chuẩn </label>
-                        <input type="text" class="form-control" id="inputAddress"  name="status"  >
+                        <div class="input-group has-validation">
+                        <input type="text" class="form-control" id="inputAddress"  name="amountAndUse"  required>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Phương pháp điều trị</label>
-                        <input type="text" class="form-control" id="inputAddress" name="medicine" rows="5"  >
+                        <div class="input-group has-validation">
+                        <input type="text" class="form-control" id="inputAddress" name="medicine" rows="5"  required>
+                        </div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Điều động</button>
