@@ -156,6 +156,7 @@ app.post('/data-login-patient',(req,res)=>{
     })
 
 })
+
 //api thay đổi trạng thái bệnh nhân
 
 app.post("/updatestatuspt", (req, res) => {
