@@ -117,7 +117,7 @@ app.post('/o/logintest',(req,res)=>{
     //     next();
     // }
 })
-app.post('/test',(req,res)=>{
+app.post('/test',(req,res)=>{})
 
 app.post("/o/logintest", (req, res) => {
   var username = req.body.username;
