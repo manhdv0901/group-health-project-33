@@ -65,39 +65,6 @@ var db = mongoose.connection;
 const KEY_DEVICE = "device05";
 
 //model
-<<<<<<< HEAD
-var DEVICE = require("./app/src/model/device_model");
-var DOCTORS = require("./app/src/model/doctor_model");
-var PATIENT = require("./app/src/model/patient_model");
-var USER = require("./app/src/model/user_model");
-
-const deviceRoute = require("./app/src/router/login_router");
-const listPatientRouter = require("./app/src/router/list_patient_router");
-const listDoctorRouter = require("./app/src/router/list_doctor_router");
-const addPatientRouter = require("./app/src/router/addpatient_router");
-const addDoctor = require("./app/src/router/add_doctor_router");
-const statuspatient = require("./app/src/router/status_patient_router");
-const page = require("./app/src/router/404_router");
-const updatetoken = require("./app/src/router/update_token_doctor_router");
-const device1 = require("./app/src/router/device_router");
-const sendnotification = require("./app/src/router/sennotication_router");
-
-app.use("/", deviceRoute);
-app.use("/", listPatientRouter);
-app.use("/", listDoctorRouter);
-app.use("/", addPatientRouter);
-app.use("/", addDoctor);
-app.use("/", statuspatient);
-app.use("/", page);
-app.use("/", updatetoken);
-app.use("/", device1);
-app.use("/", sendnotification);
-
-app.get("/", (req, res) => {
-  res.redirect("/dashboard");
-});
-app.post("/test", (req, res) => {});
-=======
 var DEVICE = require('./app/src/model/device_model');
 var DOCTORS = require('./app/src/model/doctor_model');
 var PATIENT = require('./app/src/model/patient_model');
@@ -169,7 +136,6 @@ app.post('/data-login-patient',(req,res)=>{
     })
 
 })
->>>>>>> 66507d6fbb9a052194f17e0d1697fdd9f3c61ee4
 //api thay đổi trạng thái bệnh nhân
 
 app.post("/updatestatuspt", (req, res) => {
