@@ -80,6 +80,7 @@ const page = require('./app/src/router/404_router')
 const updatetoken = require('./app/src/router/update_token_doctor_router')
 const device1 = require('./app/src/router/device_router')
 const sendnotification = require('./app/src/router/sennotication_router')
+const liststatuspatient = require('./app/src/router/list_status_patient')
 
 app.use('/', deviceRoute)
 app.use('/', listPatientRouter)
@@ -91,7 +92,7 @@ app.use('/', page)
 app.use('/', updatetoken)
 app.use('/', device1)
 app.use('/', sendnotification)
-
+app.use('/', liststatuspatient)
 
 app.get('/',(req,res)=>{
     res.redirect('/dashboard')
