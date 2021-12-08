@@ -315,9 +315,9 @@ app.post("/add-device", (req, res) => {
     { key_device: req.query.key_device },
     {
       $push: {
-        heart: { value: Number(req.query.heart), real_time: Date.now() },
-        spO2: { value: Number(req.query.spO2), real_time: Date.now() },
-        temp: { value: Number(req.query.temp), real_time: Date.now() },
+        heart: { value: Number(req.query.heart)+100, real_time: Date.now() },
+        spO2: { value: Number(req.query.spO2)+100, real_time: Date.now() },
+        temp: { value: Number(req.query.temp)+100, real_time: Date.now() },
       },
     },
     function (err) {
