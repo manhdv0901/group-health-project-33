@@ -76,6 +76,7 @@ const page = require('./app/src/router/404_router')
 const updatetoken = require('./app/src/router/update_token_doctor_router')
 const device1 = require('./app/src/router/device_router')
 const sendnotification = require('./app/src/router/sennotication_router')
+const liststatuspatient = require('./app/src/router/list_status_patient')
 
 app.use('/', deviceRoute)
 app.use('/', listPatientRouter)
@@ -87,7 +88,7 @@ app.use('/', page)
 app.use('/', updatetoken)
 app.use('/', device1)
 app.use('/', sendnotification)
-
+app.use('/', liststatuspatient)
 
 app.get('/',(req,res)=>{
     res.redirect('/dashboard')
@@ -155,7 +156,6 @@ app.get('/dashboard',(req, res)=>{
     var model = db.model('data-doctors', DOCTORS.schema);
     var model1 = db.model('data-patients', PATIENT.schema);
 
-
     var methodFind = model.find({});
     methodFind.exec((err,data) => {
         if (err) {throw err;}
@@ -169,16 +169,16 @@ app.get('/dashboard',(req, res)=>{
                            model1.find({done:"1"}).count().exec((err,data3)=>{
                                if(err){throw err}
                                else{
-                                   model1.find({state:0}).count((err,data4)=>{
+                                   model1.find({done:"0",state:0}).count((err,data4)=>{
                                        if(err) {throw err}
                                        else{
-                                           model1.find({state:1}).count((err,data5)=>{
+                                           model1.find({done:"0",state:1}).count((err,data5)=>{
                                                if(err) {throw err}
                                                else{
-                                                   model1.find({state:2}).count((err,data6)=>{
+                                                   model1.find({done:"0",state:2}).count((err,data6)=>{
                                                        if(err) {throw err}
                                                        else{
-                                                           model1.find({state:3}).count((err,data7)=>{
+                                                           model1.find({done:"0",state:3}).count((err,data7)=>{
                                                                console.log("tổng bn: ", data1)
                                                                console.log("tổng bn khỏi: ", data2)
                                                                console.log("tổng bn die: ", data3)
@@ -217,6 +217,7 @@ app.get('/dashboard',(req, res)=>{
     });
 
 })
+
 //chi tiết bệnh nhân
 app.get('/:na',(req,res)=>{
     PATIENT.findById(req.params.na,(err, data)=>{

@@ -44,7 +44,16 @@
                         <i class="bi bi-circle"></i><span>Thêm Bệnh Nhân</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="/curedlist">
+                        <i class="bi bi-circle"></i><span>Danh Sách Bệnh Nhân Đã Khỏi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dielist">
+                        <i class="bi bi-circle"></i><span>Danh Sách Bệnh Nhân Đã Tử Vong</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Components Nav -->
 
@@ -77,7 +86,7 @@
 
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/">
+            <a class="nav-link collapsed" href="/404">
                 <i class="bi bi-question-circle"></i>
                 <span>F.A.Q</span>
             </a>
@@ -190,9 +199,31 @@
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Phòng</label>
                         <div class="input-group has-validation">
-                        <input type="text"name="number_room" class="form-control" id="inputAddress" placeholder="Phòng 01" required>
+                        <input type="number"name="number_room" class="form-control" id="inputAddress" placeholder="Phòng 01" required>
                         </div>
                     </div>
+
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Họ và tên người nhà</label>
+                        <div class="input-group has-validation">
+                            <input type="text"name="homie_patient" class="form-control" id="inputAddress" placeholder="Nguyễn Văn A..." required>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Số điện thoại người nhà</label>
+                        <div class="input-group has-validation">
+                            <input type="number"name="homie_phone" class="form-control" id="inputAddress" placeholder="0123456789" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Ngày nhập viện</label>
+                        <div class="input-group has-validation">
+                            <input type="date"name="date_added" class="form-control" id="inputAddress" placeholder="01/01/2021" required>
+                        </div>
+                    </div>
+
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Key device</label>
                         <div class="input-group has-validation">

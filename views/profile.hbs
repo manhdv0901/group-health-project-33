@@ -47,7 +47,16 @@
                         <i class="bi bi-circle"></i><span>Thêm Bệnh Nhân</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="/curedlist">
+                        <i class="bi bi-circle"></i><span>Danh Sách Bệnh Nhân Đã Khỏi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/dielist">
+                        <i class="bi bi-circle"></i><span>Danh Sách Bệnh Nhân Đã Tử Vong</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Components Nav -->
 
@@ -62,7 +71,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="forms-layouts.html">
+                    <a href="/adddoctor">
                         <i class="bi bi-circle"></i><span>Thêm bác sĩ</span>
                     </a>
                 </li>
@@ -70,11 +79,17 @@
         </li><!-- End Forms Nav -->
 
 
+
+
+
+
+
         <li class="nav-heading">Pages</li>
 
 
+
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/">
+            <a class="nav-link collapsed" href="/404">
                 <i class="bi bi-question-circle"></i>
                 <span>F.A.Q</span>
             </a>
@@ -86,6 +101,10 @@
                 <span>Contact</span>
             </a>
         </li><!-- End Contact Page Nav -->
+
+
+
+
 
 
     </ul>
@@ -232,7 +251,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Số điên thoại</div>
-                                    <div class="col-lg-9 col-md-8"> {{patient.phone}}</div>
+                                    <div class="col-lg-9 col-md-8">(+84) {{patient.phone}}</div>
                                 </div>
 
                                 <div class="row">
@@ -246,8 +265,35 @@
                                 </div>
 
                                 <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Họ và tên người nhà bệnh nhân</div>
+                                    <div class="col-lg-9 col-md-8">{{patient.homie_patient}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Số điện thoại người nhà bệnh nhân</div>
+                                    <div class="col-lg-9 col-md-8">(+84) {{patient.homie_phone}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Ngày nhập viện</div>
+                                    <div class="col-lg-9 col-md-8">{{patient.date_added}}</div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Tình trạng</div>
-                                    <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                                    {{#compare patient.state "==" 3}}
+                                        <div class="col-lg-9 col-md-8">Nguy Hiểm</div>
+                                    {{/compare}}
+                                    {{#compare patient.state "==" 2}}
+                                        <div class="col-lg-9 col-md-8">Cảnh Báo</div>
+                                    {{/compare}}
+                                    {{#compare patient.state "==" 1}}
+                                        <div class="col-lg-9 col-md-8">Cần Theo Dõi</div>
+                                    {{/compare}}
+                                    {{#compare patient.state "==" 0}}
+                                        <div class="col-lg-9 col-md-8">Bình Thường</div>
+                                    {{/compare}}
+
                                 </div>
 
 

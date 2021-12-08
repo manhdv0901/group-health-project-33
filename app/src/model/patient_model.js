@@ -11,7 +11,11 @@ var PATIENTSchema = new mongoose.Schema({
     number_room:Number,
     key_device:String,
     done:String,
-    state:Number
+    state:Number,
+    date_added:String,
+    homie_patient:String,
+    homie_phone:Number,
+
 })
 var PATIENT = mongoose.model('data-patients', PATIENTSchema);
 module.exports = PATIENT

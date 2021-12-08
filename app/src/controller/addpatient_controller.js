@@ -72,7 +72,11 @@ module.exports.postaddpatient=(req, res)=>{
                             phone:req.body.phone,
                             number_room:req.body.number_room,
                             key_device:req.body.key_device,
-                            state:0
+                            date_added:req.body.date_added,
+                            homie_patient:req.body.homie_patient,
+                            homie_phone:req.body.homie_phone,
+                            state:0,
+                            done:"0"
 
                         }).save((err) =>{
                             if (err){
