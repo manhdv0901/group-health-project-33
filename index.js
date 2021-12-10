@@ -157,7 +157,7 @@ app.post('/data-login-patient',(req,res)=>{
 
 })
 
-//api thay đổi trạng thái bệnh nhân
+//api thay đổi trạng thái bệnh key_decive
 
 app.post("/updatestatuspt", (req, res) => {
   console.log(req.body.id);
