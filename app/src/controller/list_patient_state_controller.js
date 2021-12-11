@@ -17,7 +17,7 @@ var db=mongoose.connection;
 
 module.exports.listpatientdone =  (req, res) => {
     var model = db.model('data-patients', PATIENT.schema);
-    var methodFind = model.find({done:"1"}).sort({ state: -1});
+    var methodFind = model.find({done:"2"}).sort({ state: -1});
     methodFind.exec((err,data) => {
         if (err) {throw err;
         }else{
@@ -31,7 +31,7 @@ module.exports.listpatientdone =  (req, res) => {
 
 module.exports.listpatientdie =  (req, res) => {
     var model = db.model('data-patients', PATIENT.schema);
-    var methodFind = model.find({done:"2"}).sort({ state: -1});
+    var methodFind = model.find({done:"1"}).sort({ state: -1});
     methodFind.exec((err,data) => {
         if (err) {throw err;
         }else{
