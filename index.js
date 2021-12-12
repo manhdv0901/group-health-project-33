@@ -434,10 +434,9 @@ app.post("/add-device2", (req, res) => {
       // key_device:req.body.key_device
   }).save((err) =>{
       if (err){
-          console.log('Thêm không thành công:', err);
+          res.status(200).send('Thêm thiết bị thành công');
       }else{
-
-          console.log('Thành công, : ', req.body);
+        res.status(400).send('Thêm thiết bị không thành công');
       }
 
   })
