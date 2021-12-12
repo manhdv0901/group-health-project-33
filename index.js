@@ -118,9 +118,29 @@ app.post('/o/logintest',(req,res)=>{
     //     next();
     // }
 })
-app.post('/test',(req,res)=>{
+app.post('/test',(req,res)=>{})
 
+app.post("/o/logintest", (req, res) => {
+  var username = req.body.username;
+  var password = req.body.password;
+  var model = db.model("data-logins", USER);
+  model.find({ _id: "6175387f0ed1fff9a8ef2c39" }).exec((err, data) => {
+    res.send(data.toString());
+  });
+  // const findUser=userId=>{
+  //     return user.users.find(user => user.id === userId)
+  // }
+  // const authUser=(req,res,next)=>{
+  //     const {userId}=req.body;
+  //     const user=findUser(userId);
+  //     if(!user){
+  //         res.status(403).json('Sign in!')
+  //     }
+  //     req.user=user;
+  //     next();
+  // }
 });
+app.post("/test", (req, res) => {});
 
 //login bệnh nhân
 app.post('/data-login-patient',(req,res)=>{
@@ -137,7 +157,8 @@ app.post('/data-login-patient',(req,res)=>{
     })
 
 })
-//api thay đổi trạng thái bệnh nhân
+
+//api thay đổi trạng thái bệnh key_decive
 
 app.post("/updatestatuspt", (req, res) => {
   console.log(req.body.id);
@@ -650,3 +671,5 @@ app.get("/delete/:key", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/login`);
 });
+
+// app.listen(process.env.PORT || 3000);
