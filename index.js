@@ -431,19 +431,12 @@ app.post("/add-device2", (req, res) => {
     else{
       DEVICE({
         key_device:req.body.key_device,
-        // name: req.body.name,
-        // username:req.body.username,
-        // password: req.body.password,
-        // age:req.body.age,
-        // birth_day:req.body.birth_day,
-        // phone:req.body.phone,
-        // number_room:req.body.number_room,
-        // key_device:req.body.key_device
       }).save((err) =>{
         if (err){
-          res.status(200).send('Thêm thiết bị thành công');
-        }else{
           res.status(400).send('Thêm thiết bị không thành công');
+        }else{
+          res.status(200).send('Thêm thiết bị thành công');
+
         }
 
       })
