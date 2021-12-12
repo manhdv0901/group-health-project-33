@@ -422,45 +422,45 @@ app.get("/add-device", (req, res) => {
   });
 }); //-----------------|
 app.post("/add-device2", (req, res) => {
-  // DEVICE({
-  //     key_device:req.body.key_device,
-  //     // name: req.body.name,
-  //     // username:req.body.username,
-  //     // password: req.body.password,
-  //     // age:req.body.age,
-  //     // birth_day:req.body.birth_day,
-  //     // phone:req.body.phone,
-  //     // number_room:req.body.number_room,
-  //     // key_device:req.body.key_device
-  // }).save((err) =>{
-  //     if (err){
-  //         console.log('Thêm không thành công:', err);
-  //     }else{
-  //
-  //         console.log('Thành công, : ', req.body);
-  //     }
-  //
-  // })
-  var newDEVICE = DEVICE({
-    key_device: req.query.key_device,
-    heart: {
-      value: Number(req.query.heart),
-      real_time: new Date(),
-    },
-    spO2: {
-      value: Number(req.query.spO2),
-      real_time: new Date(),
-    },
-    temp: {
-      value: Number(req.query.temp),
-      real_time: new Date(),
-    },
-    state: {
-      value: Number(req.query.temp),
-      real_time: new Date(),
-    },
-  });
-  console.log("data post req: ", req.query);
+  DEVICE({
+      key_device:req.body.key_device,
+      // name: req.body.name,
+      // username:req.body.username,
+      // password: req.body.password,
+      // age:req.body.age,
+      // birth_day:req.body.birth_day,
+      // phone:req.body.phone,
+      // number_room:req.body.number_room,
+      // key_device:req.body.key_device
+  }).save((err) =>{
+      if (err){
+          console.log('Thêm không thành công:', err);
+      }else{
+
+          console.log('Thành công, : ', req.body);
+      }
+
+  })
+  // var newDEVICE = DEVICE({
+  //   key_device: req.query.key_device,
+  //   heart: {
+  //     value: Number(req.query.heart),
+  //     real_time: new Date(),
+  //   },
+  //   spO2: {
+  //     value: Number(req.query.spO2),
+  //     real_time: new Date(),
+  //   },
+  //   temp: {
+  //     value: Number(req.query.temp),
+  //     real_time: new Date(),
+  //   },
+  //   state: {
+  //     value: Number(req.query.temp),
+  //     real_time: new Date(),
+  //   },
+  // });
+  // console.log("data post req: ", req.query);
 });
 //--------------------------------------------------------------------------------------------------------------------|
 
