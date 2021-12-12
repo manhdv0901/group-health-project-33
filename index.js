@@ -65,60 +65,60 @@ var db = mongoose.connection;
 const KEY_DEVICE = "device05";
 
 //model
-var DEVICE = require('./app/src/model/device_model');
-var DOCTORS = require('./app/src/model/doctor_model');
-var PATIENT = require('./app/src/model/patient_model');
-var USER = require('./app/src/model/user_model');
+var DEVICE = require("./app/src/model/device_model");
+var DOCTORS = require("./app/src/model/doctor_model");
+var PATIENT = require("./app/src/model/patient_model");
+var USER = require("./app/src/model/user_model");
 
-const deviceRoute = require('./app/src/router/login_router')
-const listPatientRouter = require('./app/src/router/list_patient_router')
-const listDoctorRouter = require('./app/src/router/list_doctor_router')
-const addPatientRouter = require('./app/src/router/addpatient_router')
-const addDoctor = require('./app/src/router/add_doctor_router')
-const statuspatient = require('./app/src/router/status_patient_router')
-const page = require('./app/src/router/404_router')
-const updatetoken = require('./app/src/router/update_token_doctor_router')
-const device1 = require('./app/src/router/device_router')
-const sendnotification = require('./app/src/router/sennotication_router')
-const liststatuspatient = require('./app/src/router/list_status_patient')
+const deviceRoute = require("./app/src/router/login_router");
+const listPatientRouter = require("./app/src/router/list_patient_router");
+const listDoctorRouter = require("./app/src/router/list_doctor_router");
+const addPatientRouter = require("./app/src/router/addpatient_router");
+const addDoctor = require("./app/src/router/add_doctor_router");
+const statuspatient = require("./app/src/router/status_patient_router");
+const page = require("./app/src/router/404_router");
+const updatetoken = require("./app/src/router/update_token_doctor_router");
+const device1 = require("./app/src/router/device_router");
+const sendnotification = require("./app/src/router/sennotication_router");
+const liststatuspatient = require("./app/src/router/list_status_patient");
 
-app.use('/', deviceRoute)
-app.use('/', listPatientRouter)
-app.use('/', listDoctorRouter)
-app.use('/', addPatientRouter)
-app.use('/', addDoctor)
-app.use('/', statuspatient)
-app.use('/', page)
-app.use('/', updatetoken)
-app.use('/', device1)
-app.use('/', sendnotification)
-app.use('/', liststatuspatient)
+app.use("/", deviceRoute);
+app.use("/", listPatientRouter);
+app.use("/", listDoctorRouter);
+app.use("/", addPatientRouter);
+app.use("/", addDoctor);
+app.use("/", statuspatient);
+app.use("/", page);
+app.use("/", updatetoken);
+app.use("/", device1);
+app.use("/", sendnotification);
+app.use("/", liststatuspatient);
 
-app.get('/',(req,res)=>{
-    res.redirect('/dashboard')
-})
+app.get("/", (req, res) => {
+  res.redirect("/dashboard");
+});
 
-app.post('/o/logintest',(req,res)=>{
-    var username =  req.body.username;
-    var password = req.body.password;
-    var model = db.model('data-logins', USER);
-    model.find({'_id':'6175387f0ed1fff9a8ef2c39'}).exec((err,data)=>{
-        res.send(data.toString())
-    })
-    // const findUser=userId=>{
-    //     return user.users.find(user => user.id === userId)
-    // }
-    // const authUser=(req,res,next)=>{
-    //     const {userId}=req.body;
-    //     const user=findUser(userId);
-    //     if(!user){
-    //         res.status(403).json('Sign in!')
-    //     }
-    //     req.user=user;
-    //     next();
-    // }
-})
-app.post('/test',(req,res)=>{})
+app.post("/o/logintest", (req, res) => {
+  var username = req.body.username;
+  var password = req.body.password;
+  var model = db.model("data-logins", USER);
+  model.find({ _id: "6175387f0ed1fff9a8ef2c39" }).exec((err, data) => {
+    res.send(data.toString());
+  });
+  // const findUser=userId=>{
+  //     return user.users.find(user => user.id === userId)
+  // }
+  // const authUser=(req,res,next)=>{
+  //     const {userId}=req.body;
+  //     const user=findUser(userId);
+  //     if(!user){
+  //         res.status(403).json('Sign in!')
+  //     }
+  //     req.user=user;
+  //     next();
+  // }
+});
+app.post("/test", (req, res) => {});
 
 app.post("/o/logintest", (req, res) => {
   var username = req.body.username;
@@ -143,20 +143,18 @@ app.post("/o/logintest", (req, res) => {
 app.post("/test", (req, res) => {});
 
 //login bệnh nhân
-app.post('/data-login-patient',(req,res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    var findDoctor = PATIENT.findOne({username: username, password:password});
-    findDoctor.exec((err, data)=>{
-        if (!data){
-            res.status(500).send('Không có bệnh nhân này')
-        }else{
-            res.status(200).json(data);
-        }
-
-    })
-
-})
+app.post("/data-login-patient", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  var findDoctor = PATIENT.findOne({ username: username, password: password });
+  findDoctor.exec((err, data) => {
+    if (!data) {
+      res.status(500).send("Không có bệnh nhân này");
+    } else {
+      res.status(200).json(data);
+    }
+  });
+});
 
 //api thay đổi trạng thái bệnh key_decive
 
@@ -336,9 +334,9 @@ app.post("/add-device", (req, res) => {
     { key_device: req.query.key_device },
     {
       $push: {
-        heart: { value: Number(req.query.heart)+100, real_time: Date.now() },
-        spO2: { value: Number(req.query.spO2)+100, real_time: Date.now() },
-        temp: { value: Number(req.query.temp)+100, real_time: Date.now() },
+        heart: { value: Number(req.query.heart) + 100, real_time: Date.now() },
+        spO2: { value: Number(req.query.spO2) + 100, real_time: Date.now() },
+        temp: { value: Number(req.query.temp) + 100, real_time: Date.now() },
       },
     },
     function (err) {
@@ -442,27 +440,9 @@ app.get("/add-device", (req, res) => {
     }
   });
 }); //-----------------|
+
 app.post("/add-device2", (req, res) => {
-  // DEVICE({
-  //     key_device:req.body.key_device,
-  //     // name: req.body.name,
-  //     // username:req.body.username,
-  //     // password: req.body.password,
-  //     // age:req.body.age,
-  //     // birth_day:req.body.birth_day,
-  //     // phone:req.body.phone,
-  //     // number_room:req.body.number_room,
-  //     // key_device:req.body.key_device
-  // }).save((err) =>{
-  //     if (err){
-  //         console.log('Thêm không thành công:', err);
-  //     }else{
-  //
-  //         console.log('Thành công, : ', req.body);
-  //     }
-  //
-  // })
-  var newDEVICE = DEVICE({
+  DEVICE({
     key_device: req.query.key_device,
     heart: {
       value: Number(req.query.heart),
@@ -480,8 +460,43 @@ app.post("/add-device2", (req, res) => {
       value: Number(req.query.temp),
       real_time: new Date(),
     },
+    track_history: {
+      value: Number(req.query.temp),
+      real_time: new Date(),
+    },
+    treatment_course: {
+      value: Number(req.query.temp),
+      real_time: new Date(),
+    },
+  }).save((err) => {
+    if (err) {
+      console.log("Thêm không thành công:", err);
+      res.status(400).json(err);
+    } else {
+      console.log("Thành công, : ", req.body);
+      res.status(200).json('insert data device success');
+    }
   });
-  console.log("data post req: ", req.query);
+  // var newDEVICE = DEVICE({
+  //   key_device: req.query.key_device,
+  //   heart: {
+  //     value: Number(req.query.heart),
+  //     real_time: new Date(),
+  //   },
+  //   spO2: {
+  //     value: Number(req.query.spO2),
+  //     real_time: new Date(),
+  //   },
+  //   temp: {
+  //     value: Number(req.query.temp),
+  //     real_time: new Date(),
+  //   },
+  //   state: {
+  //     value: Number(req.query.temp),
+  //     real_time: new Date(),
+  //   },
+  // });
+  // console.log("data post req: ", req.query);
 });
 //--------------------------------------------------------------------------------------------------------------------|
 
