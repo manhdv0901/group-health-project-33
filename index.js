@@ -82,17 +82,18 @@ const device1 = require("./app/src/router/device_router");
 const sendnotification = require("./app/src/router/sennotication_router");
 const liststatuspatient = require("./app/src/router/list_status_patient");
 
-app.use("/", deviceRoute);
-app.use("/", listPatientRouter);
-app.use("/", listDoctorRouter);
-app.use("/", addPatientRouter);
-app.use("/", addDoctor);
-app.use("/", statuspatient);
-app.use("/", page);
-app.use("/", updatetoken);
-app.use("/", device1);
-app.use("/", sendnotification);
-app.use("/", liststatuspatient);
+
+app.use('/', deviceRoute)
+app.use('/', listPatientRouter)
+app.use('/', listDoctorRouter)
+app.use('/', addPatientRouter)
+app.use('/', addDoctor)
+app.use('/', statuspatient)
+app.use('/', page)
+app.use('/', updatetoken)
+app.use('/', device1)
+app.use('/', sendnotification)
+app.use('/', liststatuspatient)
 
 app.get("/", (req, res) => {
   res.redirect("/dashboard");
@@ -442,24 +443,26 @@ app.get("/add-device", (req, res) => {
 }); //-----------------|
 
 app.post("/add-device2", (req, res) => {
-  DEVICE({
-      key_device:req.body.key_device,
-      // name: req.body.name,
-      // username:req.body.username,
-      // password: req.body.password,
-      // age:req.body.age,
-      // birth_day:req.body.birth_day,
-      // phone:req.body.phone,
-      // number_room:req.body.number_room,
-      // key_device:req.body.key_device
-  }).save((err) =>{
-      if (err){
-          res.status(200).send('Thêm thiết bị thành công');
-      }else{
-        res.status(400).send('Thêm thiết bị không thành công');
-      }
 
-  })
+  DEVICE.findOne({key_device: req.body.key_device},(err,data1)=>{
+    if(data1){
+      res.status(400).send('Đã có thiết bị này');
+    }
+    else{
+      DEVICE({
+        key_device:req.body.key_device,
+      }).save((err) =>{
+        if (err){
+          res.status(400).send('Thêm thiết bị không thành công');
+        }else{
+          res.status(200).send('Thêm thiết bị thành công');
+
+        }
+
+      })
+    }
+  });
+
   // var newDEVICE = DEVICE({
   //   key_device: req.query.key_device,
   //   heart: {
