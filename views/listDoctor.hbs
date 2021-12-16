@@ -87,7 +87,7 @@
         <li class="nav-item">
             <a class="nav-link " href="/dashboard">
                 <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
+                <span>Thống kê</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
@@ -193,11 +193,9 @@
                         <table class="table datatable">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">ID</th>
                                 <th scope="col">Họ Và Tên</th>
-                                <th scope="col">UserName</th>
-                                <th scope="col">PassWord</th>
+                                <th scope="col">Giới tính</th>
                                 <th scope="col">Trạng Thái</th>
                             </tr>
                             </thead>
@@ -205,12 +203,10 @@
 {{#each docs}}
 
                             <tr>
-                                <th scope="row">1</th>
                                 <td>{{this.id}}</td>
                                 <td>{{this.name}}</td>
-                                <td>{{this.username}}</td>
-                                <td>{{this.password}}</td>
-                                {{#if this.state}}-->
+                                <td>{{this.gender}}</td>
+                                {{#if this.state}}
                                                                                 <td><a href="#" class="btn btn-success">Đang rảnh</a></td>
                                                                                 {{else}}
                                                                                     <td><a href="#" class="btn btn-danger">Đang bận</a></td>{{/if}}
