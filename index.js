@@ -95,53 +95,9 @@ app.use('/', device1)
 app.use('/', sendnotification)
 app.use('/', liststatuspatient)
 
-app.get("/", (req, res) => {
-  res.redirect("/dashboard");
-});
-
-app.post("/o/logintest", (req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
-  var model = db.model("data-logins", USER);
-  model.find({ _id: "6175387f0ed1fff9a8ef2c39" }).exec((err, data) => {
-    res.send(data.toString());
-  });
-  // const findUser=userId=>{
-  //     return user.users.find(user => user.id === userId)
-  // }
-  // const authUser=(req,res,next)=>{
-  //     const {userId}=req.body;
-  //     const user=findUser(userId);
-  //     if(!user){
-  //         res.status(403).json('Sign in!')
-  //     }
-  //     req.user=user;
-  //     next();
-  // }
-});
-app.post("/test", (req, res) => {});
-
-app.post("/o/logintest", (req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
-  var model = db.model("data-logins", USER);
-  model.find({ _id: "6175387f0ed1fff9a8ef2c39" }).exec((err, data) => {
-    res.send(data.toString());
-  });
-  // const findUser=userId=>{
-  //     return user.users.find(user => user.id === userId)
-  // }
-  // const authUser=(req,res,next)=>{
-  //     const {userId}=req.body;
-  //     const user=findUser(userId);
-  //     if(!user){
-  //         res.status(403).json('Sign in!')
-  //     }
-  //     req.user=user;
-  //     next();
-  // }
-});
-app.post("/test", (req, res) => {});
+app.get('/',(req,res)=>{
+    res.redirect('/dashboard')
+})
 
 //login bệnh nhân
 app.post("/data-login-patient", (req, res) => {
@@ -293,7 +249,6 @@ app.get("/:na", (req, res) => {
                 patient: data,
                 device: data2,
                 doctors: data3,
-                data: [10, 20, 30],
               });
             }
           });
@@ -562,7 +517,7 @@ app.get("/data-device", (req, res) => {
 });
 
 app.get("/data/data-patient", (req, res) => {
-  var findPatient = PATIENT.find({});
+  var findPatient = PATIENT.find({done:"0"});
   findPatient.exec((err, data) => {
     if (err) {
       res.status(400).json(err);
@@ -572,7 +527,7 @@ app.get("/data/data-patient", (req, res) => {
   });
 });
 app.get("/data-patient", (req, res) => {
-  var findPatient = PATIENT.find({});
+  var findPatient = PATIENT.find({done:"0"});
   findPatient.exec((err, data) => {
     if (err) {
       res.status(404).json(err);
@@ -581,7 +536,7 @@ app.get("/data-patient", (req, res) => {
     }
   });
 });
-//login doctor
+//api login doctor
 app.post("/data-login-doctor", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
