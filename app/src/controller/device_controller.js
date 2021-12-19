@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 
 const DEVICE = require("../model/device_model");
+const moment = require("moment/moment");
 
 
 const DATABASE_URL ="mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
@@ -17,10 +18,9 @@ var db=mongoose.connection;
 module.exports.trackhistory = (req,res)=>{
     console.log(req.body.key_device)
     console.log(req.body.data)
-    console.log(req.body.date)
     var key=req.body.key_device;
     var data=req.body.data;
-    var date=req.body.date;
+    var date=moment().format("DD-MM-YYYY hh:mm:ss");
     var model = db.model('data-devices', DEVICE.schema);
     model.findOne({key_device: key}, (err, devices)=>{
        if(devices!=null){
@@ -55,7 +55,7 @@ module.exports.treatmentcourse = (req,res)=>{
 
     var key=req.body.key_device;
     var data=req.body.data;
-    var date=req.body.date;
+    var date=moment().format("DD-MM-YYYY hh:mm:ss");
     var model = db.model('data-devices', DEVICE.schema);
     model.findOne({key_device: key}, (err, devices)=>{
         if(devices!=null){
