@@ -20,6 +20,7 @@ module.exports.getaddpatient = (req, res) => {
   });
   req.session.errors = null;
 };
+
 module.exports.postaddpatient = (req, res) => {
   var errors = validationResult(req).array();
   if (errors.length > 0) {
@@ -69,6 +70,7 @@ module.exports.postaddpatient = (req, res) => {
               number_room: req.body.number_room,
               key_device: req.body.key_device,
               state: 0,
+              done:"0"
             }).save((err) => {
               if (err) {
                 console.log("Thêm bệnh nhân thất bại:", err);
