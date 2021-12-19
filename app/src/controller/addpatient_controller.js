@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 
 const PATIENT = require("../model/patient_model");
+const DEVICE = require("../model/device_model");
+
 const { body, validationResult } = require("express-validator");
 
 const DATABASE_URL =
