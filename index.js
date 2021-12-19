@@ -1,5 +1,6 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
+var moment = require("moment");
 var expressSession = require("express-session");
 const exhbs = require("express-handlebars");
 const PORT = process.env.PORT || 3000;
@@ -82,22 +83,21 @@ const device1 = require("./app/src/router/device_router");
 const sendnotification = require("./app/src/router/sennotication_router");
 const liststatuspatient = require("./app/src/router/list_status_patient");
 
+app.use("/", deviceRoute);
+app.use("/", listPatientRouter);
+app.use("/", listDoctorRouter);
+app.use("/", addPatientRouter);
+app.use("/", addDoctor);
+app.use("/", statuspatient);
+app.use("/", page);
+app.use("/", updatetoken);
+app.use("/", device1);
+app.use("/", sendnotification);
+app.use("/", liststatuspatient);
 
-app.use('/', deviceRoute)
-app.use('/', listPatientRouter)
-app.use('/', listDoctorRouter)
-app.use('/', addPatientRouter)
-app.use('/', addDoctor)
-app.use('/', statuspatient)
-app.use('/', page)
-app.use('/', updatetoken)
-app.use('/', device1)
-app.use('/', sendnotification)
-app.use('/', liststatuspatient)
-
-app.get('/',(req,res)=>{
-    res.redirect('/dashboard')
-})
+app.get("/", (req, res) => {
+  res.redirect("/dashboard");
+});
 
 //login bệnh nhân
 app.post("/data-login-patient", (req, res) => {
@@ -286,13 +286,14 @@ app.post("/add-device", (req, res) => {
       }
     }
   );
+  var date = moment().format("DD-MM-YYYY hh:mm:ss");
   DEVICE.updateOne(
     { key_device: req.query.key_device },
     {
       $push: {
-        heart: { value: Number(req.query.heart), real_time: Date.now() },
-        spO2: { value: Number(req.query.spO2), real_time: Date.now() },
-        temp: { value: Number(req.query.temp), real_time: Date.now() },
+        heart: { value: Number(req.query.heart), real_time: date },
+        spO2: { value: Number(req.query.spO2), real_time: date },
+        temp: { value: Number(req.query.temp), real_time: date },
       },
     },
     function (err) {
@@ -398,23 +399,19 @@ app.get("/add-device", (req, res) => {
 }); //-----------------|
 
 app.post("/add-device2", (req, res) => {
-
-  DEVICE.findOne({key_device: req.body.key_device},(err,data1)=>{
-    if(data1){
-      res.status(400).send('Đã có thiết bị này');
-    }
-    else{
+  DEVICE.findOne({ key_device: req.body.key_device }, (err, data1) => {
+    if (data1) {
+      res.status(400).send("Đã có thiết bị này");
+    } else {
       DEVICE({
-        key_device:req.body.key_device,
-      }).save((err) =>{
-        if (err){
-          res.status(400).send('Thêm thiết bị không thành công');
-        }else{
-          res.status(200).send('Thêm thiết bị thành công');
-
+        key_device: req.body.key_device,
+      }).save((err) => {
+        if (err) {
+          res.status(400).send("Thêm thiết bị không thành công");
+        } else {
+          res.status(200).send("Thêm thiết bị thành công");
         }
-
-      })
+      });
     }
   });
 
@@ -517,7 +514,7 @@ app.get("/data-device", (req, res) => {
 });
 
 app.get("/data/data-patient", (req, res) => {
-  var findPatient = PATIENT.find({done:"0"});
+  var findPatient = PATIENT.find({ done: "0" });
   findPatient.exec((err, data) => {
     if (err) {
       res.status(400).json(err);
@@ -527,7 +524,7 @@ app.get("/data/data-patient", (req, res) => {
   });
 });
 app.get("/data-patient", (req, res) => {
-  var findPatient = PATIENT.find({done:"0"});
+  var findPatient = PATIENT.find({ done: "0" });
   findPatient.exec((err, data) => {
     if (err) {
       res.status(404).json(err);

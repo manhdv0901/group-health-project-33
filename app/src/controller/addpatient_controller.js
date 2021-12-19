@@ -70,13 +70,28 @@ module.exports.postaddpatient = (req, res) => {
               number_room: req.body.number_room,
               key_device: req.body.key_device,
               state: 0,
-              done:"0"
+              done: "0",
             }).save((err) => {
               if (err) {
                 console.log("Thêm bệnh nhân thất bại:", err);
               } else {
-                res.redirect("/list-patients");
-                console.log("Thành công, user: ", req.body);
+                DEVICE({
+                  id: req.body.id,
+                  key_device: req.body.key_device,
+                  state: 0,
+                  heart: [],
+                  spO2: [],
+                  temp: [],
+                  track_history: [],
+                  treatment_course: [],
+                }).save((e) => {
+                  if (e) {
+                    console.log("Thêm thất bại : ", e);
+                  } else {
+                    res.redirect("/list-patients");
+                    console.log("Thành công, user: ", req.body);
+                  }
+                });
               }
             });
           }
