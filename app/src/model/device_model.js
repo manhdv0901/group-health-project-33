@@ -18,13 +18,13 @@ var DEVICESchema = new mongoose.Schema({
     ],
     track_history:[
         {value:String,
-            real_time :Date
+            real_time :String
         }
     ],
 
     treatment_course:[
         {value:String,
-            real_time :Date
+            real_time :String
         }
     ]
 
