@@ -422,9 +422,7 @@
                                                             {{/each}}
                                                         </td>
                                                         <td>{{#each this.temp}}
-
-                                                            <div style="margin-top: 20px">{{moment real_time
-                                                                                                   format="YYYY-MM-DD hh:MM"}}
+                                                            <div style="margin-top: 20px">{{moment this.real_time "DD/MM/YYYY HH:mm:ss"}}
                                                             </div>
                                                         {{/each}}</td>
                                                     </tr>
