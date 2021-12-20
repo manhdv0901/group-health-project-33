@@ -114,7 +114,7 @@ app.post('/data-login-patient',(req,res)=>{
     })
 
 })
-//api thay đổi trạng thái bệnh nhân
+//api thay đổi trạng thái bệnh nhân=3(nguy cấp)
 
 app.post("/updatestatuspt", (req, res) => {
   console.log(req.body.id);
@@ -132,6 +132,25 @@ app.post("/updatestatuspt", (req, res) => {
         res.status(401).send("Cập nhật trạng thái khẩn cấp không thành công");
       }
     }
+  );
+});
+//api thay đổi trạng thái bệnh nhân
+app.post("/app/updateStatusPatient", (req, res) => {
+  console.log(req.body.id);
+  var newvalues = { $set: { state: req.body.state} };
+  PATIENT.findByIdAndUpdate(
+      req.body.id,
+      newvalues,
+      {
+        new: true,
+      },
+      function (err, model) {
+        if (!err) {
+          res.status(200).send("Cập nhật trạng thái bệnh nhân thành công");
+        } else {
+          res.status(401).send("Cập nhật trạng thái bệnh nhân không thành công");
+        }
+      }
   );
 });
 //màn hình dashboard
