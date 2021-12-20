@@ -81,67 +81,24 @@ const updatetoken = require("./app/src/router/update_token_doctor_router");
 const device1 = require("./app/src/router/device_router");
 const sendnotification = require("./app/src/router/sennotication_router");
 const liststatuspatient = require("./app/src/router/list_status_patient");
+const devices = require("./app/src/router/devices_router");
 
-
-app.use('/', deviceRoute)
-app.use('/', listPatientRouter)
-app.use('/', listDoctorRouter)
-app.use('/', addPatientRouter)
-app.use('/', addDoctor)
-app.use('/', statuspatient)
-app.use('/', page)
-app.use('/', updatetoken)
-app.use('/', device1)
-app.use('/', sendnotification)
-app.use('/', liststatuspatient)
+app.use("/", deviceRoute);
+app.use("/", listPatientRouter);
+app.use("/", listDoctorRouter);
+app.use("/", addPatientRouter);
+app.use("/", addDoctor);
+app.use("/", statuspatient);
+app.use("/", page);
+app.use("/", updatetoken);
+app.use("/", device1);
+app.use("/", sendnotification);
+app.use("/", liststatuspatient);
+app.use("/", devices);
 
 app.get("/", (req, res) => {
   res.redirect("/dashboard");
 });
-
-app.post("/o/logintest", (req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
-  var model = db.model("data-logins", USER);
-  model.find({ _id: "6175387f0ed1fff9a8ef2c39" }).exec((err, data) => {
-    res.send(data.toString());
-  });
-  // const findUser=userId=>{
-  //     return user.users.find(user => user.id === userId)
-  // }
-  // const authUser=(req,res,next)=>{
-  //     const {userId}=req.body;
-  //     const user=findUser(userId);
-  //     if(!user){
-  //         res.status(403).json('Sign in!')
-  //     }
-  //     req.user=user;
-  //     next();
-  // }
-});
-app.post("/test", (req, res) => {});
-
-app.post("/o/logintest", (req, res) => {
-  var username = req.body.username;
-  var password = req.body.password;
-  var model = db.model("data-logins", USER);
-  model.find({ _id: "6175387f0ed1fff9a8ef2c39" }).exec((err, data) => {
-    res.send(data.toString());
-  });
-  // const findUser=userId=>{
-  //     return user.users.find(user => user.id === userId)
-  // }
-  // const authUser=(req,res,next)=>{
-  //     const {userId}=req.body;
-  //     const user=findUser(userId);
-  //     if(!user){
-  //         res.status(403).json('Sign in!')
-  //     }
-  //     req.user=user;
-  //     next();
-  // }
-});
-app.post("/test", (req, res) => {});
 
 //login bệnh nhân
 app.post("/data-login-patient", (req, res) => {
@@ -157,7 +114,7 @@ app.post("/data-login-patient", (req, res) => {
   });
 });
 
-//api thay đổi trạng thái bệnh key_decive
+//api thay đổi trạng thái bệnh nhân=3(nguy cấp)
 
 app.post("/updatestatuspt", (req, res) => {
   console.log(req.body.id);
@@ -173,6 +130,25 @@ app.post("/updatestatuspt", (req, res) => {
         res.status(200).send("Cập nhật trạng thái khẩn cấp thành công");
       } else {
         res.status(401).send("Cập nhật trạng thái khẩn cấp không thành công");
+      }
+    }
+  );
+});
+//api thay đổi trạng thái bệnh nhân
+app.post("/app/updateStatusPatient", (req, res) => {
+  console.log(req.body.id);
+  var newvalues = { $set: { state: req.body.state } };
+  PATIENT.findByIdAndUpdate(
+    req.body.id,
+    newvalues,
+    {
+      new: true,
+    },
+    function (err, model) {
+      if (!err) {
+        res.status(200).send("Cập nhật trạng thái bệnh nhân thành công");
+      } else {
+        res.status(401).send("Cập nhật trạng thái bệnh nhân không thành công");
       }
     }
   );
@@ -293,7 +269,6 @@ app.get("/:na", (req, res) => {
                 patient: data,
                 device: data2,
                 doctors: data3,
-                data: [10, 20, 30],
               });
             }
           });
@@ -443,23 +418,19 @@ app.get("/add-device", (req, res) => {
 }); //-----------------|
 
 app.post("/add-device2", (req, res) => {
-
-  DEVICE.findOne({key_device: req.body.key_device},(err,data1)=>{
-    if(data1){
-      res.status(400).send('Đã có thiết bị này');
-    }
-    else{
+  DEVICE.findOne({ key_device: req.body.key_device }, (err, data1) => {
+    if (data1) {
+      res.status(400).send("Đã có thiết bị này");
+    } else {
       DEVICE({
-        key_device:req.body.key_device,
-      }).save((err) =>{
-        if (err){
-          res.status(400).send('Thêm thiết bị không thành công');
-        }else{
-          res.status(200).send('Thêm thiết bị thành công');
-
+        key_device: req.body.key_device,
+      }).save((err) => {
+        if (err) {
+          res.status(400).send("Thêm thiết bị không thành công");
+        } else {
+          res.status(200).send("Thêm thiết bị thành công");
         }
-
-      })
+      });
     }
   });
 
@@ -562,7 +533,7 @@ app.get("/data-device", (req, res) => {
 });
 
 app.get("/data/data-patient", (req, res) => {
-  var findPatient = PATIENT.find({});
+  var findPatient = PATIENT.find({ done: "0" });
   findPatient.exec((err, data) => {
     if (err) {
       res.status(400).json(err);
@@ -572,7 +543,7 @@ app.get("/data/data-patient", (req, res) => {
   });
 });
 app.get("/data-patient", (req, res) => {
-  var findPatient = PATIENT.find({});
+  var findPatient = PATIENT.find({ done: "0" });
   findPatient.exec((err, data) => {
     if (err) {
       res.status(404).json(err);
@@ -581,7 +552,7 @@ app.get("/data-patient", (req, res) => {
     }
   });
 });
-//login doctor
+//api login doctor
 app.post("/data-login-doctor", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

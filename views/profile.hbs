@@ -422,9 +422,7 @@
                                                             {{/each}}
                                                         </td>
                                                         <td>{{#each this.temp}}
-
-                                                            <div style="margin-top: 20px">{{moment real_time
-                                                                                                   format="YYYY-MM-DD hh:MM"}}
+                                                            <div style="margin-top: 20px">{{moment this.real_time "DD/MM/YYYY HH:mm:ss"}}
                                                             </div>
                                                         {{/each}}</td>
                                                     </tr>
@@ -457,7 +455,7 @@
                                                                     data-bs-toggle="collapse"
                                                                     data-bs-target="#collapseOne" aria-expanded="true"
                                                                     aria-controls="collapseOne">
-                                                                {{moment real_time format="YYYY-MM-DD"}}
+                                                                {{moment this.real_time}}
                                                             </button>
                                                         </h2>
                                                         <div id="collapseOne" class="accordion-collapse collapse show"
@@ -534,7 +532,6 @@
                         {{#each device}}
                             {{#each this.heart}}
                             heart.push({{this.value}});
-                            date.push({{moment real_time format="YYYY-MM-DD"}})
                             {{/each}}
                             {{#each this.spO2}}
                             sp02.push({{this.value}});

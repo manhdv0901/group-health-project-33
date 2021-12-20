@@ -43,6 +43,30 @@
                 <span>Thống kê</span>
             </a>
         </li><!-- End Dashboard Nav -->
+        <!--        thiết bị-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Thiết bị</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/dashboard-devices">
+                        <i class="bi bi-circle"></i><span>Thống kê thiết bị</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/adds-devices">
+                        <i class="bi bi-circle"></i><span>Thêm thiết bị</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/list-devices">
+                        <i class="bi bi-circle"></i><span>Danh sách thiết bị</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Components Nav -->
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -141,6 +165,39 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Danh sách bệnh nhân</h5>
+                        <div class="container">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <div class="" style="background-color:red;height: 10px;width: 50px">
+                                    </div>
+                                    <div class="col">
+                                        Khẩn cấp
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="" style="background-color:yellow;height: 10px;width: 50px">
+                                    </div>
+                                    <div class="col">
+                                        Cảnh báo
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="" style="background-color:deepskyblue;height: 10px;width: 50px">
+                                    </div>
+                                    <div class="col">
+                                        Cần theo dõi
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="" style="background-color:green;height: 10px;width: 50px">
+                                    </div>
+                                    <div class="col">
+                                        Bình thường
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                         <!-- Table with stripped rows -->
                         <table class="table datatable">
                             <thead>

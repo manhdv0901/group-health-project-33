@@ -20,6 +20,7 @@ module.exports.getaddpatient = (req, res) => {
   });
   req.session.errors = null;
 };
+
 module.exports.postaddpatient = (req, res) => {
   var errors = validationResult(req).array();
   if (errors.length > 0) {
@@ -55,28 +56,46 @@ module.exports.postaddpatient = (req, res) => {
             req.session.success = false;
             res.redirect("/add-patient");
           } else {
-            PATIENT({
-              id: req.body.id,
-              name: req.body.name,
-              homie_patient: req.body.homie_patient,
-              username: req.body.username,
-              password: req.body.password,
-              age: req.body.age,
-              birth_day: req.body.birth_day,
-              date_added: req.body.date_added,
-              phone: req.body.phone,
-              homie_phone: req.body.homie_phone,
-              number_room: req.body.number_room,
-              key_device: req.body.key_device,
-              state: 0,
-            }).save((err) => {
-              if (err) {
-                console.log("Thêm bệnh nhân thất bại:", err);
-              } else {
-                res.redirect("/list-patients");
-                console.log("Thành công, user: ", req.body);
+            PATIENT.findOne({},(err,data)=>{
+              if(data){
+                errors.push({
+                  value: "",
+                  msg: "Đã có key username này",
+                  param: "username",
+                  location: "body",
+                });
+                console.log(errors);
+                req.session.errors = errors;
+                req.session.success = false;
+                res.redirect("/add-patient");
               }
-            });
+              else{
+                PATIENT({
+                  id: req.body.id,
+                  name: req.body.name,
+                  homie_patient: req.body.homie_patient,
+                  username: req.body.username,
+                  password: req.body.password,
+                  age: req.body.age,
+                  birth_day: req.body.birth_day,
+                  date_added: req.body.date_added,
+                  phone: req.body.phone,
+                  homie_phone: req.body.homie_phone,
+                  number_room: req.body.number_room,
+                  key_device: req.body.key_device,
+                  state: 0,
+                  done:"0"
+                }).save((err) => {
+                  if (err) {
+                    console.log("Thêm bệnh nhân thất bại:", err);
+                  } else {
+                    res.redirect("/list-patients");
+                    console.log("Thành công, user: ", req.body);
+                  }
+                });
+              }
+            })
+
           }
         });
       }
