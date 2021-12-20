@@ -134,21 +134,21 @@
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>Thêm thiết bị</h1>
-<!--        {{# if success }}-->
-<!--            <section class="success">-->
-<!--                <h2> </h2>-->
-<!--            </section>-->
-<!--        {{ else }}-->
-<!--            {{# if errors }}-->
-<!--                <section class="errors">-->
-<!--                    <ul>-->
-<!--                        {{# each errors }}-->
-<!--                            <li class="alert alert-danger">{{ this.msg }}</li>-->
-<!--                        {{/each}}-->
-<!--                    </ul>-->
-<!--                </section>-->
-<!--            {{/if}}-->
-<!--        {{/if}}-->
+        {{# if success }}
+            <section class="success">
+                <h2> </h2>
+            </section>
+        {{ else }}
+            {{# if errors }}
+                <section class="errors">
+                    <ul>
+                        {{# each errors }}
+                            <li class="alert alert-danger">{{ this.msg }}</li>
+                        {{/each}}
+                    </ul>
+                </section>
+            {{/if}}
+        {{/if}}
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Thống kê</a></li>
@@ -163,18 +163,22 @@
 
                 <!-- Vertical Form -->
                 <form class="row g-3" action="/adds-devices" id="application-form" method="post">
-                    <div class="col-12">
-                        <label for="inputNanme4" class="form-label">Tên thiết bị</label>
-                        <div class="input-group has-validation">
-                            <input type="text" name="namedevice" class="form-control" id="inputNanme4" required>
-                        </div>
-                    </div>
+<!--                    <div class="col-12">-->
+<!--                        <label for="inputNanme4" class="form-label">Tên thiết bị</label>-->
+<!--                        <div class="input-group has-validation">-->
+<!--                            <input type="text" name="namedevice" class="form-control" id="inputNanme4" required>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="col-12">
                         <label for="inputEmail4" class="form-label">Key Thiết bị</label>
                         <div class="input-group has-validation">
-                            <input type="text" name="keydevice" class="form-control" id="inputEmail4" required>
+                            <input type="text" name="key_device" class="form-control" id="inputEmail4" required>
                         </div>
                     </div>
+                    <select name="namedevice" class="form-select" aria-label="Default select example">
+                        <option value="TBD" selected name="namedevice">Thiết bị đo</option>
+                        <option value="TBT" name="namedevice">Thiết bị thở</option>
+                    </select>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Thêm</button>
                         <button type="reset" class="btn btn-secondary">Đặt lại </button>

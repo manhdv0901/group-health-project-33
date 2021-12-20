@@ -224,17 +224,14 @@
                             </thead>
                             <tbody>
                             {{#each docs}}
-
                                 <tr>
-                                    <td>{{this.id}}</td>
-                                    <td>{{this.name}}</td>
-                                    <td><a href="#" class="btn btn-success">Đang sử dụng</a></td>
-<!--                                    {{#if this.state}}-->
-<!--                                        <td><a href="#" class="btn btn-success">Đang rảnh</a></td>-->
-<!--                                    {{else}}-->
-<!--                                        <td><a href="#" class="btn btn-danger">Đang bận</a></td>{{/if}}-->
+                                    <td>{{this.nameDevice}}</td>
+                                    <td>{{this.key_device}}</td>
+                                   {{#if this.state}}
+                                      <td><a href="#" class="btn btn-success">Đang sử dụng</a></td>
+                                  {{else}}
+                                       <td><a href="#" class="btn btn-danger">Chưa sử dụng</a></td>{{/if}}
                                 </tr>
-
                             {{/each}}
                             </tbody>
                         </table>

@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
 const PATIENT = require("../model/patient_model");
+const DEVICE = require("../model/device_model");
 const { body, validationResult } = require("express-validator");
+const USER = require("../model/user_model");
 
 const DATABASE_URL =
   "mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
@@ -14,11 +16,17 @@ mongoose.connect(DATABASE_URL, DATABASE_CONNECT_OPTION);
 var db = mongoose.connection;
 
 module.exports.getaddpatient = (req, res) => {
-  res.render("addPatient", {
-    success: req.session.success,
-    errors: req.session.errors,
+  var model = db.model('data-devices', DEVICE.schema);
+  model.find({state:false}, (err, devices) =>{
+    console.log(devices)
+    res.render("addPatient", {
+      success: req.session.success,
+      errors: req.session.errors,
+      data:devices
+    });
+    req.session.errors = null;
   });
-  req.session.errors = null;
+
 };
 
 module.exports.postaddpatient = (req, res) => {
@@ -56,7 +64,7 @@ module.exports.postaddpatient = (req, res) => {
             req.session.success = false;
             res.redirect("/add-patient");
           } else {
-            PATIENT.findOne({},(err,data)=>{
+            PATIENT.findOne({username:req.body.username},(err,data)=>{
               if(data){
                 errors.push({
                   value: "",
@@ -70,6 +78,22 @@ module.exports.postaddpatient = (req, res) => {
                 res.redirect("/add-patient");
               }
               else{
+                DEVICE.updateOne({key_device:req.body.key_device},{$set:{state:true}}).exec((err,data)=>{
+                  if(err){
+                    console.log(err)
+                  }
+                  else{
+                    console.log('thành công')
+                  }
+                })
+                DEVICE.updateOne({key_device:req.body.key_device},{$push:{historical:{id_patient:req.body.id}}}).exec((err,data)=>{
+                  if(err){
+                    console.log(err)
+                  }
+                  else{
+                    console.log('thành công')
+                  }
+                })
                 PATIENT({
                   id: req.body.id,
                   name: req.body.name,
