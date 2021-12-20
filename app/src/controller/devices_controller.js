@@ -29,11 +29,11 @@ module.exports.dashboard = (req,res)=>{
                 .count()
                 .exec((err, data2) => {
                     model1
-                        .find({nameDevice:"Thiết bị đo nhịp tim"})
+                        .find({nameDevice:"TBD"})
                         .count()
                         .exec((err, data3) => {
                             model1
-                                .find({nameDevice:"Thiết bị thở"})
+                                .find({nameDevice:"TBT"})
                                 .count()
                                 .exec((err, data4) => {
                                     res.render('dashboard_device',{

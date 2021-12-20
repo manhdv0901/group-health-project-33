@@ -248,19 +248,18 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <label for="inputAddress" class="form-label">Key device</label>
-                        <div class="input-group has-validation">
-                        <input type="text"name="key_device"class="form-control" id="inputAddress" placeholder="device02" required>
-                        </div>
-                    </div>
+<!--                    <div class="col-12">-->
+<!--                        <label for="inputAddress" class="form-label">Key device</label>-->
+<!--                        <div class="input-group has-validation">-->
+<!--                        <input type="text"name="key_device"class="form-control" id="inputAddress" placeholder="device02" required>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <label>Grade:</label><br/>
                     <div class='form-field'>
-                        <label for='brandFilter'>Brand</label>
-                        <select id='brandFilter' class='form-control'>
-                            <option>Choose brand</option>
+                        <label for='brandFilter'>Key thiết bị</label>
+                        <select name="key_device" id='brandFilter' class='form-control'>
                             {{#each data}}
-                                <option value="{{this}}">{{this.name}}</option>
+                                <option selected value="{{this.key_device}}">{{this.key_device}}</option>
                             {{/each}}
                         </select>
                     </div>
