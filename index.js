@@ -1,5 +1,6 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
+const SERVER_KEY = 'AAAAqRousOQ:APA91bGX-6Wo0hGqvr9OrzCnX-8LEPNQXZsycdQR7qnrOH1Wzi5LDpo9UPyLNMayuL7F5QWXGI9wAxpRMwi7fOWRh3BrPHj9Nsc_5Fimt9Bb6wBO_GmbT97BDqXfZJNX4v2l_OXGAPsH';
 var expressSession = require("express-session");
 const exhbs = require("express-handlebars");
 var moment = require("moment");
@@ -119,22 +120,92 @@ app.post("/data-login-patient", (req, res) => {
 
 app.post("/updatestatuspt", (req, res) => {
   console.log(req.body.id);
+  var id=req.body.id;
+  var name=req.body.name;
+  var room=req.body.room;
+  var age=req.body.age;
+  var key_device=req.body.key_device;
   var newvalues = { $set: { state: 3 } };
-  PATIENT.findByIdAndUpdate(
-    req.body.id,
-    newvalues,
-    {
-      new: true,
-    },
-    function (err, model) {
-      if (!err) {
-        res.status(200).send("Cập nhật trạng thái khẩn cấp thành công");
-      } else {
-        res.status(401).send("Cập nhật trạng thái khẩn cấp không thành công");
+  var newvalues1 = { $set: { state: false } };
+  var tokenn;
+  var iddoctor;
+  DOCTORS.find({state:true}).limit(1).exec((err,data)=>{
+      var val
+      for (var i in data) {
+        val = data[i];
+        tokenn=val.tokenn;
+        iddoctor=val._id;
+        DOCTORS.findByIdAndUpdate(
+            val._id,
+            newvalues1,
+            {
+              new: true,
+            },
+            function (e, model) {
+              if (!e) {
+                console.log("update status doctor completr");
+              } else {
+                console.log("update status doctor fail");
+              }
+            }
+        );
       }
-    }
+    console.log(iddoctor)
+      var notification={
+        'id':id,
+        'title':'Bệnh nhân thông báo khẩn cấp',
+        'name':name,
+        'room':room,
+        'age':age,
+        'status':'Khẩn cấp',
+        'medicine':'Khẩn cấp',
+        'amountAndUse':'Khẩn cấp',
+        'key_device':key_device
+      };
+
+      var notification_body={
+        'data':notification,
+        'to':tokenn
+      }
+      console.log("notify body",notification_body)
+
+      async function fetchMovies() {
+        const response = await fetch('https://fcm.googleapis.com/fcm/send',{
+          'method':'POST',
+          'headers':{
+            'Authorization':'key=' +SERVER_KEY,
+            'Content-Type':'application/json'
+          },
+          'body':JSON.stringify(notification_body)
+        }).then(()=>{
+          // res.redirect('/dashboard')
+        }).catch((err)=>{
+
+        });
+        return response;
+        // waits until the request completes...
+      }
+      console.log(fetchMovies())
+
+
+    })
+
+  PATIENT.findByIdAndUpdate(
+      req.body.id,
+      newvalues,
+      {
+        new: true,
+      },
+      function (err, model) {
+        if (!err) {
+          res.send("Cập nhật trạng thái khẩn cấp thành công");
+        } else {
+          res.send("Cập nhật trạng thái khẩn cấp không thành công");
+        }
+      }
   );
 });
+
 //api thay đổi trạng thái bệnh nhân
 app.post("/app/updateStatusPatient", (req, res) => {
   console.log(req.body.id);
