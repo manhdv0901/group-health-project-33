@@ -2,6 +2,7 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 var expressSession = require("express-session");
 const exhbs = require("express-handlebars");
+var moment = require("moment");
 const PORT = process.env.PORT || 3000;
 const app = express();
 var helpers = require("handlebars-helpers")();
@@ -306,13 +307,14 @@ app.post("/add-device", (req, res) => {
       }
     }
   );
+  var date = moment().format("DD-MM-YYYY hh:mm:ss");
   DEVICE.updateOne(
     { key_device: req.query.key_device },
     {
       $push: {
-        heart: { value: Number(req.query.heart), real_time: Date.now() },
-        spO2: { value: Number(req.query.spO2), real_time: Date.now() },
-        temp: { value: Number(req.query.temp), real_time: Date.now() },
+        heart: { value: Number(req.query.heart), real_time: date },
+        spO2: { value: Number(req.query.spO2), real_time: date },
+        temp: { value: Number(req.query.temp), real_time: date },
       },
     },
     function (err) {
