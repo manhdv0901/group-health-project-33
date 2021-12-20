@@ -293,6 +293,7 @@ app.post("/add-device", (req, res) => {
 
   console.log("state: ", req.query.state);
   console.log("------------------------------------------- ");
+  
   PATIENT.updateOne(
     { key_device: req.query.key_device },
     { $set: { state: Number(req.query.state) } },
@@ -307,7 +308,7 @@ app.post("/add-device", (req, res) => {
       }
     }
   );
-  var date = moment().format("DD-MM-YYYY hh:mm:ss");
+  var date = moment(Date.now()).format("DD-MM-YYYY hh:mm:ss");
   DEVICE.updateOne(
     { key_device: req.query.key_device },
     {
