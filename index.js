@@ -82,6 +82,7 @@ const updatetoken = require("./app/src/router/update_token_doctor_router");
 const device1 = require("./app/src/router/device_router");
 const sendnotification = require("./app/src/router/sennotication_router");
 const liststatuspatient = require("./app/src/router/list_status_patient");
+const devices = require("./app/src/router/devices_router");
 
 app.use("/", deviceRoute);
 app.use("/", listPatientRouter);
@@ -94,6 +95,7 @@ app.use("/", updatetoken);
 app.use("/", device1);
 app.use("/", sendnotification);
 app.use("/", liststatuspatient);
+app.use("/", devices);
 
 app.get("/", (req, res) => {
   res.redirect("/dashboard");
@@ -113,7 +115,7 @@ app.post("/data-login-patient", (req, res) => {
   });
 });
 
-//api thay đổi trạng thái bệnh key_decive
+//api thay đổi trạng thái bệnh nhân=3(nguy cấp)
 
 app.post("/updatestatuspt", (req, res) => {
   console.log(req.body.id);
@@ -129,6 +131,25 @@ app.post("/updatestatuspt", (req, res) => {
         res.status(200).send("Cập nhật trạng thái khẩn cấp thành công");
       } else {
         res.status(401).send("Cập nhật trạng thái khẩn cấp không thành công");
+      }
+    }
+  );
+});
+//api thay đổi trạng thái bệnh nhân
+app.post("/app/updateStatusPatient", (req, res) => {
+  console.log(req.body.id);
+  var newvalues = { $set: { state: req.body.state } };
+  PATIENT.findByIdAndUpdate(
+    req.body.id,
+    newvalues,
+    {
+      new: true,
+    },
+    function (err, model) {
+      if (!err) {
+        res.status(200).send("Cập nhật trạng thái bệnh nhân thành công");
+      } else {
+        res.status(401).send("Cập nhật trạng thái bệnh nhân không thành công");
       }
     }
   );
