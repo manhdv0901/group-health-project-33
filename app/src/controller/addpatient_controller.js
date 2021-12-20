@@ -77,6 +77,7 @@ module.exports.postaddpatient = (req, res) => {
                 req.session.success = false;
                 res.redirect("/add-patient");
               }
+              
               else{
                 DEVICE.updateOne({key_device:req.body.key_device},{$set:{state:true}}).exec((err,data)=>{
                   if(err){
