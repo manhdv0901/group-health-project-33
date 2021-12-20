@@ -254,8 +254,20 @@
                         <input type="text"name="key_device"class="form-control" id="inputAddress" placeholder="device02" required>
                         </div>
                     </div>
-                 
-                    
+                    <label>Grade:</label><br/>
+                    <div class='form-field'>
+                        <label for='brandFilter'>Brand</label>
+                        <select id='brandFilter' class='form-control'>
+                            <option>Choose brand</option>
+                            {{#each data}}
+                                <option value="{{this}}">{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+
+
+
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Thêm</button>
                         <button type="reset" class="btn btn-secondary">Đặt lại </button>

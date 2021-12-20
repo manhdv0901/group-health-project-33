@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
 const PATIENT = require("../model/patient_model");
+const DOCTOR = require("../model/doctor_model");
 const { body, validationResult } = require("express-validator");
+const USER = require("../model/user_model");
 
 const DATABASE_URL =
   "mongodb+srv://sonhandsome01:sonhandsome01@test-data-datn.fwejn.mongodb.net/data-project?retryWrites=true&w=majority";
@@ -14,11 +16,17 @@ mongoose.connect(DATABASE_URL, DATABASE_CONNECT_OPTION);
 var db = mongoose.connection;
 
 module.exports.getaddpatient = (req, res) => {
-  res.render("addPatient", {
-    success: req.session.success,
-    errors: req.session.errors,
+  var model = db.model('data-doctors', DOCTOR.schema);
+  model.find({}, (err, devices) =>{
+    console.log(devices)
+    res.render("addPatient", {
+      success: req.session.success,
+      errors: req.session.errors,
+      data:devices
+    });
+    req.session.errors = null;
   });
-  req.session.errors = null;
+
 };
 
 module.exports.postaddpatient = (req, res) => {

@@ -159,7 +159,7 @@
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
                     new ApexCharts(document.querySelector("#pieChart"), {
-                        series: [44, 55],
+                        series: [{{devicetrue}}, {{devicefasle}}],
                         chart: {
                             height: 400,
                             type: 'pie',
@@ -189,7 +189,7 @@
                 document.addEventListener("DOMContentLoaded", () => {
                     new ApexCharts(document.querySelector("#barChart"), {
                         series: [{
-                            data: [400, 430, 448, 470, 540]
+                            data: [{{nameDevices}}, {{nameDevices1}}]
                         }],
                         chart: {
                             type: 'bar',
@@ -205,7 +205,7 @@
                             enabled: false
                         },
                         xaxis: {
-                            categories: ['Thiết bị 1','Thiết bị 2','Thiết bị 3','Thiết bị 4','Thiết bị 5'
+                            categories: ['Thiết bị đo nhịp tim','Thiết bị thở'
                             ],
                         }
                     }).render();
