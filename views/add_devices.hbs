@@ -133,77 +133,51 @@
 </aside>
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Thêm bác sĩ</h1>
+        <h1>Thêm thiết bị</h1>
+<!--        {{# if success }}-->
+<!--            <section class="success">-->
+<!--                <h2> </h2>-->
+<!--            </section>-->
+<!--        {{ else }}-->
+<!--            {{# if errors }}-->
+<!--                <section class="errors">-->
+<!--                    <ul>-->
+<!--                        {{# each errors }}-->
+<!--                            <li class="alert alert-danger">{{ this.msg }}</li>-->
+<!--                        {{/each}}-->
+<!--                    </ul>-->
+<!--                </section>-->
+<!--            {{/if}}-->
+<!--        {{/if}}-->
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Thống kê</a></li>
-                <li class="breadcrumb-item active">Thêm bác sĩ</li>
+                <li class="breadcrumb-item active">Thêm thiết bị</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Thêm bác sĩ</h5>
-                {{# if success }}
-                    <section class="success">
-                        <h2> </h2>
-                    </section>
-                {{ else }}
-                    {{# if errors }}
-                        <section class="errors">
-                            <ul>
-                                {{# each errors }}
-                                    <li class="alert alert-danger">{{ this.msg }}</li>
-                                {{/each}}
-                            </ul>
-                        </section>
-                    {{/if}}
-                {{/if}}
+                <h5 class="card-title">Thêm thiết bị</h5>
+
                 <!-- Vertical Form -->
-                <form class="row g-3" action="/adddoctor" id="application-form" method="post">
+                <form class="row g-3" action="/adds-devices" id="application-form" method="post">
                     <div class="col-12">
-                        <label for="inputNanme4" class="form-label">Username</label>
+                        <label for="inputNanme4" class="form-label">Tên thiết bị</label>
                         <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="inputNanme4" required>
+                            <input type="text" name="namedevice" class="form-control" id="inputNanme4" required>
                         </div>
                     </div>
                     <div class="col-12">
-                        <label for="inputEmail4" class="form-label">Password</label>
+                        <label for="inputEmail4" class="form-label">Key Thiết bị</label>
                         <div class="input-group has-validation">
-                        <input type="password" name="password" class="form-control" id="inputEmail4" required>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="inputPassword4" class="form-label">ID</label>
-                        <div class="input-group has-validation">
-                        <input type="number" name="id" class="form-control" id="inputPassword4" required>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <label for="inputAddress" class="form-label">Họ Và Tên</label>
-                        <div class="input-group has-validation">
-                        <input type="text" name="name" class="form-control" id="inputAddress" placeholder="Nguyen Van A" required>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <label class="label">Giới Tính</label>
-                        <div class="input-group">
-                            <div class="p-t-10">
-                                <label class="radio-container m-r-45">Nam
-                                    <input type="radio" checked="checked" value="Nam" name="gender">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="radio-container">Nữ
-                                    <input type="radio" value="Nữ" name="gender">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
+                            <input type="text" name="keydevice" class="form-control" id="inputEmail4" required>
                         </div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Thêm</button>
-                        <button type="reset" class="btn btn-secondary">Đặt lại</button>
+                        <button type="reset" class="btn btn-secondary">Đặt lại </button>
                     </div>
                 </form><!-- Vertical Form -->
 
